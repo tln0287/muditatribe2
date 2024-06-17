@@ -1,0 +1,56 @@
+{%include 'head.html' %}
+<body>
+    <div id="wrapper">
+        <!--Header Start-->
+      {%include 'header.html' %}
+        <!--Header End-->
+
+
+
+        <!--form start-->
+  <section class="py-12 md:py-32">
+            <div class="max-w-screen-xl mx-auto px-5">
+                <div class="mb-8 md:mb-24">
+                    <h2 class="text-4xl md:text-7xl text-center font-semibold text-[#C6584F] tracking-wide">Register</h2>
+                </div>
+                <div class="grid md:grid-cols-2 gap-x-6 items-center">
+                    <form action="/add_contact" method="post" id="contactForm">
+             {% csrf_token %}
+    <div>
+        <div class="form">
+            <div class="form-group">
+                <label class="label-form">Name</label>
+                <input class="form-input" type="text" name="name" id="name" required />
+            </div>
+            <div class="form-group">
+                <label class="label-form">Email</label>
+                <input class="form-input" type="email" name="email" id="email" required />
+            </div>
+            <div class="form-group">
+                <label class="label-form">Phone</label>
+                <input class="form-input" type="tel" name="phone" id="phone" required />
+            </div>
+            <div class="form-group">
+                <label class="label-form">What can we help you with?</label>
+                <input class="form-input" type="text" name="message" id="message" required />
+            </div>
+            <div class="w-full text-center">
+                <button class="bg-[#EECC96] text-white inline-block px-8 py-2 text-xl font-bold rounded-lg" type="submit">Submit</button>
+            </div>
+        </div>
+    </div>
+</form>
+                    <div>
+                        <img src="/static/img/contact.png" alt="" class="w-10/12 mx-auto">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--form end-->
+
+{%include 'footer.html' %}
+    </div>
+
+</body>
+
+</html>

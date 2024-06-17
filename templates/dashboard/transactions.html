@@ -1,0 +1,169 @@
+{% include 'dashboard_layout/head.html' %}
+<body>
+<div id="wrapper">
+    {% include 'dashboard_layout/sidebar.html' %}
+    <section class="home-section">
+        {% include 'dashboard_layout/header.html' %}
+        <section class="content-container contentContainer" id="homeSection">
+            <h3 class="sub-title">Transactions </h3>
+            <div class="box-inner">
+                    <div class="table-responsive">
+                    <table class="table table-bordered" id="columnFilterDatatable">
+                        <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Referred by</th>
+                            <th>Customer Name</th>
+                            <th>Customer Phone</th>
+                            <th>TxnId</th>
+                            <th>No.of Tickets</th>
+                            <th>Theatre Location</th>
+                            <th>Paid Amount</th>
+                            <th>Paid On</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for d in data %}
+                        <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ d.agent_name|title }}</td>
+                        <td>{{ d.customer_name|title }}</td>
+                        <td>{{ d.customer_mobile }}</td>
+                        <td>{{ d.txn_id|default:"Pending" }}</td>
+                        <td>{{ d.no_of_tickets }}</td>
+                        <td>{{ d.location }}</td>
+                        <td>{{ d.paid_amount }}</td>
+                        <td>{{ d.Date }}</td>
+
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+        <div class="modal" id="myModal">
+            <div class="modal-dialog modal-lg">
+                <form action="add_agent" method="post" >
+                    {% csrf_token %}
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add Agent</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path
+                                    d="M12.0007 10.5865L16.9504 5.63672L18.3646 7.05093L13.4149 12.0007L18.3646 16.9504L16.9504 18.3646L12.0007 13.4149L7.05093 18.3646L5.63672 16.9504L10.5865 12.0007L5.63672 7.05093L7.05093 5.63672L12.0007 10.5865Z">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                       <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label>Select Leader</label>
+                                <select  name="leader_id" class="form-control" required>
+                                <option value="">Select</option>
+                                    {% for l in leaders %}
+                                        <option value="{{ l.id }}-{{ l.first_name }}">{{ l.first_name|title }}</option>
+
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Enter Agent Name</label>
+                                <input type="text" name="agent_name" class="form-control" required>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Enter Email</label>
+                                <input type="email" name="email" class="form-control" required>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Enter Phone</label>
+                                <input type="number" name="phone" class="form-control" required>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Address</label>
+                                <textarea class="form-control" name="address"
+                                          required></textarea>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer justify-content-center">
+                        <button type="submit" class="btn btn-success">Save</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+                </form>
+
+            </div>
+        </div>
+</div>
+{% include 'dashboard_layout/scripts.html' %}
+<script>
+     function myModal(){
+         $('.modal-title').html("Add Agent")
+        $('#myModal').modal('show')
+    }
+  $(document).ready(function () {
+        $("#columnFilterDatatable").DataTable({
+            "pageLength": 10,
+            dom: 'W<"clear">Blfrtip',
+
+             "oColumnFilterWidgets": {
+                "aiExclude": [0,3,4,5,6]
+             },
+            responsive: true,
+            buttons: [
+
+                {
+                    extend: 'excel',
+                    text: 'Excel',
+                    title: 'File name',
+
+                }
+
+            ]
+
+        });
+
+    })
+    function edit_agent(id){
+          $.ajax({
+            type: "GET",
+            url: '/edit_agent',
+            enctype: 'multipart/form-data',
+            data: {"id": id},
+
+            success: function (data) {
+                var lid = data.data[0]['leader_id']
+                var lname = data.data[0]['leader_name']
+                var lvalue = lid+"-"+lname
+                $('.modal-title').html("Edit Agent")
+               $("input[name=agent_name]").val(data.data[0]['first_name'])
+               $("input[name=email]").val(data.data[0]['email'])
+               $("input[name=phone]").val(data.data[0]['phone'])
+               $("select[name=leader_id]").val(lvalue)
+               $("textarea[name=address]").val(data.data[0]['address'])
+                  $('#myModal').modal('show')
+
+
+            },
+            error: function () {
+                alert("something went wrong")
+            }
+        });
+    }
+</script>
+</body>
+
+
+</html>

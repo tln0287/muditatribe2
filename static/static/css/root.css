@@ -1,0 +1,125 @@
+@import "font.css";
+@import "theme.css";
+@import "common.css";
+@import "styles.css";
+@import "dashboard.css";
+@import "reponsive.css";
+@import "prints.css";
+
+
+
+/* Individual portal css   */
+/* Attendance */
+.btn_picker input {
+    margin-right: 10px
+}
+
+.btn_picker .btn-sm {
+    padding: 3px 6px 4px 6px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+    margin-bottom: 5px;
+    min-width: 85px;
+}
+
+.datepickerIcon {
+    margin-top: 2px;
+}
+
+.datepickerIcon .ui-datepicker {
+    position: absolute;
+    z-index: 9999;
+    top: 120px;
+    left: auto !important;
+    right: 25px !important;
+    top: 120px !important;
+}
+
+.datepickerIcon a i {
+    /* background: #1a2127s;
+    padding: 8px 9px 8px 9px;
+    color: #fff;
+    border-radius: 4px;
+    vertical-align: middle;*/
+    background: #1a2127;
+   
+    padding: 6px 8px;
+    color: #fff;
+    border-radius: 4px;
+    vertical-align: middle;
+}
+
+.titleMarTop {
+    margin-top: 10px;
+}
+
+.row_bg {
+    background-color: green;
+}
+
+.row_bg td {
+    color: white;
+    border: 1px solid #0f8e0f;
+}
+
+.row_bg {
+    cursor: pointer !important
+}
+
+.row_bg td:first-child {
+    padding-left: 34px
+}
+
+/* QR code */
+.qrTimer {
+    background: #fff;
+    padding-top: 12px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.qrTimerTop {
+    background: #fff;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.qrTimerTop h3 {
+    margin-bottom: 0px;
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.qrTimer h3 {
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.course-container img {
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 50%;
+    transition: 0.5s all ease-in-out;
+    border: 1px solid #d4dadd;
+    margin: 0px !important;
+}
+
+.course-container img:hover {
+    transform: scale(1.5);
+}
+
+.table_img {
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 50%;
+    transition: 0.5s all ease-in-out;
+    margin: 0px;
+}
+
+.table_img:hover {
+    transform: scale(1.5);
+}

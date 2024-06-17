@@ -1,0 +1,565 @@
+/* ###### Filters section ###### */
+.filterItems,
+.filterItems1 {
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: space-between; */
+}
+
+.filter-title {
+    margin-right: 7px;
+    padding-top: 9px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--main-color);
+}
+
+.filterItems select {
+    width: 165px;
+    box-shadow: inset 3.33508px 0px 25.5689px rgba(0, 0, 0, 0.22);
+    border-radius: 25px;
+    border: 3px solid #fff;
+    height: 38px !important;
+    font-size: 14px;
+    color: #333131;
+    background-image: url("../images/down-arrow.png");
+    background-size: 16px 16px;
+    margin-right: 13px;
+    background-repeat: no-repeat;
+
+}
+
+.dashbordFilter select {
+    /* width: 165px; */
+    box-shadow: inset 3.33508px 0px 25.5689px rgba(0, 0, 0, 0.22);
+    border-radius: 25px;
+    border: 3px solid #fff;
+    height: 38px !important;
+    font-size: 14px;
+    color: #333131;
+    background-image: url("../images/down-arrow.png");
+    background-size: 16px 16px;
+    margin-right: 13px;
+    background-repeat: no-repeat;
+
+}
+
+.filterItems .form-select:focus {
+    border-color: rgba(109, 196, 244, 0.45);
+    outline: 0;
+    box-shadow: 0 0 0 .25rem rgba(224, 230, 238, 0.25);
+}
+
+/* ###### End filters section ###### */
+
+
+/* ###### Dashboard cards section ###### */
+
+.dashboardCardContainer {
+    /* margin: 20px 0px; */
+}
+
+.dashboardCardContainer .cardBox {
+    background: #fff;
+    padding: 15px 10px 10px 15px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* box-shadow: var(--box-shadow-xl); */
+    box-shadow: 0px 4px 10px rgb(0 0 0 / 16%);
+    /* margin-bottom: 22px; */
+    border-top: 1px solid #f3f3f3;
+    min-height: 110px;
+}
+
+.dashboardCardContainer .cardBox:hover {
+   opacity: 0.8;
+}
+
+.single_box {
+    justify-content: center !important;
+}
+
+.dashboardCardContainer .cardBox .cardTitle {
+    text-align: left;
+    font-weight: 400;
+    margin-bottom: 6px;
+    font-size: 15px;
+    /* color: #5d5c5e; */
+    color: var(--main-color);
+}
+
+.dashboardCardContainer .cardBox .sub-details ul {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+    margin-right: 10px;
+    border-left: 1px solid #f2d9da;
+    padding-left: 20px;
+}
+
+.dashboardCardContainer .cardBox .sub-details ul li {
+    font-size: 14px;
+
+    margin-bottom: 4px;
+    color: var(--text-color) !important;
+}
+
+.dashboardCardContainer .cardBox .sub-details .det_val {
+    min-width: 11px !important;
+    color: var(--text-color) !important;
+    display: inline-block;
+}
+
+.dashboardCardContainer .cardBox .cardValue {
+    font-size: 23px !important;
+    color: #302f2f;
+}
+
+.dashboardCardContainer .cardBox .cardSubValue {
+    font-size: 13px !important;
+    font-weight: 400;
+}
+
+.dashboardCardContainer .cardBox i {
+    font-size: 34px;
+    color: #fdc41f;
+}
+
+.cardBoxPurple {
+    border-left: 5px solid purple;
+}
+
+.cardBoxGreen {
+    border-left: 5px solid green;
+}
+
+.cardBoxYellow {
+    border-left: 5px solid #fdc41f;
+}
+
+.cardBoxRed {
+    border-left: 5px solid #b1040e;
+}
+
+/* .gender_count {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.gender_count h6 {
+    margin-right: 30px;
+    font-size: 12px;
+}
+
+.gender_count h6 span {
+    color: #b1040e;
+    font-size: 16px;
+}
+
+.gender_count .separator {
+    padding-right: 12px;
+    margin-right: 10px;
+    font-size: 12px;
+    border-right: 2px solid #b1040e;
+} */
+
+
+/* ###### End Dashboard cards section ###### */
+
+/* ###### Dashboard card box gradient colors ###### */
+.dashBoxGradient .cardBox {
+    background-image: linear-gradient(135deg, #6499e75e 10%, #d7d4f1 100%);
+    /* background-image: linear-gradient(135deg, #c1d3ed5e 10%, #d7d4f1 100%); */
+    box-shadow: none;
+}
+
+.dashBoxGradient .cardBox:hover {
+    background-image: linear-gradient(135deg, #4785e05e 10%, #aea8e2 100%);
+
+}
+
+.dashBoxGradient .cardBox .sub-details ul {
+    border-left: 1px solid #f2f2f2;
+}
+
+.dashBoxGradient .cardBox:hover .sub-details ul {
+    border-left: 1px solid #d5d9fd;
+}
+
+.dashBoxGradient .cardBox .cardTitle {
+    color: #535155;
+}
+
+/* ###### End Dashboard card box gradient colors ###### */
+/* ###### End Dashboard card box multiple colors ###### */
+.dashMultipleColors .cardBox{
+   
+    position: relative;
+    z-index: 9;
+     
+}
+.dashMultipleColors .cardBox .background-image {
+    position: absolute;
+    right: 5px;
+    bottom: 1px;
+    width: 50px;
+    height: 50px;
+    background-image: url(../images/icon.png);
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+    filter: opacity(25%);
+  }
+  .dashMultipleColors .cardBox.blue_box{
+    background-color: #2c65fb;
+  }
+  .dashMultipleColors .cardBox.orange_box{
+    background-color: #fb772d;
+  }
+  .dashMultipleColors .cardBox.green_box{
+    background-color: #03b6ab;
+  }
+  .dashMultipleColors .cardBox.purple_box{
+    background-color: #9677fe;
+  }
+  .dashMultipleColors .cardBox.red_box{
+    background-color: #fc3f3f;
+  }
+  .dashMultipleColors .cardBox img{
+    width: 50px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+.dashMultipleColors .cardBox i{
+    background-color: white;
+    padding: 10px;
+    border-radius: 50%;
+
+}
+.dashboardCardContainer .dashMultipleColors .cardBox {   
+    justify-content: start;
+  
+}
+.dashMultipleColors  .cardBox .cardTitle {   
+    font-size: 14px;   
+    color: var(--white);
+}
+.dashMultipleColors .cardBox i {
+    font-size: 34px;
+    color: #2c65fb;
+}
+.dashMultipleColors .cardBox .cardValue {
+    font-size: 35px !important;
+    color: white;
+}
+
+  
+  
+/* ###### End Dashboard card box multiple colors ###### */
+
+ 
+/* ###### dash_card_count card box ###### */
+.dash_card_count .cardBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+}
+.dash_card_count .cardBox .top_text{
+    display: flex;
+    justify-content: space-between;
+}
+.dash_card_count .cardBox .bottom_text{
+    display: flex;
+    justify-content: space-between;
+}
+.dashboardCardContainer .cardBox .divider{
+    height: 1px;
+    background-color: #efefef;
+    margin: 0px 0px 15px 0px;
+    border-radius: 10px;
+}
+.dashboardCardContainer .dash_card_count .cardBox .subTitle {  
+    margin-bottom: 0px;
+    font-size: 13px;  
+    color: var(--secondary-dark-color);    
+}
+/* ###### End of dash_card_count card box ###### */
+
+/* ###### large card box ###### */
+
+.dash_large_card .cardBox i{
+   font-size: 20px;
+    background-color: #f2f2f2;
+    padding: 10px;
+    border-radius: 50%;
+    color: #335fd6;
+    margin-right:10px;
+  
+  }
+  .dash_large_card .cardBox{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0px;
+  }
+  .dash_large_card .card-body{
+display: flex;
+justify-content: space-between;
+padding: 15px 10px 10px 15px;
+  }
+  .dash_large_card .card-footer{
+    background-color: #f0f4ff;
+    padding: 15px 10px 10px 15px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+  }
+  .dash_large_card .cardBox .subTitle {  
+    margin-bottom: 0px;
+    font-size: 11px;  
+    color: var(--secondary-dark-color);    
+}
+.bg_red{
+    background-color: #fecdcd !important;
+}
+.bg_green{
+    background-color: #d9f8f6 !important;
+}
+
+/* ######  End of large card box ###### */
+
+/* ###### Dashboard graphs section ###### */
+.graphBoxContainer {
+    background-color: #ffffff;
+    padding: 10px 10px;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow-xl);
+    margin-bottom: 20px;
+    border-top: 1px solid #f2e7e7;
+}
+
+.graphHeading {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #f9eff0;
+    padding-bottom: 5px;
+}
+
+.graphTitle {
+    margin-bottom: 0px;
+    font-size: 17px;
+    color: #312f2f;
+}
+
+/* ###### End dashboard graphs section ###### */
+
+
+/* ###### Finance dashboard section ###### */
+
+.finance-sec .dashboardCardContainer .cardBox {
+    padding: 15px 10px 10px 9px;
+    box-shadow: 0px 2px 3px rgb(201 210 237);
+    /* background: #fff; */
+    /* box-shadow: none; */
+    border: 1px solid #e3e8eb;
+}
+
+.finance-sec .dashboardCardContainer table tr td {
+    padding: 3px;
+    padding-bottom: 6px;
+}
+
+.finance-sec .dashboardCardContainer table tr td:nth-child(1) {
+    width: 175px;
+    font-size: 13px;
+}
+
+.finance-sec .dashboardCardContainer table tr td:nth-child(2) {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.finance-sec .dashboardCardContainer table .tbl-tr {
+    padding: 10px;
+
+}
+
+/* .finance-sec .dashboardCardContainer .ug_pg {
+    display: block;
+} */
+
+.finance-sec .dashboardCardContainer .cardBox.studentcard {
+    padding: 0px;
+    border-radius: 10px;
+    display: block;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 2px 3px rgb(209 188 237);
+    /* border-top: 1px solid #f3f3f3; */
+    min-height: 110px;
+}
+
+.finance-sec .studentcard .subcard {
+    display: flex !important;
+    justify-content: space-between;
+    padding: 15px 10px 16px 9px;
+
+}
+
+.finance-sec .dashboardCardContainer .cardBox .subcard.staff-pad {
+    padding: 15px 10px 16px 13px;
+}
+
+/* .finance-sec .ug_pg {
+    margin-top: -7px;
+    margin-bottom: -14px;
+
+} */
+
+.finance-sec .ug-sub-details {
+    padding: 10px 15px 1px 15px;
+}
+
+.finance-sec .ug_pg.ttl {
+    /* margin: 0px; */
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.finance-sec .ug_pg.ttl.ttl-student {
+    background-color: #e5d8f5;
+}
+
+.finance-sec .ug_pg.ttl.ttl-staff {
+    background-color: #f5d8d8;
+}
+
+/* .finance-sec .bor-btm {
+    margin-top: 3px;
+    margin-bottom: 12px;
+    width: 351px;
+    margin-left: -15px;
+} */
+
+.finance-sec .dashboardCardContainer .cardBox .ug_pg .cardValue {
+    font-size: 17px !important;
+    color: #302f2f;
+}
+
+.finance-sec .dashboardCardContainer .cardBox .icon {
+    width: 70px;
+    margin-top: -7px;
+}
+
+.finance-sec .dashboardCardContainer .cardBox .icon img {
+    padding: 5px;
+    width: 60px;
+}
+
+.finance-sec .dashboardCardContainer .cardBox .cardTitle {
+    text-align: left;
+    font-weight: 400;
+    margin-bottom: 6px;
+    font-size: 12px;
+    color: #2b2b2c;
+}
+
+.finance-sec .dashboardCardContainer .cardTitle.total-amt {
+    text-align: left;
+    font-weight: 400;
+    margin-bottom: 6px;
+    font-size: 16px;
+    color: #b1040e;
+}
+
+.finance-sec .dashboardCardContainer .cardTitle.month {
+    font-size: 14px;
+    color: #363636;
+}
+
+.finance-sec .dashboardCardContainer .cardBox.card-list-items {
+    min-height: 152px;
+
+}
+
+.finance-sec .dashboardCardContainer .cardBox.box-hgt {
+    min-height: 116px;
+}
+
+.finance-sec.contentContainer hr {
+    margin-top: 0px;
+}
+
+.finance-sec .dashboardCardContainer .cardBox.coll-card {
+    background-image: linear-gradient(135deg, #FFFFFF45 10%, #dae1f5 100%);
+}
+
+.finance-sec .dashboardCardContainer .cardBox.stud-card {
+    background-image: linear-gradient(135deg, #FFFFFF45 10%, #f0e9f9 100%);
+}
+
+.finance-sec .dashboardCardContainer .cardBox.staff-card {
+    background-image: linear-gradient(135deg, #FFFFFF45 10%, #fff5f5 100%);
+    box-shadow: 0px 4px 10px rgb(234, 228, 228);
+}
+
+.finance-sec .radialChartContainer {
+    border-radius: 15px;
+    /* background-image: linear-gradient(135deg, #B1040E 10%, #ea676e 100%); */
+    background-color: #f24646;
+    padding: 68px 0px;
+    margin-top: 1px;
+    margin-right: 0px;
+    box-shadow: 5px 5px 5px rgb(221 213 213);
+}
+
+.tblBorderLeft {
+    border-left: 1px solid #ede9e9;
+    padding-left: 21px;
+}
+
+.finance-sec .radialChartContainer .radial-details {
+    padding-bottom: 0px;
+    padding-top: 40px;
+}
+
+.finance-sec .radialChartContainer #radialChart {
+    min-height: 217px;
+}
+
+.finance-sec .radialChartContainer .radial-details i {
+    font-size: 21px;
+    color: #fff;
+    margin-top: 10px;
+    border: 1px solid #fff;
+    padding: 6px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+}
+
+.finance-sec .radialChartContainer .bar-word {
+    color: #fdbaba;
+    font-size: 14px;
+    margin-top: 3px;
+}
+
+.finance-sec .radialChartContainer .bar-amt {
+    color: #fff;
+    font-size: 26px;
+}
+
+/* .finance-sec.contentContainer .graphContainer .bar-btm-amt {
+    color: #fff;
+    font-size: 12px;
+} */

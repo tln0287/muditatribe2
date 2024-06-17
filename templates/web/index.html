@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load sweetify %}
+{% sweetify %}
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Mudita | The Joy of Giving Others Happiness</title>
+
+    <meta name="Distribution" content="Global" />
+    <meta name="description" content="Welcome to Mudita, where the very essence of joy resides in the act of bestowing happiness upon others. In a world where some believe anxiety and depression." />
+    <meta name="theme-color" content="#EECC96" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Mudita | The Joy of Giving Others Happiness" />
+    <meta property="og:description" content="Welcome to Mudita, where the very essence of joy resides in the act of bestowing happiness upon others. In a world where some believe anxiety and depression." />
+    <meta property="og:site_name" content="Mudita" />
+    <meta name="author" content="Mudita" />
+    <meta name="copyright" content="Mudita" />
+
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="icon" href="/static/img/favicon.png" sizes="32x32" />
+
+    <link rel="stylesheet" href="/static/css/flowbite.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+    <script src="/static/js/flowbite.js"></script>
+    <script src="/static/js/tailwindcss.js"></script>
+      <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.10/dist/sweetalert2.min.css" rel="stylesheet">
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.10/dist/sweetalert2.all.min.js"></script>
+
+
+    <style type="text/tailwindcss">
+        .form {
+        @apply w-10/12 mx-auto;
+        }
+
+        .form-group {
+        @apply mb-8;
+        }
+
+        .label-form {
+        @apply block mb-2 text-2xl text-[#C6584F] font-semibold;
+        }
+
+        .form-input {
+        @apply w-full h-10 rounded-md bg-[#EECC96];
+        }
+        .swiper-slide{
+        @apply border-4 border-dashed border-[#EECC96] bg-white p-3 text-lg md:text-2xl text-center font-semibold h-96 flex items-center justify-center text-[#C6584F];
+        }
+        .swiper-slide-active{
+        @apply bg-[#EECC96] border-[#fff] text-white;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div id="wrapper">
+        <!--Header Start-->
+        <!--Web header starts-->
+   {%include 'header.html'%}
+        <!--Header End-->
+
+        <!--Other Happiness Start-->
+        <section class="py-12 md:py-32">
+            <div class="max-w-screen-xl mx-auto px-5">
+                <h2 class="text-5xl md:text-8xl text-center font-semibold text-[#C6584F] italic mb-6 md:mb-24">The Joy of Giving Others Happiness</h2>
+                <div class="grid md:grid-cols-2 gap-y-5 md:gap-y-0 md:gap-x-5 items-center">
+                    <div>
+                        <img src="/static/img/about_img.jpg" alt="about" class="w-10/12 mx-auto">
+                    </div>
+                    <div>
+                        <p class="text-center md:text-left text-[#C6584F] text-lg md:text-2xl font-semibold md:leading-[42px]">Welcome to Mudita, where the very essence of joy resides in the act of bestowing happiness upon others. In a world where some believe anxiety and depression can be vanquished with a mere act of will, we aim to reveal that these afflictions often feel like a battle in the tempestuous sea. You fight, sometimes alone, until a safety boat emerges.</p>
+                        <div class="text-center mt-6">
+                            <a href="/about" class="bg-[#BECCCF] text-white inline-block px-8 py-2 text-xl font-bold rounded-lg">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--Other Happiness End-->
+
+        <!--Quote Start-->
+        <div class="w-full">
+            <img src="/static/img/bg_b_front.svg" class="w-full" alt="">
+        </div>
+        <section class="py-12 md:py-32 bg-[#C4D1D4]">
+            <div class="max-w-screen-xl mx-auto px-5">
+                <div class="w-10/12 mx-auto">
+                    <div class="w-12 md:w-32">
+                        <svg id="fi_7350737" enable-background="new 0 0 24 24" viewBox="0 0 24 24" class="w-full h-full" fill="white" xmlns="http://www.w3.org/2000/svg">
+                            <path d="m4.7 17.7c-1-1.1-1.6-2.3-1.6-4.3 0-3.5 2.5-6.6 6-8.2l.9 1.3c-3.3 1.8-4 4.1-4.2 5.6.5-.3 1.2-.4 1.9-.3 1.8.2 3.2 1.6 3.2 3.5 0 .9-.4 1.8-1 2.5-.7.7-1.5 1-2.5 1-1.1 0-2.1-.5-2.7-1.1zm10 0c-1-1.1-1.6-2.3-1.6-4.3 0-3.5 2.5-6.6 6-8.2l.9 1.3c-3.3 1.8-4 4.1-4.2 5.6.5-.3 1.2-.4 1.9-.3 1.8.2 3.2 1.6 3.2 3.5 0 .9-.4 1.8-1 2.5s-1.5 1-2.5 1c-1.1 0-2.1-.5-2.7-1.1z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl md:text-5xl text-center font-bold text-white italic md:leading-[70px] w-10/12 mx-auto">There is no normal life that is free of pain. It's the very wrestling with our problems that can be the impetus for our growth.</h3>
+
+                    <div class="w-12 md:w-32 float-end">
+                        <svg id="fi_7350738" enable-background="new 0 0 24 24" viewBox="0 0 24 24" class="w-full h-full" fill="white" xmlns="http://www.w3.org/2000/svg">
+                            <path d="m19.3 6.3c1 1.1 1.6 2.3 1.6 4.3 0 3.5-2.5 6.6-6 8.2l-.9-1.3c3.3-1.8 4-4.1 4.2-5.6-.5.3-1.2.4-1.9.3-1.8-.2-3.2-1.6-3.2-3.5 0-.9.4-1.8 1-2.5.7-.7 1.5-1 2.5-1 1.1 0 2.1.5 2.7 1.1zm-10 0c1 1.1 1.6 2.3 1.6 4.3 0 3.5-2.5 6.6-6 8.2l-.9-1.3c3.3-1.8 4-4.1 4.2-5.6-.5.3-1.2.4-1.9.3-1.8-.2-3.2-1.7-3.2-3.5 0-.9.4-1.8 1-2.5.7-.7 1.5-1 2.5-1 1.1 0 2.1.5 2.7 1.1z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="w-full">
+            <img src="/static/img/bg_b_back.svg" class="w-full" alt="">
+        </div>
+        <!--Quote End-->
+
+        <!--ACTIVITIES  Start-->
+        <section class="py-12 md:py-32">
+            <div class="max-w-screen-xl mx-auto px-5">
+                <div class="mb-8 md:mb-24">
+                    <h2 class="text-4xl md:text-7xl text-center font-semibold text-[#C6584F] tracking-wide mb-6 md:mb-12">ACTIVITIES</h2>
+                    <h3 class="text-xl md:text-4xl text-center font-semibold text-[#C6584F] italic">At Mudita, we offer an extensive array of services and activities that are tailored to meet your mental health requirements and improve overall wellbeing.</h3>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-y-5 gap-x-5 md:gap-y-0 md:gap-x-24  items-center">
+                    <a href="/breathing" ><div class="bg-white rounded-t-full overflow-hidden">
+                        <div class="w-full">
+                            <img src="/static/img/activity_1.png" alt="Breathing img" class="w-full">
+                        </div>
+                        <div class="py-3 text-center">
+                            <h4 class="text-2xl text-[#C6584F] font-semibold">Breathing Exercises</h4>
+                        </div>
+                    </div></a>
+                   <a href="/music" > <div class="bg-white rounded-t-full overflow-hidden	">
+                        <div class="w-full">
+                            <img src="/static/img/activity_2.png" alt="Music img" class="w-full">
+                        </div>
+                        <div class="py-3 text-center">
+                            <h4 class="text-2xl text-[#C6584F] font-semibold">Music</h4>
+                        </div>
+                   </div></a>
+                    <a href="/art" ><div class="bg-white rounded-t-full overflow-hidden	">
+                        <div class="w-full">
+                            <img src="/static/img/activity_3.png" alt="Art img" class="w-full">
+                        </div>
+                        <div class="py-3 text-center">
+                            <h4 class="text-2xl text-[#C6584F] font-semibold">Art Therapy</h4>
+                        </div>
+                    </div></a>
+                </div>
+            </div>
+        </section>
+        <!--ACTIVITIES  End-->
+
+        <!--TESTIMONIALS Start-->
+        <section class="py-4 md:py-8 bg-[#EECC96]">
+            <div>
+                <h2 class="text-4xl md:text-7xl text-center font-semibold text-white tracking-wide mt-3">TESTIMONIALS</h2>
+            </div>
+        </section>
+        <div class="w-full">
+            <img src="/static/img/bg_r_back.svg" class="w-full" alt="">
+        </div>
+        <section class="py-6 md:py-12 mt-6 md:mt-24 mb-12 mb:mb-32">
+            <div class="max-w-screen-xl mx-auto px-5">
+                <!-- Slider main container -->
+                <div class="swiper swiper-coverflow swiper-3d swiper-initialized swiper-horizontal swiper-watch-progress">
+                    <!-- Additional required wrapper -->
+                    <div class="swiper-wrapper">
+                        <!-- Slides -->
+                        <div class="swiper-slide relative">
+                            <p>various testimonials from users</p>
+                        </div>
+                        <div class="swiper-slide swiper-after">
+                            <p>various testimonials from users</p>
+                        </div>
+                        <div class="swiper-slide swiper-after">
+                            <p>various testimonials from users</p>
+                        </div>
+                        <div class="swiper-slide swiper-after">
+                            <p>various testimonials from users</p>
+                        </div>
+                        <div class="swiper-slide swiper-after">
+                            <p>various testimonials from users</p>
+                        </div>
+                        <div class="swiper-slide swiper-after">
+                            <p>various testimonials from users</p>
+                        </div>
+
+                    </div>
+                    <!-- If we need pagination -->
+                    <!--                    <div class="swiper-pagination"></div>-->
+
+                    <!-- If we need navigation buttons -->
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                </div>
+
+            </div>
+        </section>
+
+        <!--TESTIMONIALS End-->
+
+        <!--ARTICLES Start-->
+        <section class="py-4 md:py-8 bg-[#C4D1D4]">
+            <div>
+                <h2 class="text-4xl md:text-7xl text-center font-semibold text-white tracking-wide mt-3">ARTICLES</h2>
+            </div>
+        </section>
+        <div class="w-full">
+            <img src="/static/img/bg_b_back.svg" class="w-full" alt="">
+        </div>
+        <section class="py-6 md:py-12 mt-6 md:mt-24 mb-12 mb:mb-32">
+            <div class="max-w-screen-xl mx-auto px-5">
+                <div class="mb-8">
+                    <h3 class="text-2xl md:text-4xl text-center font-semibold text-[#C6584F] mb-4 md:mb-12">READ ALL OUR LATEST ARTICLES </h3>
+                    <div class="w-full bg-[#C6584F] h-0.5"></div>
+                </div>
+                <div class="grid md:grid-cols-3 gap-y-12 md:gap-y-0 md:gap-x-6 items-center ">
+                    <div class="flex flex-row items-center gap-x-4 ">
+                        <div class="overflow-hidden rounded-2xl">
+                            <img src="/static/img/article_1.png" alt="">
+                        </div>
+                        <div class="text-[#C6584F]">
+                            <h4 class="text-xl font-bold mb-1 md:mb-2">Dancing Away Depression</h4>
+                            <p class="font-semibold">Dance is not purely about body movements, but also integrates physical ...</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-row items-center gap-x-4">
+                        <div class="overflow-hidden rounded-2xl">
+                            <img src="/static/img/article_2.png" alt="">
+                        </div>
+                        <div class="text-[#C6584F]">
+                            <h4 class="text-xl font-bold mb-2">Art therapy</h4>
+                            <p class="font-semibold">Art-based interventions have been found to reduce depression and several scientific ...</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-row items-center gap-x-4">
+                        <div class="overflow-hidden rounded-2xl">
+                            <img src="/static/img/article_3.png" alt="">
+                        </div>
+                        <div class="text-[#C6584F]">
+                            <h4 class="text-xl font-bold mb-2">Exercise as Therapy</h4>
+                            <p class="font-semibold">Exercise has been recommended as an adjunct treatment for depression by both the WHO and...</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!--ARTICLES End-->
+
+        <!--COLLABORATORS Start-->
+        <div class="w-full">
+            <img src="/static/img/bg_r_front.svg" class="w-full" alt="">
+        </div>
+        <section class="py-6 md:py-12 bg-[#EECC96]">
+            <div class="max-w-screen-xl mx-auto px-5">
+                <div class="mb-4 md:mb-12">
+                    <h2 class="text-4xl md:text-7xl text-center font-semibold text-white tracking-wide ">COLLABORATORS</h2>
+                </div>
+                <div class="grid md:grid-cols-2 gap-x-24 items-center">
+                    <div>
+                        <img src="/static/img/collaborators_1.png" alt="" class="w-8/12 mx-auto">
+                    </div>
+                    <div>
+                        <img src="/static/img/collaborators_2.png" alt="" class="w-8/12 mx-auto">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="w-full">
+            <img src="/static/img/bg_r_back.svg" class="w-full" alt="">
+        </div>
+        <!--COLLABORATORS End-->
+
+        <!--CONTACT US  Start-->
+        <section class="py-12 md:py-32">
+            <div class="max-w-screen-xl mx-auto px-5">
+                <div class="mb-8 md:mb-24">
+                    <h2 class="text-4xl md:text-7xl text-center font-semibold text-[#C6584F] tracking-wide">CONTACT US</h2>
+                </div>
+                <div class="grid md:grid-cols-2 gap-x-6 items-center">
+                    <form action="/add_contact" method="post" id="contactForm">
+             {% csrf_token %}
+    <div>
+        <div class="form">
+            <div class="form-group">
+                <label class="label-form">Name</label>
+                <input class="form-input" type="text" name="name" id="name" required />
+            </div>
+            <div class="form-group">
+                <label class="label-form">Email</label>
+                <input class="form-input" type="email" name="email" id="email" required />
+            </div>
+            <div class="form-group">
+                <label class="label-form">Phone</label>
+                <input class="form-input" type="tel" name="phone" id="phone" required />
+            </div>
+            <div class="form-group">
+                <label class="label-form">What can we help you with?</label>
+                <input class="form-input" type="text" name="message" id="message" required />
+            </div>
+            <div class="w-full text-center">
+                <button class="bg-[#EECC96] text-white inline-block px-8 py-2 text-xl font-bold rounded-lg" type="submit">Submit</button>
+            </div>
+        </div>
+    </div>
+</form>
+                    <div>
+                        <img src="/static/img/contact.png" alt="" class="w-10/12 mx-auto">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--CONTACT US  End-->
+
+        <!--Footer Start-->
+      {% include 'footer.html' %}
+
+        <!--Footer End-->
+
+
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+    <script src="/static/js/app.js"></script>
+</body>
+<script>
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    if (!name || !email || !message) {
+        event.preventDefault();
+        alert('Please fill out all fields.');
+        return;
+    }
+
+    if (!validateEmail(email)) {
+        event.preventDefault();
+        alert('Please enter a valid email address.');
+        return;
+    }
+    if (!validatePhone(phone)) {
+        event.preventDefault();
+        alert('Please enter a valid phone number.');
+        return;
+    }
+
+    function validateEmail(email) {
+        const re = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+        return re.test(email);
+    }
+});
+</script>
+
+</html>

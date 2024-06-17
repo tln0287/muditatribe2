@@ -1,0 +1,78 @@
+     <div class="sidebar-bg"></div>
+        <div class="sidebar menuSec">
+            <div class="logo-details">
+                <span class="logo_name">
+
+                    <img src="/static/img/logo.svg" alt="GoalDenMedia-logo">
+                </span>
+            </div>
+
+        {% load customtag %}
+            <h5 class="nav-heading d-none d-lg-block">Mudita</h5>
+            <ul class="nav-links ">
+
+                <li>
+                    <a href="/index">
+                        <i class='bx bx-grid-alt'></i>
+                        <span class="link_name">Dashboard</span>
+                    </a>
+                    <ul class="sub-menu blank">
+                        <li><a class="link_name" href="/index">Dashboard</a></li>
+                    </ul>
+                </li>
+                {% if request.user|has_group:"Admin" %}
+                <li>
+                    <a href="/leaders">
+                     <i class='bx bx-user-check'></i>
+                        <span class="link_name">Leaders</span>
+                    </a>
+                    <ul class="sub-menu blank">
+                        <li><a class="link_name" href="/leaders">Leaders</a></li>
+                    </ul>
+                </li>
+                     <li>
+                    <a href="/view_contacts">
+                        <i class='bx bx-phone'></i>
+                        <span class="link_name">Contacts</span>
+                    </a>
+                    <ul class="sub-menu blank">
+                        <li><a class="link_name" href="/view_contacts">Contacts</a></li>
+                    </ul>
+                </li>
+                {% endif %}
+             {% if request.user|has_group:"Admin" or  request.user|has_group:"Leader"  %}
+                <li>
+                    <a href="/agents">
+                     <i class='bx bx-group'></i>
+                        <span class="link_name">Agents</span>
+                    </a>
+                    <ul class="sub-menu blank">
+                        <li><a class="link_name" href="/agents">Agents</a></li>
+                    </ul>
+                </li>
+            {% endif %}
+
+                <li>
+                    <a href="/transactions">
+                        <i class='bx bx-rupee'></i>
+                        <span class="link_name">Transactions</span>
+                    </a>
+                    <ul class="sub-menu blank">
+                        <li><a class="link_name" href="/transactions">Transactions</a></li>
+                    </ul>
+                </li>
+
+
+
+                    <li>
+                    <a href="/share_post">
+                        <i class='bx bx-share-alt' ></i>
+                        <span class="link_name">Share Poster</span>
+                    </a>
+                    <ul class="sub-menu blank">
+                        <li><a class="link_name" href="/share_post">Share Poster</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>

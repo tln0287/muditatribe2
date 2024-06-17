@@ -1,0 +1,132 @@
+{% include 'dashboard_layout/head.html' %}
+<body>
+{% load customtag %}
+<div id="wrapper">
+    {% include 'dashboard_layout/sidebar.html' %}
+    <section class="home-section">
+        {% include 'dashboard_layout/header.html' %}
+        <section class="content-container contentContainer" id="homeSection">
+            <h3 class="sub-title">Leaders<span style="float: right;margin-top: -12px;"><button class="btn btn-primary" onClick="myModal()">Add Leader</button></span></h3>
+            <div class="box-inner">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for d in data %}
+                        <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ d.first_name }}</td>
+                        <td>{{ d.phone }}</td>
+                        <td>{{ d.email }}</td>
+                        <td>{{ d.address }}</td>
+                        <td><i class='bx bx-edit-alt' style="text-decoration: none;cursor: pointer;" onclick="edit_leader({{ d.id }})"> Edit</i> </td>
+
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </section>
+    </section>
+    <div class="modal" id="myModal">
+            <div class="modal-dialog modal-lg">
+                <form action="add_leader" method="post" >
+                    {% csrf_token %}
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add Leader</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path
+                                    d="M12.0007 10.5865L16.9504 5.63672L18.3646 7.05093L13.4149 12.0007L18.3646 16.9504L16.9504 18.3646L12.0007 13.4149L7.05093 18.3646L5.63672 16.9504L10.5865 12.0007L5.63672 7.05093L7.05093 5.63672L12.0007 10.5865Z">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                       <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label>Enter Name</label>
+                                <input type="text" name="name" class="form-control" required>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Enter Email</label>
+                                <input type="email" name="email" class="form-control" required>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Enter Phone</label>
+                                <input type="number" name="phone" class="form-control" required>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Address</label>
+                                <textarea class="form-control" name="address"
+                                          required></textarea>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer justify-content-center">
+                        <button type="submit" class="btn btn-success">Save</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+                </form>
+
+            </div>
+        </div>
+</div>
+{% include 'dashboard_layout/scripts.html' %}
+<script>
+    function myModal(){
+         $('.modal-title').html("Edit Leader")
+        $('#myModal').modal('show')
+    }
+    $(document).ready(function (){
+
+    })
+    function edit_leader(id){
+
+          $.ajax({
+            type: "GET",
+            url: '/edit_leader',
+            enctype: 'multipart/form-data',
+            data: {"id": id},
+
+            success: function (data) {
+                $('.modal-title').html("Edit Leader")
+               $("input[name=name]").val(data.data[0]['first_name'])
+               $("input[name=email]").val(data.data[0]['email'])
+               $("input[name=phone]").val(data.data[0]['phone'])
+               $("textarea[name=address]").val(data.data[0]['address'])
+                  $('#myModal').modal('show')
+
+
+            },
+            error: function () {
+                alert("something went wrong")
+            }
+        });
+    }
+</script>
+</body>
+
+
+</html>

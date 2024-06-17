@@ -1,0 +1,82 @@
+{% include 'dashboard_layout/head.html' %}
+<body>
+{% load customtag %}
+<div id="wrapper">
+    {% include 'dashboard_layout/sidebar.html' %}
+    <section class="home-section">
+        {% include 'dashboard_layout/header.html' %}
+        <section class="content-container contentContainer" id="homeSection">
+            <h3 class="sub-title">Dashboard</h3>
+            <div class="box-inner">
+                <div class="dashboardCardContainer mb-4">
+                    <div class="row justify-content-center">
+                        <div class="col-sm-3 mb-2">
+                            <a href="/transactions"> <div class="cardBox cardBoxGreen">
+                                <div>
+                                    <h5 class="cardTitle">Transactions</h5>
+                                    <h3 class="cardValue"> {{ tcount }}</h3>
+
+                                </div>
+                                <div>
+                                    <i class="fa-solid fa-indian-rupee-sign"></i>
+                                </div>
+
+                            </div></a>
+                        </div>
+
+                    {% if request.user|has_group:"Admin" %}
+                         <div class="col-sm-3 mb-2">
+                            <a href="/leaders"><div class="cardBox cardBoxPurple">
+                                <div>
+                                    <h5 class="cardTitle">Leaders</h5>
+                                    <h3 class="cardValue"> {{ lcount }}</h3>
+                                </div>
+                                <div>
+                                    <i class='bx bxs-user-check'></i>
+                                </div>
+
+                            </div></a>
+                        </div>
+                        <div class="col-sm-3 mb-2">
+                           <a href="/view_contacts"> <div class="cardBox cardBoxRed">
+                                <div>
+                                    <h5 class="cardTitle">Contacts</h5>
+                                    <h3 class="cardValue"> {{ccount }}</h3>
+                                </div>
+                                <div>
+                                  <i class='bx bxs-book-alt'></i>
+
+                                </div>
+
+                           </div></a>
+                        </div>
+                    {% endif %}
+                    {% if request.user|has_group:"Leader" or request.user|has_group:"Admin" %}
+                        <div class="col-sm-3 mb-2">
+                           <a href="/agents"> <div class="cardBox cardBoxYellow">
+                                <div>
+                                    <h5 class="cardTitle">Agents</h5>
+                                    <h3 class="cardValue"> {{ acount }}</h3>
+                                </div>
+                                <div>
+                                    <i class='bx bx-group'></i>
+
+                                </div>
+
+                           </div></a>
+                        </div>
+                        {% endif %}
+
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </section>
+</div>
+{% include 'dashboard_layout/scripts.html' %}
+</body>
+
+
+</html>
