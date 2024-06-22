@@ -2,9 +2,13 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from testimonial.models import UserTestimonial
 # Create your views here.
 def home(request):
-    return render(request,'web/index.html')
+    testimonial = UserTestimonial.objects.filter(publish=True)
+    context = dict()
+    context['testi'] = testimonial
+    return render(request,'web/index.html',context)
 
 def about(request):
     return render(request,'web/about.html')

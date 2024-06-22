@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'import_export',
     'home',
     'contact',
-
+    'testimonial',
     'usermanagement',
 'social_django',
 'django_social_share',
