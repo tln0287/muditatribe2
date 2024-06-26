@@ -6,9 +6,9 @@ from django.contrib.auth.models import Group
 # Register your models here.
 @admin.register(User)
 class ViewAdmin(ImportExportModelAdmin):
-    list_display = ['id','u_id','first_name']
-
+    list_display = ['admin_photo','first_name','designation']
     search_fields = ('username','u_id','email','first_name')
+
 
 @admin.register(UserGroups)
 class ViewAdmin(ImportExportModelAdmin):

@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 admin.site.site_header = "Mudita Tribe"
 admin.site.site_title = "Mudita Tribe"
@@ -28,4 +30,4 @@ urlpatterns = [
     path('', include('testimonial.urls')),
     path('', include('counsellor.urls')),
 path('', include('social_django.urls', namespace='social')),
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

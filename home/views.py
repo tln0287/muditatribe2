@@ -27,7 +27,10 @@ def donations(request):
     return render(request,'web/donations.html')
 
 def counsellors(request):
-    return render(request,'web/letMeet.html')
+    data = User.objects.filter(userOf__group__name='counsellor')
+    context=dict()
+    context['data'] = data
+    return render(request,'web/letMeet.html',context)
 
 
 def contact(request):
