@@ -3,6 +3,9 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from testimonial.models import UserTestimonial
+from .models import *
+from social_django.models import UserSocialAuth
+from usermanagement.models import *
 # Create your views here.
 def home(request):
     testimonial = UserTestimonial.objects.filter(publish=True)
@@ -12,6 +15,9 @@ def home(request):
 
 def about(request):
     return render(request,'web/about.html')
+
+def helplines(request):
+    return render(request,'web/helplines.html')
 
 
 def activities(request):
@@ -25,6 +31,7 @@ def counsellors(request):
 
 
 def contact(request):
+
     return render(request,'web/joinTheTribe.html')
 
 def breathing(request):
@@ -98,6 +105,56 @@ def failed2(request):
 def profile(request):
     return render(request,'dashboard/dashboard.html')
 
+
+
+def volunteer(request):
+    return render(request,'web/volunteer.html')
+
+
+def professional(request):
+    return render(request,'web/professional.html')
+
+
+
+def add_user(request):
+    try:
+        name = request.POST['name']
+        email = request.POST['email']
+        phone=request.POST['phone']
+        address = request.POST['address']
+        email_check = email.split('@')
+        email_address = email_check[1]
+        if email_address != "gmail.com":
+            messages.error(request,'Accept only for gmail')
+
+        else:
+            obj, created = User.objects.get_or_create(email=email)
+            obj.first_name = name
+            obj.password = "pbkdf2_sha256$390000$qjgXAopeH0sYVMjgJaESp3$ZMnGBKxZo9tj/sKf2EhCmCnS7ibAbd1KhxOStvEl0go="
+            obj.last_name = name
+            obj.address = address
+            obj.phone = phone
+            obj.email = email
+            obj.save()
+
+            obj2, created = UserGroups.objects.get_or_create(user_id=obj.id,group_id=3)
+            obj2.save()
+
+            obj3,created = UserSocialAuth.objects.get_or_create(uid=email)
+            obj3.user_id = obj.id
+            obj3.provider = 'google-oauth2'
+            obj3.extra_data = {'data':1}
+            obj3.save()
+
+            messages.success(request,'Your account has been created')
+            return redirect('login2')
+
+
+        return redirect('register')
+    except Exception as e:
+        obj = Exceptions(error_name = str(e))
+        obj.save()
+        return redirect('register')
 
 def logout2(request):
     logout(request)

@@ -25,36 +25,38 @@
         <!--form start-->
         <section class="py-2 about-content">
             <div class="max-w-screen-xl mx-auto px-5">
-                  <form class="w-full" id="donationForm">
+                  <form class="w-full" id="donationForm" action="/add_donation" method="post" enctype="multipart/form-data">
+                      {%csrf_token%}
+
         <div class="grid md:grid-cols-2 gap-x-8">
             <div class="form-group mb-4">
                 <label class="label-form">Name</label>
-                <input class="form-input border-2 border-gray-300 rounded-lg p-2 w-full" type="text" id="name" required/>
+                <input class="form-input border-2 border-gray-300 rounded-lg p-2 w-full" type="text" name="uname" id="name" required/>
                 <p class="text-red-500 text-sm hidden" id="nameError">Name is required.</p>
             </div>
             <div class="form-group mb-4">
                 <label class="label-form">Address</label>
-                <input class="form-input border-2 border-gray-300 rounded-lg p-2 w-full" type="text" id="address" required />
+                <input class="form-input border-2 border-gray-300 rounded-lg p-2 w-full" type="text" name="address" id="address" required />
                 <p class="text-red-500 text-sm hidden" id="addressError">Address is required.</p>
             </div>
             <div class="form-group mb-4">
                 <label class="label-form">Email</label>
-                <input class="form-input border-2 border-gray-300 rounded-lg p-2 w-full" type="email" id="email" required />
+                <input class="form-input border-2 border-gray-300 rounded-lg p-2 w-full" type="email" name="email" id="email" required />
                 <p class="text-red-500 text-sm hidden" id="emailError">Valid email is required.</p>
             </div>
             <div class="form-group mb-4">
                 <label class="label-form">Type Your Amount</label>
-                <input class="form-input border-2 border-gray-300 rounded-lg p-2 w-full" type="number" id="amount" required />
+                <input class="form-input border-2 border-gray-300 rounded-lg p-2 w-full" type="number" name="amount" id="amount" required />
                 <p class="text-red-500 text-sm hidden" id="amountError">Amount is required.</p>
             </div>
             <div class="form-group mb-4">
                 <label class="label-form">Mobile</label>
-                <input class="form-input border-2 border-gray-300 rounded-lg p-2 w-full" type="tel" id="mobile" required />
+                <input class="form-input border-2 border-gray-300 rounded-lg p-2 w-full" type="number" name="phone" id="mobile" required />
                 <p class="text-red-500 text-sm hidden" id="mobileError">Mobile number is required.</p>
             </div>
             <div class="form-group mb-4">
                 <label class="label-form">Upload PAN Image</label>
-                <input class="form-input border-2 border-gray-300 rounded-lg p-2 w-full" type="file" id="panImage" accept="image/*" required />
+<input class="form-input" type="file" name="pan" id="panImage" accept="image/*, .pdf" required />
                 <p class="text-red-500 text-sm hidden" id="panImageError">PAN image is required.</p>
             </div>
         </div>
@@ -64,39 +66,7 @@
         </div>
     </form>
 
-<!--                <form class="w-full" action="#">-->
-<!--                    <div class="grid md:grid-cols-2 gap-x-8">-->
-<!--                        <div class="form-group">-->
-<!--                            <label class="label-form">Name</label>-->
-<!--                            <input class="form-input" type="text" required/>-->
-<!--                        </div>-->
-<!--                        <div class="form-group">-->
-<!--                            <label class="label-form">Address</label>-->
-<!--                            <input class="form-input" type="text" required />-->
-<!--                        </div>-->
-<!--                        <div class="form-group">-->
-<!--                            <label class="label-form">Email</label>-->
-<!--                            <input class="form-input" type="text" required />-->
-<!--                        </div>-->
-<!--                        <div class="form-group">-->
-<!--                            <label class="label-form">Type Your Amount</label>-->
-<!--                            <input class="form-input" type="text" required />-->
-<!--                        </div>-->
-<!--                        <div class="form-group">-->
-<!--                            <label class="label-form">Mobile</label>-->
-<!--                            <input class="form-input" type="text" required />-->
-<!--                        </div>-->
 
-<!--                        <div class="form-group">-->
-<!--                            <label class="label-form">Upload PAN Image</label>-->
-<!--                            <input class="form-input" type="text" required />-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="w-full text-center mt-12">-->
-<!--                        <button  type="button"  class="bg-[#C6584F] text-white inline-block px-8 py-2 text-xl font-bold rounded-lg">Submit Donation</button>-->
-<!--                        <P   class="text-2xl font-semibold mt-6 text-[#C6584F] ">Thank you for your donation!</P>-->
-<!--                    </div>-->
-<!--                </form>-->
             </div>
         </section>
         <!--form end-->
@@ -106,82 +76,87 @@
 
 </body>
 <script>
-        document.getElementById('donationForm').addEventListener('submit', function(event) {
-            event.preventDefault();
+       document.getElementById('donationForm').addEventListener('submit', function(event) {
+    event.preventDefault();
 
-            let isValid = true;
+    let isValid = true;
 
-            const name = document.getElementById('name');
-            const address = document.getElementById('address');
-            const email = document.getElementById('email');
-            const amount = document.getElementById('amount');
-            const mobile = document.getElementById('mobile');
-            const panImage = document.getElementById('panImage');
+    const name = document.getElementById('name');
+    const address = document.getElementById('address');
+    const email = document.getElementById('email');
+    const amount = document.getElementById('amount');
+    const mobile = document.getElementById('mobile');
+    const panImage = document.getElementById('panImage');
 
-            const nameError = document.getElementById('nameError');
-            const addressError = document.getElementById('addressError');
-            const emailError = document.getElementById('emailError');
-            const amountError = document.getElementById('amountError');
-            const mobileError = document.getElementById('mobileError');
-            const panImageError = document.getElementById('panImageError');
-            const thankYouMessage = document.getElementById('thankYouMessage');
+    const nameError = document.getElementById('nameError');
+    const addressError = document.getElementById('addressError');
+    const emailError = document.getElementById('emailError');
+    const amountError = document.getElementById('amountError');
+    const mobileError = document.getElementById('mobileError');
+    const panImageError = document.getElementById('panImageError');
+    const thankYouMessage = document.getElementById('thankYouMessage');
 
-            // Validate Name
-            if (name.value.trim() === '') {
-                nameError.classList.remove('hidden');
-                isValid = false;
-            } else {
-                nameError.classList.add('hidden');
-            }
+    // Validate Name
+    if (name.value.trim() === '') {
+        nameError.classList.remove('hidden');
+        isValid = false;
+    } else {
+        nameError.classList.add('hidden');
+    }
 
-            // Validate Address
-            if (address.value.trim() === '') {
-                addressError.classList.remove('hidden');
-                isValid = false;
-            } else {
-                addressError.classList.add('hidden');
-            }
+    // Validate Address
+    if (address.value.trim() === '') {
+        addressError.classList.remove('hidden');
+        isValid = false;
+    } else {
+        addressError.classList.add('hidden');
+    }
 
-            // Validate Email
-            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-            if (!emailPattern.test(email.value)) {
-                emailError.classList.remove('hidden');
-                isValid = false;
-            } else {
-                emailError.classList.add('hidden');
-            }
+    // Validate Email
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    if (!emailPattern.test(email.value)) {
+        emailError.classList.remove('hidden');
+        isValid = false;
+    } else {
+        emailError.classList.add('hidden');
+    }
 
-            // Validate Amount
-            if (amount.value.trim() === '' || isNaN(amount.value)) {
-                amountError.classList.remove('hidden');
-                isValid = false;
-            } else {
-                amountError.classList.add('hidden');
-            }
+    // Validate Amount
+    if (amount.value.trim() === '' || isNaN(amount.value) || amount.value <= 0) {
+        amountError.classList.remove('hidden');
+        isValid = false;
+    } else {
+        amountError.classList.add('hidden');
+    }
 
-            // Validate Mobile
-            const mobilePattern = /^[0-9]{10}$/;
-            if (!mobilePattern.test(mobile.value)) {
-                mobileError.classList.remove('hidden');
-                isValid = false;
-            } else {
-                mobileError.classList.add('hidden');
-            }
+    // Validate Mobile
+    const mobilePattern = /^[0-9]{10}$/;
+    if (!mobilePattern.test(mobile.value)) {
+        mobileError.classList.remove('hidden');
+        isValid = false;
+    } else {
+        mobileError.classList.add('hidden');
+    }
 
-            // Validate PAN Image
-            if (panImage.files.length === 0) {
-                panImageError.classList.remove('hidden');
-                isValid = false;
-            } else {
-                panImageError.classList.add('hidden');
-            }
+    // Validate PAN Image
+    if (panImage.files.length === 0) {
+        panImageError.classList.remove('hidden');
+        isValid = false;
+    } else {
+        panImageError.classList.add('hidden');
+    }
 
-            if (isValid) {
-                thankYouMessage.classList.remove('hidden');
-            } else {
-                thankYouMessage.classList.add('hidden');
-            }
-        });
+    if (isValid) {
+        thankYouMessage.classList.remove('hidden');
+        // Use a timeout to allow the thank you message to display
+        setTimeout(() => {
+            document.getElementById('donationForm').submit();
+        }, 500);
+    } else {
+        thankYouMessage.classList.add('hidden');
+    }
+});
+
     </script>
 
 </html>

@@ -1,0 +1,89 @@
+{%include 'head.html' %}
+<body>
+    <div id="wrapper">
+        <!--Header Start-->
+      {%include 'header.html' %}
+        <!--Header End-->
+
+
+        <!--Other Happiness Start-->
+        <section class="py-6 about-content">
+            <div class="max-w-screen-xl mx-auto px-5">
+                <h2 class="text-4xl md:text-7xl text-center font-semibold text-[#C6584F] ">Support Our Journey</h2>
+                <div class="w-full md:w-7/12 mx-auto">
+                    <img src="/static/img/donations.png" alt="" class="w-full">
+                </div>
+
+                <div class="mb-8 md:mb-24">
+                    <h2 class="text-[#C6584F] mt-12 mb-2 md:mb-12 text-3xl md:text-6xl font-semibold text-center">Let’s Create A Better Tomorrow</h2>
+                    <h4 class="text-2xl md:text-4xl text-center font-semibold text-[#C6584F] italic md:w-8/12 mx-auto">Please ensure the name and mobile number provided match your PAN card details for accurate 80G certificate issuance. Thank you for your support.</h4>
+                </div>
+            </div>
+        </section>
+        <!--Other Happiness End-->
+
+        <!--form start-->
+        <section class="py-2 about-content">
+            <div class="max-w-screen-xl mx-auto px-5">
+                        <form action="{% url 'charged' %}" method="post">
+                                                {% csrf_token %}
+        <div class="grid md:grid-cols-2 gap-x-8">
+            <div class="form-group mb-4">
+                <label class="label-form">Name</label>
+                <input class="form-input border-2 border-gray-300 rounded-lg p-2 w-full" readonly value="{{data.name}}" type="text" name="uname" id="name" required/>
+                <p class="text-red-500 text-sm hidden" id="nameError">Name is required.</p>
+            </div>
+            <div class="form-group mb-4">
+                <label class="label-form">Address</label>
+                <input class="form-input border-2 border-gray-300 rounded-lg p-2 w-full" readonly value="{{data.address}}" type="text" name="address" id="address" required />
+                <p class="text-red-500 text-sm hidden" id="addressError">Address is required.</p>
+            </div>
+            <div class="form-group mb-4">
+                <label class="label-form">Email</label>
+                <input class="form-input border-2 border-gray-300 rounded-lg p-2 w-full"  readonly value="{{data.email}}" type="email" name="email" id="email" required />
+                <p class="text-red-500 text-sm hidden" id="emailError">Valid email is required.</p>
+            </div>
+            <div class="form-group mb-4">
+                <label class="label-form">Type Your Amount</label>
+                <input class="form-input border-2 border-gray-300 rounded-lg p-2 w-full"  readonly value="{{data.amount}}" type="number" name="amount" id="amount" required />
+                <p class="text-red-500 text-sm hidden" id="amountError">Amount is required.</p>
+            </div>
+            <div class="form-group mb-4">
+                <label class="label-form">Mobile</label>
+                <input class="form-input border-2 border-gray-300 rounded-lg p-2 w-full" readonly value="{{data.phone}}" type="number" name="phone" id="mobile" required />
+                <p class="text-red-500 text-sm hidden" id="mobileError">Mobile number is required.</p>
+            </div>
+            <div class="w-full text-center mt-12">
+
+                     <script
+            src="https://checkout.razorpay.com/v1/checkout.js"
+            data-key="rzp_test_lP8JZTcfYYzYzm"
+            data-amount="{{ amount_tbp }}"
+            data-name="Mudita Tribe"
+            data-description="Donation"
+            data-image="vk.jpg"
+            data-netbanking="true"
+            data-prefill.name="{{ data.name }}"
+            data-prefill.email="{{ data.email }}"
+            data-prefill.contact="{{ data.phone }}"
+            data-notes.shopping_order_id="{{ data.id }}">
+        </script>
+        <input type="hidden" name="shopping_order_id" value="{{ data.id }}">
+
+        </div>
+
+        </div>
+
+    </form>
+
+            </div>
+        </section>
+        <!--form end-->
+
+{%include 'footer.html' %}
+    </div>
+
+</body>
+
+
+</html>

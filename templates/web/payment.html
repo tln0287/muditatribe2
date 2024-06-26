@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment</title>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+        function razorpaySubmit() {
+            var options = {
+                "key": "{{ razorpay_key_id }}",
+                "amount": "{{ amount }}",
+                "currency": "INR",
+                "name": "Your Company Name",
+                "description": "Test Transaction",
+                "order_id": "{{ order_id }}",
+                "handler": function (response){
+                    var form = document.createElement("form");
+                    form.setAttribute("method", "POST");
+                    form.setAttribute("action", "{% url 'payment_success' %}");
+
+                    var razorpay_order_id = document.createElement("input");
+                    razorpay_order_id.setAttribute("type", "hidden");
+                    razorpay_order_id.setAttribute("name", "razorpay_order_id");
+                    razorpay_order_id.setAttribute("value", response.razorpay_order_id);
+                    form.appendChild(razorpay_order_id);
+
+                    var razorpay_payment_id = document.createElement("input");
+                    razorpay_payment_id.setAttribute("type", "hidden");
+                    razorpay_payment_id.setAttribute("name", "razorpay_payment_id");
+                    razorpay_payment_id.setAttribute("value", response.razorpay_payment_id);
+                    form.appendChild(razorpay_payment_id);
+
+                    var razorpay_signature = document.createElement("input");
+                    razorpay_signature.setAttribute("type", "hidden");
+                    razorpay_signature.setAttribute("name", "razorpay_signature");
+                    razorpay_signature.setAttribute("value", response.razorpay_signature);
+                    form.appendChild(razorpay_signature);
+
+                    document.body.appendChild(form);
+                    form.submit();
+                },
+                "theme": {
+                    "color": "#528FF0"
+                }
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.open();
+        }
+    </script>
+</head>
+<body onload="razorpaySubmit()">
+    <h1>Processing Payment...</h1>
+</body>
+</html>

@@ -1,10 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<script>
+        $(document).ready(function() {
+            $('input[type="file"][accept="image/*, .pdf"]').on('change', function() {
+                var fileInput = $(this);
+                var filePath = fileInput.val();
+                var allowedExtension = /(\.pdf)$/i;
+                var maxSize = 5 * 1024 * 1024; // 5MB in bytes
+                var file = this.files[0];
+                var errorMessage = $('#file-error');
 
-</body>
-</html>
+                if (!allowedExtension.exec(filePath)) {
+                    errorMessage.show().text("Please upload only PDF.");
+                    alert("Please upload only PDF.");
+                    fileInput.val(''); // Clear the input
+                } else if (file.size > maxSize) {
+                    errorMessage.show().text("File size exceeds 5MB. Please upload a smaller file.");
+                    alert("File size exceeds 5MB. Please upload a smaller file.");
+                    fileInput.val(''); // Clear the input
+                } else {
+                    errorMessage.hide();
+                }
+            });
+        });
+    </script>

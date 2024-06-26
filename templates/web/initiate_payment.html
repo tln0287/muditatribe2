@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Initiate Payment</title>
+</head>
+<body>
+    <h1>Initiate Payment</h1>
+    <form method="post" action="/initiate_payment">
+        {% csrf_token %}
+        <label for="amount">Amount:</label>
+        <input type="number" name="amount" id="amount" required>
+        <button type="submit">Pay Now</button>
+    </form>
+</body>
+</html>

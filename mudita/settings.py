@@ -28,6 +28,10 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+
+RAZORPAY_KEY_ID = 'rzp_test_lP8JZTcfYYzYzm'
+RAZORPAY_KEY_SECRET = 'rg8Esy7F1mSTtcityp87mPRJ'
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,12 +44,16 @@ INSTALLED_APPS = [
     'import_export',
     'home',
     'contact',
+    'donation',
     'testimonial',
     'usermanagement',
-'social_django',
-'django_social_share',
+    'social_django',
+    'django_social_share',
     'sweetify',
     'counsellor',
+    'blog',
+    'mindfulTradition',
+
 
 
 ]
@@ -144,8 +152,16 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
-}
 
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'mudita',
+    #     'USER': 'root',
+    #     'PASSWORD': '',
+    #     'HOST': 'localhost',
+    #     'PORT': '3306',
+    # }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

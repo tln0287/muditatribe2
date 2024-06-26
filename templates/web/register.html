@@ -14,7 +14,7 @@
                     <h2 class="text-4xl md:text-7xl text-center font-semibold text-[#C6584F] tracking-wide">Register</h2>
                 </div>
                 <div class="grid md:grid-cols-2 gap-x-6 items-center">
-                    <form action="/add_contact" method="post" id="contactForm">
+                    <form action="/add_user" method="post" id="contactForm">
              {% csrf_token %}
     <div>
         <div class="form">
@@ -28,12 +28,14 @@
             </div>
             <div class="form-group">
                 <label class="label-form">Phone</label>
-                <input class="form-input" type="tel" name="phone" id="phone" required />
+                <input class="form-input" type="number" name="phone" id="phone" required />
             </div>
-            <div class="form-group">
-                <label class="label-form">What can we help you with?</label>
-                <input class="form-input" type="text" name="message" id="message" required />
+             <div class="form-group">
+                <label class="label-form">Address</label>
+                 <textarea  class="form-input" name="address" required></textarea>
+
             </div>
+
             <div class="w-full text-center">
                 <button class="bg-[#EECC96] text-white inline-block px-8 py-2 text-xl font-bold rounded-lg" type="submit">Submit</button>
             </div>
