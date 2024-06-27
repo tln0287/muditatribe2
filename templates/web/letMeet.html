@@ -20,36 +20,15 @@
                     <h2 class="text-[#C6584F] mt-12 text-4xl md:text-6xl font-semibold text-center">Get to know more about the team </h2>
                 </div>
                 <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-5">
-                    <div class="relative overflow-hidden rounded-2xl cursor-pointer	" data-modal-target="default-modal" data-modal-toggle="default-modal">
+                    {%for i in data%}
+                       <div class="relative overflow-hidden rounded-2xl cursor-pointer" onclick="get_counsellor({{i.id}})">
                         <div class="w-full profile">
-                            <img src="/static/img/profile_1.png" alt="" class="w-full">
+                            <img src="/media/{{i.photo}}" alt="" class="w-full">
                         </div>
-                        <h6 class="absolute bottom-4 text-white px-4 py-2 text-2xl text-white z-10">Aakhansha Varghese</h6>
+<!--                        <h6 class="absolute bottom-4 text-white px-4 py-2 text-2xl text-white z-10">{{i.first_name|title}}</h6>-->
                     </div>
-                    <div class="relative overflow-hidden rounded-2xl">
-                        <div class="w-full profile">
-                            <img src="/static/img/profile_2.png" alt="" class="w-full">
-                        </div>
-                        <h6 class="absolute bottom-4 text-white px-4 py-2 text-2xl text-white z-10">Aakhansha Varghese</h6>
-                    </div>
-                    <div class="relative overflow-hidden rounded-2xl">
-                        <div class="w-full profile">
-                            <img src="/static/img/profile_3.png" alt="" class="w-full">
-                        </div>
-                        <h6 class="absolute bottom-4 text-white px-4 py-2 text-2xl text-white z-10">Aakhansha Varghese</h6>
-                    </div>
-                    <div class="relative overflow-hidden rounded-2xl">
-                        <div class="w-full profile">
-                            <img src="/static/img/profile_4.png" alt="" class="w-full">
-                        </div>
-                        <h6 class="absolute bottom-4 text-white px-4 py-2 text-2xl text-white z-10">Aakhansha Varghese</h6>
-                    </div>
-                    <div class="relative overflow-hidden rounded-2xl">
-                        <div class="w-full profile">
-                            <img src="/static/img/profile_5.png" alt="" class="w-full">
-                        </div>
-                        <h6 class="absolute bottom-4 text-white px-4 py-2 text-2xl text-white z-10">Aakhansha Varghese</h6>
-                    </div>
+                    {%endfor%}
+
 
                 </div>
             </div>
@@ -64,43 +43,78 @@
 
     </div>
 
-    <div id="default-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-        <div class="relative p-4 w-full max-w-2xl max-h-full">
-            <!-- Modal content -->
-            <div class="relative bg-[#F8EDDE] rounded-lg shadow p-8">
-                <!-- Modal header -->
-                <div class="flex items-center justify-between rounded-t">
-                    <button type="button" class="text-white bg-[#C6584F]  hover:bg-black rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center " data-modal-hide="default-modal">
-                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                        </svg>
-                    </button>
-                </div>
-                <!-- Modal body -->
-                <div class="space-y-4 text-[#C6584F]">
-                    <div>
-                        <h4 class="text-2xl font-semibold">Aakhansha Varghese</h4>
-                        <h6 class="text-lg font-semibold">Psychologist</h6>
-                    </div>
-                    <ul class="space-y-1">
-                        <li><b>Area of Specialization:</b>Relationship Counselling </li>
-                        <li><b>Experience:</b> 5 Years</li>
-                        <li><b>Qualification:</b> MSc In Counselling Psychology </li>
-                        <li><b>Mode of Delivery:</b> Both Offline and Online</li>
-                        <li><b>Language:</b> English, Hindi</li>
-                        <li><b>Location:</b> Valsad, Gujarat</li>
-                        <li><b>Email:</b> aakansha151995@gmail.com</li>
-                        <li><b>Mobile No:</b> 9986071608 </li>
-                    </ul>
-                    <div>
-                        <b>About: </b><br />
-                        Aakanksha's work as a psychologist affords her the great privilege of being invited into the most intimate emotional spaces of people’s lives. She works with children, adolescents & young adults with cases like Anxiety, Depression, Relationship issues, Borderline Personality Disorder, ADHD (children and adults), Stress and Work-Life Balance, Adjustmental Issues. Aakanksha is a LGBTQIA ally, Trauma Informed and has worked on cases involving Childhood Trauma. In therapy her approach has been eclectic however she majorly practice humanistic approach. She believes that every individual has the capability to grow and evolve when given an environment of acceptance, empathy and unconditional positive regard. 
-                    </div>
-                </div>
 
+
+<div id="default-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed inset-0 z-50 flex justify-center items-center w-full h-full">
+    <div class="relative p-4 w-full max-w-2xl max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-[#F8EDDE] rounded-lg shadow p-8">
+            <!-- Modal header -->
+            <div class="flex items-center justify-between rounded-t">
+                <button type="button" class="text-white bg-[#C6584F] hover:bg-black rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="default-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                    </svg>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="space-y-4 text-[#C6584F]" id="profile">
+                <div>
+                    <h4 class="text-2xl font-semibold">Aakhansha Varghese</h4>
+                    <h6 class="text-lg font-semibold">Psychologist</h6>
+                </div>
+                <ul class="space-y-1">
+                    <li><b>Area of Specialization:</b>Relationship Counselling </li>
+                    <li><b>Experience:</b> 5 Years</li>
+                    <li><b>Qualification:</b> MSc In Counselling Psychology </li>
+                    <li><b>Mode of Delivery:</b> Both Offline and Online</li>
+                    <li><b>Language:</b> English, Hindi</li>
+                    <li><b>Location:</b> Valsad, Gujarat</li>
+                    <li><b>Email:</b> aakansha151995@gmail.com</li>
+                    <li><b>Mobile No:</b> 9986071608 </li>
+                </ul>
+                <div>
+                    <b>About: </b><br />
+                    Aakanksha's work as a psychologist affords her the great privilege of being invited into the most intimate emotional spaces of people’s lives. She works with children, adolescents & young adults with cases like Anxiety, Depression, Relationship issues, Borderline Personality Disorder, ADHD (children and adults), Stress and Work-Life Balance, Adjustmental Issues. Aakanksha is a LGBTQIA ally, Trauma Informed and has worked on cases involving Childhood Trauma. In therapy her approach has been eclectic however she majorly practice humanistic approach. She believes that every individual has the capability to grow and evolve when given an environment of acceptance, empathy and unconditional positive regard.
+                </div>
             </div>
         </div>
     </div>
+</div>
 </body>
+   <script src="/static/static/js/jquery-3.6.0.js"></script>
+
+<script>
+
+
+$(document).ready(function() {
+    // Open modal
+    $("#open-modal").click(function() {
+        get_counsellor(1); // Example id, you can replace it with dynamic id
+    });
+
+    // Close modal
+    $(document).on('click', "[data-modal-hide='default-modal']", function() {
+        $("#default-modal").addClass("hidden");
+    });
+});
+
+function get_counsellor(id) {
+    $.ajax({
+        type: "GET",
+        url: '/get_counsellor_data',
+        data: {"id": id},
+        success: function (data) {
+            $('#profile').html(data.html_form);
+            $("#default-modal").removeClass("hidden");
+        },
+        error: function () {
+            alert("Something went wrong");
+        }
+    });
+}
+
+
+</script>
 
 </html>

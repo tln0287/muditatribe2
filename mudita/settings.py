@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'sweetify',
     'counsellor',
     'blog',
+    'helplines',
     'mindfulTradition',
 
 
