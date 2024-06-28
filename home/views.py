@@ -2,6 +2,8 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib import messages
+
+from blog.models import Blog
 from testimonial.models import UserTestimonial
 from .models import *
 from social_django.models import UserSocialAuth
@@ -94,7 +96,11 @@ def privacy_policy(request):
 
 
 def blog(request):
-    return render(request,'web/blog.html')
+    data = Blog.objects.filter(publish=True)
+
+    context = dict()
+    context['data'] = data
+    return render(request,'web/blog.html',context)
 
 
 def register(request):

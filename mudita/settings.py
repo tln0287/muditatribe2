@@ -22,6 +22,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-wj=mn_^x2cnt4_v+ow=h%xj!-gg_=q6kjz3mwx547o^tc1h@9k'
 
+ENCRYPT_KEY = b'gOO5zRy11u0LutYE9sZPLEtgJLBVqz5fXveYoU3Uh3I='
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -49,11 +51,13 @@ INSTALLED_APPS = [
     'usermanagement',
     'social_django',
     'django_social_share',
-    'sweetify',
     'counsellor',
     'blog',
     'helplines',
     'mindfulTradition',
+    'sweetify',
+    'tinymce',
+    'article',
 
 
 
@@ -69,6 +73,30 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
+
+TINYMCE_DEFAULT_CONFIG = {
+    'image_dimensions': False,
+    "plugins": """
+            textcolor save link image media preview codesample contextmenu
+            table code lists fullscreen  insertdatetime  nonbreaking
+            contextmenu directionality searchreplace wordcount visualblocks
+            visualchars code fullscreen autolink lists  charmap print  hr
+            anchor pagebreak
+            """,
+    "toolbar1": """
+            fullscreen preview bold italic underline | fontselect,
+            fontsizeselect  | forecolor backcolor | alignleft alignright |
+            aligncenter alignjustify | indent outdent | bullist numlist table |
+            | link image media | codesample |
+            """,
+    "toolbar2": """
+            visualblocks visualchars |
+            charmap hr pagebreak nonbreaking anchor |  code |
+            """,
+    "contextmenu": "formats | link image",
+    "menubar": True,
+    "statusbar": True,
+}
 
 ROOT_URLCONF = 'mudita.urls'
 
