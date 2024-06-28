@@ -1,4 +1,5 @@
 {% include 'head.html' %}
+{%load customtag %}
 <body>
     <div id="wrapper">
         <!--Header Start-->
@@ -23,29 +24,19 @@
 
                 </div>
                 <div class="grid md:grid-cols-3 gap-5">
-
-                    <div class="grid gap-y-2 w-full md:w-8/12 mx-auto">
+                    {%for b in data %}
+                     <div class="grid gap-y-2 w-full md:w-8/12 mx-auto">
                         <div class="overflow-hidden rounded-2xl w-full mx-auto">
-                            <img src="/static/img/blog_1.png" alt="" class="w-full">
+                            <img src="/media/{{b.article_main_image}}" alt="" class="w-full">
                         </div>
                         <div class="text-[#C6584F] text-center">
-                            <h4 class="text-xl font-bold mb-1">Dancing Away Depression</h4>
-                            <p class="font-semibold">“I don’t like the word ‘depression’; I prefer to refer to that state as the ‘inside ...”</p>
+                            <h4 class="text-xl font-bold mb-1">{{b.title}}</h4>
+                            <p class="font-semibold">{{b.content|safe|slice:"100"}}..</p>
 
-                            <a href="#" class="bg-[#C4D1D4] text-white mt-3 w-6/12 mx-auto text-xl text-center py-1.5 rounded-lg px-4">Read More</a>
+                            <a href="/article_details/{{ b.id|encrypting }}" class="bg-[#C4D1D4] text-white mt-3 w-6/12 mx-auto text-xl text-center py-1.5 rounded-lg px-4">Read More</a>
                         </div>
                     </div>
-                    <div class="grid gap-y-2 w-full md:w-8/12 mx-auto">
-                        <div class="overflow-hidden rounded-2xl w-full mx-auto">
-                            <img src="/static/img/blog_2.png" alt="" class="w-full">
-                        </div>
-                        <div class="text-[#C6584F] text-center">
-                            <h4 class="text-xl font-bold mb-1">The Fog That Comes Like Clock Work</h4>
-                            <p class="font-semibold">Days go by and I keep telling myself and you that I understand where you’re ...</p>
-
-                            <a href="#" class="bg-[#C4D1D4] text-white mt-3 w-6/12 mx-auto text-xl text-center py-1.5 rounded-lg px-4">Read More</a>
-                        </div>
-                    </div>
+                 {%endfor%}
                 </div>
             </div>
         </section>

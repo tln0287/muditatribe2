@@ -1,0 +1,65 @@
+{% include 'head.html' %}
+
+<body>
+    <div id="wrapper">
+        <!--Header Start-->
+{% include 'header.html' %}
+        <!--Header End-->
+
+
+        <!--Other Happiness Start-->
+
+
+        <!--Other Happiness End-->
+
+        <!--Quote Start-->
+
+
+        <!--Quote End-->
+
+        <!--Other Happiness Start-->
+<!--        <section class="py-12 md:py-32 about-content">-->
+<!--            <div class="max-w-screen-xl mx-auto px-5">-->
+
+<!--                <div class="grid gap-5 md:gap-10 items-center">-->
+<!--                    <div class="flex justify-center items-center">-->
+<!--                        <img src="/media/{{data.blog_main_image}}" alt="about" class="h-auto max-w-xl rounded-lg shadow-xl dark:shadow-gray-800">-->
+<!--                    </div>-->
+<!--                    <h2 class="text-4xl md:text-7xl text-center font-semibold text-[#C6584F] mb-2 md:mb-5">{{data.title}} </h2>-->
+<!--                    <div>-->
+<!--                      <p class="text-[#C6584F] text-2xl font-semibold italic">{{data.content|linebreaksbr }}</p>-->
+
+
+<!--                    </div>-->
+
+<!--                </div>-->
+<!--            </div>-->
+<!--        </section>-->
+
+        <section class="py-12 md:py-32 about-content">
+    <div class="max-w-screen-xl mx-auto px-5">
+        <div class="grid gap-5 md:gap-10 items-center">
+            <div class="flex justify-center items-center">
+                <img src="/media/{{data.article_main_image}}" alt="about" class="h-auto max-w-full md:max-w-xl rounded-lg shadow-xl dark:shadow-gray-800">
+            </div>
+            <h2 class="text-4xl md:text-7xl text-center font-semibold text-[#C6584F] mb-2 md:mb-5">{{data.title}}</h2>
+            <div>
+                <p class="text-[#C6584F] text-2xl font-semibold italic text-center md:text-left">{{data.content | linebreaksbr }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+        <!--Other Happiness End-->
+
+   <!--Footer Start-->
+       {% include 'footer.html' %}
+
+        <!--Footer End-->
+
+
+
+    </div>
+</body>
+
+</html>

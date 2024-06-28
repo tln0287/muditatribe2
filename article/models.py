@@ -9,7 +9,7 @@ from django.utils.translation import gettext_lazy as _
 class Articles(models.Model):
     id = models.AutoField(primary_key=True, auto_created=True)
     title = models.CharField(max_length=500, blank=True, null=True)
-    content = HTMLField(null=True,blank=True)
+    content = models.TextField(null=True,blank=True)
     timestamp = models.DateTimeField(_("Timestamp"), auto_now=True)
     article_main_image = models.ImageField(upload_to='Article/',blank=True, null=True)
     publish = models.BooleanField(default=False)

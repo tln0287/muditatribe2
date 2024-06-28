@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
+from article.models import Articles
 from blog.models import Blog
 from testimonial.models import UserTestimonial
 from .models import *
@@ -68,7 +69,10 @@ def sound_nature(request):
 
 
 def articles(request):
-    return render(request,'web/articles.html')
+    data = Articles.objects.filter(publish=True)
+    context=dict()
+    context['data'] = data
+    return render(request,'web/articles.html',context)
 
 def chants(request):
     return render(request,'web/chants.html')

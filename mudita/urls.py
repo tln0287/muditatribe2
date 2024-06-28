@@ -30,6 +30,7 @@ urlpatterns = [
     path('', include('testimonial.urls')),
     path('', include('counsellor.urls')),
     path('', include('blog.urls')),
+    path('', include('article.urls')),
     # path('', include('helplines.urls')),
 path('', include('social_django.urls', namespace='social')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
