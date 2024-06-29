@@ -1,0 +1,16 @@
+     <div class="space-y-4 text-[#C6584F] text-center" id="profile">
+                    <div>
+                        <h4 class="text-2xl font-semibold">{{data.name}}</h4>
+                    </div>
+                    <div>
+                        {{data.description|safe}}
+                    </div>
+
+                    <ul class="space-y-1">
+                        <li><b>Number:</b> {{data.phone|default:"-"}}</li>
+                        <li><b>Time:</b> {{data.timings|default:"-"}}</li>
+                        <li><b>Languages:</b>  {{data.language|default:"-"}}</li>
+                        <li><b>Email:</b> {{data.email|default:"-"}}</li>
+                        <li><b>Website:</b> {{data.website|default:"-"}}</li>
+                    </ul>
+                </div>

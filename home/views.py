@@ -5,6 +5,7 @@ from django.contrib import messages
 
 from article.models import Articles
 from blog.models import Blog
+from helplines.models import AddHelpline
 from testimonial.models import UserTestimonial
 from .models import *
 from social_django.models import UserSocialAuth
@@ -20,7 +21,10 @@ def about(request):
     return render(request,'web/about.html')
 
 def helplines(request):
-    return render(request,'web/helplines.html')
+    data = AddHelpline.objects.all()
+    context = dict()
+    context['data'] = data
+    return render(request,'web/helplines.html',context)
 
 
 def activities(request):

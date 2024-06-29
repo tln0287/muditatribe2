@@ -11,101 +11,128 @@
         <!--Header End-->
 
         <!--ACTIVITIES  Start-->
-        <section class="py-12 md:py-32">
-            <div class="max-w-screen-xl mx-auto px-5">
-                <div class="mb-8 md:mb-24">
-                    <h2 class="text-4xl md:text-7xl text-center font-semibold text-[#C6584F] tracking-wide mb-6 md:mb-12">Become A Mental Health Professional</h2>
+   <section class="py-12 md:py-32">
+    <div class="max-w-screen-xl mx-auto px-5">
+        <div class="mb-8 md:mb-24">
+            <h2 class="text-4xl md:text-7xl text-center font-semibold text-[#C6584F] tracking-wide mb-6 md:mb-12">Become A Mental Health Professional</h2>
+        </div>
+        <form action="{% url 'submit_form' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <img src="/static/img/Call%20center-cuate%202.png" class="w-full" alt="Image">
                 </div>
-                <div class="grid md:grid-cols-2 gap-8 items-center">
-                    <div>
-                        <img src="/static/img/Call%20center-cuate%202.png" class="w-full" alt="">
-                    </div>
-                    <div>
-                        <div class="form-group">
-                            <label class="label-form">Name*</label>
-                            <input class="form-input" type="text">
-                        </div>
-                        <div class="form-group">
-                            <label class="label-form">Phone Number*</label>
-                            <input class="form-input" type="text">
-                        </div>
-                        <div class="form-group">
-                            <label class="label-form">Gender</label>
-                            <select class="form-input">
-                                <option>Select</option>
-                                <option>Male</option>
-                                <option>Female</option>
-                                <option>Other</option>
-                            </select>
-                        </div>
-                        
-                    </div>
-                </div>
-                <div class="grid md:grid-cols-2 gap-8 items-center">
-                   <div class="form-group">
-                            <label class="label-form">Email Address*</label>
-                            <input class="form-input" type="text">
-                        </div>
+                <div>
                     <div class="form-group">
-                        <label class="label-form">Date of Birth*</label>
-                        <input class="form-input" type="text">
+                        <label class="label-form">Name*</label>
+                        <input class="form-input w-full" type="text" name="name" required>
                     </div>
                     <div class="form-group">
-                        <label class="label-form">City*</label>
-                        <input class="form-input" type="text">
+                        <label class="label-form">Phone Number*</label>
+                        <input class="form-input w-full" type="text" name="phone" required>
                     </div>
                     <div class="form-group">
-                        <label class="label-form">Type of Mental Health Profession**</label>
-                        <select class="form-input">
+                        <label class="label-form">Gender</label>
+                        <select class="form-input w-full" name="gender">
                             <option>Select</option>
-                            <option>option1</option>
-                            <option>option2</option>
-                            <option>option3</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Other</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label class="label-form">Upload CV*</label>
-                        <input class="form-input" type="file">
-                    </div>
-                    <div class="form-group">
-                        <label class="label-form">Area of Specialisation*</label>
-                        <input class="form-input" type="text">
-                    </div>
-                    <div class="form-group">
-                        <label class="label-form">Upload Degree/Diploma(1)*</label>
-                        <input class="form-input" type="file">
-                    </div>
-                    <div class="form-group">
-                        <label class="label-form">Work Experience*</label>
-                        <input class="form-input" type="text">
-                    </div>
-                    <div class="form-group">
-                        <label class="label-form">Upload Photograph*</label>
-                        <input class="form-input" type="file">
-                    </div>
-                    <div class="form-group">
-                        <label class="label-form">Mode of Delivery*</label>
-                        <select class="form-input">
-                            <option>Select</option>
-                            <option>option1</option>
-                            <option>option2</option>
-                            <option>option3</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-span-2">
-                        <label class="label-form">Description of Yourself *</label>
-                        <input class="form-input" type="text">
-                    </div>
-                    <div class="form-group col-span-2">
-                        <label class="label-form">Your Message *</label>
-                        <input class="form-input" type="text">
-                    </div>
                 </div>
-               <div class="w-full text-center">
-                    <a href="#" class="bg-[#EECC96] text-white inline-block px-8 py-2 text-xl font-bold rounded-lg">Submit</a>
-               </div>
             </div>
-        </section>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="form-group">
+                    <label class="label-form">Email Address*</label>
+                    <input class="form-input w-full" type="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label class="label-form">Date of Birth*</label>
+                    <input class="form-input w-full" type="date" name="dob" required>
+                </div>
+                <div class="form-group">
+                    <label class="label-form">City*</label>
+                    <input class="form-input w-full" type="text" name="city" required>
+                </div>
+                <div class="form-group">
+                    <label class="label-form">Type of Mental Health Profession*</label>
+                    <select class="form-input w-full" name="profession" required>
+                        <option>Select</option>
+                        <option value="Mental Health Advocacy">Mental Health Advocacy</option>
+                        <option value="Autism Mentor">Autism Mentor</option>
+
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="label-form">Upload CV*</label>
+                    <input class="form-input w-full" type="file" name="cv" required>
+                </div>
+                <div class="form-group">
+                    <label class="label-form">Area of Specialisation*</label>
+                    <input class="form-input w-full" type="text" name="specialisation" required>
+                </div>
+                <div class="form-group">
+                    <label class="label-form">Upload Degree/Diploma(1)*</label>
+                    <input class="form-input w-full" type="file" name="degree" required>
+                </div>
+                <div class="form-group">
+                    <label class="label-form">Work Experience*</label>
+                    <input class="form-input w-full" type="text" name="experience" required>
+                </div>
+                <div class="form-group">
+                    <label class="label-form">Upload Photograph*</label>
+                    <input class="form-input w-full" type="file" name="photo" required>
+                </div>
+                <div class="form-group">
+                    <label class="label-form">Mode of Delivery*</label>
+                    <select class="form-input w-full" name="delivery_mode" required>
+                        <option>Select</option>
+                        <option value="Offline">Offline</option>
+                        <option value="Online">Online</option>
+                        <option value="Both Online and Offline">Both Online and Offline</option>
+                    </select>
+                </div>
+                <div class="form-group md:col-span-2">
+                    <label class="label-form">Description of Yourself*</label>
+                    <textarea class="form-input w-full" name="description" required></textarea>
+                </div>
+                <div class="form-group md:col-span-2">
+                    <label class="label-form">Your Message*</label>
+                    <textarea class="form-input w-full" name="message" required></textarea>
+                </div>
+            </div>
+            <div class="w-full text-center">
+                <button type="submit" class="bg-[#EECC96] text-white inline-block px-8 py-2 text-xl font-bold rounded-lg">Submit</button>
+            </div>
+        </form>
+    </div>
+</section>
+
+<style>
+    .form-group {
+        margin-bottom: 1rem;
+    }
+    .label-form {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+    }
+    .form-input {
+        display: block;
+        width: 100%;
+
+        border: 1px solid #ccc;
+        border-radius: 0.25rem;
+    }
+    @media (min-width: 768px) {
+        .form-input {
+            max-width: 100%;
+        }
+    }
+</style>
+
+
         <!--ACTIVITIES  End-->
 
         <!--Footer Start-->

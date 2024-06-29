@@ -27,7 +27,7 @@ ENCRYPT_KEY = b'gOO5zRy11u0LutYE9sZPLEtgJLBVqz5fXveYoU3Uh3I='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 
@@ -58,6 +58,8 @@ INSTALLED_APPS = [
     'sweetify',
     'tinymce',
     'article',
+    'music',
+    'vedios',
 
 
 
