@@ -1,0 +1,142 @@
+{% include 'head.html' %}
+<body>
+    <div id="wrapper">
+        <!--Header Start-->
+        <!--Web header starts-->
+       {% include 'header.html' %}
+        {%load customtag %}
+        <!--Header End-->
+<style>
+        .player-bg {
+            background-color: #c4c4c4;
+        }
+    </style>
+
+        <!--Other Happiness Start-->
+        <section class="py-12 md:py-32 about-content">
+            <div class="max-w-screen-xl mx-auto px-5">
+                <div class="w-full md:w-7/12 mx-auto">
+                    <img src="/static/img/music_article.png" alt="" class="w-full">
+
+                </div>
+
+
+
+
+            <div class="player-bg p-6 rounded-lg shadow-lg text-black">
+        <h1 class="text-2xl font-bold mb-4">{{data.name}}</h1>
+        <audio id="audio" src="/media/{{data.audio}}"></audio>
+
+        <div class="flex items-center space-x-4 mb-4">
+            <button id="playButton" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-6.882-3.939A1 1 0 007 8.07v7.861a1 1 0 001.37.928l6.882-3.938a1 1 0 000-1.856z" />
+                </svg>
+            </button>
+            <button id="pauseButton" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m-7 2a9 9 0 1118 0 9 9 0 01-18 0z" />
+                </svg>
+            </button>
+            <button id="stopButton" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 10h4v4h-4z" />
+                </svg>
+            </button>
+            <div class="flex-grow">
+                <input type="range" id="seekBar" class="w-full" value="0">
+            </div>
+        </div>
+
+        <div class="flex justify-between">
+            <span id="currentTime">0:00</span>
+            <span id="totalTime">0:00</span>
+        </div>
+    </div>
+                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in adata %}
+            <tr>
+                <td>{{ i.name }}</td>
+                <td>
+                    <a href="/music-details/{{ i.id|encrypting }}">
+                        <p>Play</p>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+            </div>
+
+
+        </section>
+        <!--Other Happiness End-->
+
+        <!--Footer Start-->
+{% include 'footer.html' %}
+        <!--Footer End-->
+        <script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const audio = document.getElementById('audio');
+    const playButton = document.getElementById('playButton');
+    const pauseButton = document.getElementById('pauseButton');
+    const stopButton = document.getElementById('stopButton');
+    const seekBar = document.getElementById('seekBar');
+    const currentTimeDisplay = document.getElementById('currentTime');
+    const totalTimeDisplay = document.getElementById('totalTime');
+
+    playButton.addEventListener('click', () => {
+        audio.play();
+    });
+
+    pauseButton.addEventListener('click', () => {
+        audio.pause();
+    });
+
+    stopButton.addEventListener('click', () => {
+        audio.pause();
+        audio.currentTime = 0;
+    });
+
+    audio.addEventListener('timeupdate', () => {
+        const currentMinutes = Math.floor(audio.currentTime / 60);
+        const currentSeconds = Math.floor(audio.currentTime % 60);
+        currentTimeDisplay.textContent = `${currentMinutes}:${currentSeconds < 10 ? '0' : ''}${currentSeconds}`;
+        seekBar.value = (audio.currentTime / audio.duration) * 100;
+    });
+
+    audio.addEventListener('loadedmetadata', () => {
+        const totalMinutes = Math.floor(audio.duration / 60);
+        const totalSeconds = Math.floor(audio.duration % 60);
+        totalTimeDisplay.textContent = `${totalMinutes}:${totalSeconds < 10 ? '0' : ''}${totalSeconds}`;
+    });
+
+    seekBar.addEventListener('input', () => {
+        const seekTime = (seekBar.value / 100) * audio.duration;
+        audio.currentTime = seekTime;
+    });
+});
+
+
+
+
+        </script>
+
+    </div>
+</body>
+
+</html>

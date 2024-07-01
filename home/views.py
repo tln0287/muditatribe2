@@ -6,6 +6,7 @@ from django.contrib import messages
 from article.models import Articles
 from blog.models import Blog
 from helplines.models import AddHelpline
+from music.models import AddMusic
 from testimonial.models import UserTestimonial
 from .models import *
 from social_django.models import UserSocialAuth
@@ -51,7 +52,10 @@ def guided_meditation(request):
     return render(request,'web/meditation.html')
 
 def music(request):
-    return render(request,'web/music.html')
+    data = AddMusic.objects.all()
+    context = dict()
+    context['data'] = data
+    return render(request,'web/music.html',context)
 
 def art(request):
     return render(request,'web/art.html')
@@ -87,7 +91,11 @@ def login2(request):
 
 
 def music_article(request):
-    return render(request,'web/music_article.html')
+    data = AddMusic.objects.all()
+    context = dict()
+    context['data'] = data
+    return render(request,'web/music.html',context)
+
 
 
 def refund(request):
