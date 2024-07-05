@@ -20,6 +20,8 @@ class AddVideo(models.Model):
     video = models.FileField(upload_to="video/", null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     language = models.CharField(max_length=500, null=True, blank=True)
+    youtube_vedio = models.BooleanField(default=False)
+    iframe = models.TextField(null=True, blank=True)
     video_type = models.CharField(max_length=500, null=True, blank=True)
 
     def admin_photo(self):

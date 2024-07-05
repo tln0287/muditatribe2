@@ -12,5 +12,5 @@ from django.contrib.auth.models import Group
 # Register your models here.
 @admin.register(AddVideo)
 class ViewAdmin(ImportExportModelAdmin):
-    list_display = ['admin_photo','name','description']
+    list_display = ['admin_photo','name','description','youtube_vedio']
     search_fields = ('name','description')

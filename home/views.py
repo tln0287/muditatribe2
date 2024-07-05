@@ -8,6 +8,7 @@ from blog.models import Blog
 from helplines.models import AddHelpline
 from music.models import AddMusic
 from testimonial.models import UserTestimonial
+from vedios.models import AddVideo
 from .models import *
 from social_django.models import UserSocialAuth
 from usermanagement.models import *
@@ -49,7 +50,10 @@ def breathing(request):
     return render(request,'web/breathing.html')
 
 def guided_meditation(request):
-    return render(request,'web/meditation.html')
+    youtube = AddVideo.objects.filter(youtube_vedio=True)
+    context = dict()
+    context['youtube'] = youtube
+    return render(request,'web/meditation.html',context)
 
 def music(request):
     data = AddMusic.objects.all()
