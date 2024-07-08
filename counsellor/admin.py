@@ -16,4 +16,5 @@ class ViewAdmin(ImportExportModelAdmin):
 @admin.register(AddCounsellor)
 class ViewAdmin(ImportExportModelAdmin):
     list_display = ['user','experience','created_at']
+    raw_id_fields = ('user',)
     search_fields = ('user__first_name',)

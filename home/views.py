@@ -22,6 +22,9 @@ def home(request):
 def about(request):
     return render(request,'web/about.html')
 
+def glossary(request):
+    return render(request,'web/glossary.html')
+
 def helplines(request):
     data = AddHelpline.objects.all()
     context = dict()
@@ -47,10 +50,14 @@ def contact(request):
     return render(request,'web/joinTheTribe.html')
 
 def breathing(request):
-    return render(request,'web/breathing.html')
+    youtube = AddVideo.objects.filter(youtube_vedio=True, video_type='Breathing')
+    context = dict()
+    context['youtube'] = youtube
+    return render(request, 'web/breathing.html', context)
+
 
 def guided_meditation(request):
-    youtube = AddVideo.objects.filter(youtube_vedio=True)
+    youtube = AddVideo.objects.filter(youtube_vedio=True,video_type='Guided Meditation')
     context = dict()
     context['youtube'] = youtube
     return render(request,'web/meditation.html',context)
@@ -69,7 +76,10 @@ def dance_class(request):
     return render(request,'web/dance_class.html')
 
 def music_class(request):
-    return render(request,'web/music_class.html')
+    data = AddMusic.objects.filter(music_type='calming')
+    context = dict()
+    context['data'] = data
+    return render(request,'web/music_class.html',context)
 
 
 def postural(request):
@@ -77,7 +87,11 @@ def postural(request):
 
 
 def sound_nature(request):
-    return render(request,'web/sound_nature.html')
+    data = AddMusic.objects.all()
+    context = dict()
+    context['data'] = data
+    return render(request, 'web/sound_nature.html', context)
+
 
 
 def articles(request):
