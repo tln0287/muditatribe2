@@ -79,22 +79,24 @@ def add_donation(request):
         name = request.POST['uname']
         address = request.POST['address']
         email = request.POST['email']
-        amount = int(request.POST['amount'])
+        amountDropdown = request.POST['amountDropdown']
+        if amountDropdown == "custom":
+            amount = int(request.POST['amount'])
+        else:
+            amount = int(amountDropdown)
         phone = request.POST['phone']
         pan_card = request.FILES['pan']
-        import requests
-        import json
-        amount = amount * 100
-        payment = client.order.create({
-            'amount': amount,
-            'currency': 'INR',
-            'payment_capture': '1'
-        })
-        lamount = amount / 100
+        # import requests
+        # import json
+        # amount = amount * 100
+        # payment = client.order.create({
+        #     'amount': amount,
+        #     'currency': 'INR',
+        #     'payment_capture': '1'
+        # })
+        # lamount = amount / 100
 
-        payment_obj = DonatedUser(
-        razorpay_order_id=payment['id'],
-        amount=str(lamount),
+        payment_obj = DonatedUser(amount=str(amount),
         name=name,
         email = email,
         address = address,
@@ -103,13 +105,13 @@ def add_donation(request):
         )
         payment_obj.save()
 
-        context = {
-            'razorpay_key_id': settings.RAZORPAY_KEY_ID,
-            'amount': amount,
-            'order_id': payment['id']
-        }
-
-        return render(request,'web/payment.html',context)
+        # context = {
+        #     'razorpay_key_id': settings.RAZORPAY_KEY_ID,
+        #     'amount': amount,
+        #     'order_id': payment['id']
+        # }
+        sweetify.success(request, 'Thank you for your donation')
+        return render(request,'web/bank_details.html')
     except Exception as e:
         print(e)
         sweetify.error(request,'something went wrong')

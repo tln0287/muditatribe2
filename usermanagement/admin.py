@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User,UserGroups
+from .models import *
 from import_export.admin import ImportExportModelAdmin
 from django.contrib.auth.models import Group
 
@@ -24,3 +24,11 @@ class ViewAdmin(ImportExportModelAdmin):
 
 
 
+
+@admin.register(UserSupport)
+class ViewAdmin(ImportExportModelAdmin):
+    list_display = ['user','title','reply_status','query_status']
+
+@admin.register(UserSupportComment)
+class ViewAdmin(ImportExportModelAdmin):
+    list_display = ['user','comment_on']

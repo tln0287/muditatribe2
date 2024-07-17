@@ -1,10 +1,15 @@
+import datetime
+
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from sweetify import sweetify
 
 from article.models import Articles
 from blog.models import Blog
+from counsellor.encryption_util import decrypt
 from helplines.models import AddHelpline
 from music.models import AddMusic
 from testimonial.models import UserTestimonial
@@ -45,6 +50,74 @@ def counsellors(request):
     return render(request,'web/letMeet.html',context)
 
 
+@login_required
+def user_support(request):
+    if request.user.groups.filter(name="Admin"):
+        qdata = UserSupport.objects.all()
+    else:
+        qdata = UserSupport.objects.filter(user__u_id=request.user.u_id).all()
+    context = dict()
+    context['qdata'] = qdata
+    return render(request, 'support/user_support.html', context)
+
+@login_required
+def add_new_ticket(request):
+    try:
+        title = request.POST['title']
+        comments = request.POST['comments']
+        qdoc = request.FILES.get('qdoc', False)
+        user_d = User.objects.get(id=request.user.id)
+        obj = UserSupport(user=user_d, title=title)
+        obj.save()
+        if qdoc:
+            obj_new = UserSupportComment(user=user_d, support_id=obj.id, comments=comments, file=qdoc)
+        else:
+            obj_new = UserSupportComment(user=user_d, support_id=obj.id, comments=comments)
+        obj_new.save()
+        sweetify.success(request, 'Successfully Saved Your Ticket')
+    except:
+        sweetify.error(request, 'Unable to save your query contact gresignation_support@gitam.edu')
+    return redirect(request.META.get('HTTP_REFERER'))
+
+
+
+@login_required
+def view_qcomments(request, id):
+    id = decrypt(id)
+    qstatus = UserSupport.objects.get(id=id)
+    qcomments = UserSupportComment.objects.filter(support_id=id).all()
+    context = dict()
+    context['qdata'] = qcomments
+    context['qid'] = id
+    context['qstatus'] = qstatus.query_status
+    return render(request, 'support/query_comments.html', context)
+
+@login_required
+def delete_query(request, id):
+    id = decrypt(id)
+    UserSupport.objects.get(id=id).delete()
+    sweetify.success(request, 'Successfully Deleted Your Ticket')
+    return redirect(request.META.get('HTTP_REFERER'))
+
+@login_required
+def add_qcomments(request):
+    comments = request.POST['comments']
+    id = request.POST['qid']
+    if request.user.groups.filter(name="Admin").exists():
+        UserSupport.objects.filter(id=id).update(reply_status=1)
+    else:
+        UserSupport.objects.filter(id=id).update(reply_status=0)
+    obj = UserSupportComment(support_id=id, user_id=request.user.id, comments=comments)
+    obj.save()
+    sweetify.success(request, 'Successfully Saved Your Ticket')
+    return redirect(request.META.get('HTTP_REFERER'))
+
+@login_required
+def close_ticket(request):
+    qid = request.GET.get('qid')
+    UserSupport.objects.filter(id=qid).update(query_status=1)
+    return JsonResponse({"data": 1})
+
 def contact(request):
 
     return render(request,'web/joinTheTribe.html')
@@ -68,12 +141,22 @@ def music(request):
     context['data'] = data
     return render(request,'web/music.html',context)
 
+def instrumental(request):
+    data = AddMusic.objects.all()
+    context = dict()
+    context['data'] = data
+    return render(request,'web/instrumental.html',context)
+
 def art(request):
     return render(request,'web/art.html')
 
 
 def dance_class(request):
-    return render(request,'web/dance_class.html')
+    youtube = AddVideo.objects.filter(youtube_vedio=True, video_type='dance')
+    context = dict()
+    context['youtube'] = youtube
+
+    return render(request,'web/dance_class.html',context)
 
 def music_class(request):
     data = AddMusic.objects.filter(music_type='calming')
@@ -83,7 +166,11 @@ def music_class(request):
 
 
 def postural(request):
-    return render(request,'web/postural.html')
+    youtube = AddVideo.objects.filter(youtube_vedio=True, video_type='postural')
+    context = dict()
+    context['youtube'] = youtube
+
+    return render(request,'web/postural.html',context)
 
 
 def sound_nature(request):
@@ -157,7 +244,33 @@ def volunteer(request):
 def professional(request):
     return render(request,'web/professional.html')
 
+@login_required
+def user_blog(request):
+    data = Blog.objects.filter(user_id=request.user.id)
+    context = dict()
+    context['data'] = data
+    return render(request,'dashboard/blog.html',context)
 
+@login_required
+def add_user_blog(request):
+    title = request.POST['title']
+    content = request.POST['content']
+    image = request.FILES['image']
+    obj, created = Blog.objects.get_or_create(created_by=request.user.first_name,title=title)
+    obj.content = content
+    obj.blog_main_image = image
+    obj.user_id = request.user.id
+    obj.blog_date = datetime.datetime.now().date()
+    obj.save()
+    sweetify.success(request,"Blog added successfully")
+    return redirect(request.META.get('HTTP_REFERER'))
+
+@login_required
+def delete_blog(request,id):
+    id = decrypt(id)
+    Blog.objects.filter(id=id).delete()
+    sweetify.success(request, "Blog deleted successfully")
+    return redirect(request.META.get('HTTP_REFERER'))
 
 def add_user(request):
     try:

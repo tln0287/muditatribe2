@@ -1,4 +1,10 @@
    <script src="/static/static/js/jquery-3.6.0.js"></script>
+
+     <script src="/static/sweetAlert/sweetalert2.all.min.js"></script>
+
+
+    {% load sweetify %}
+ {% sweetify %}
 <script>
         $(document).ready(function() {
             $('input[type="file"][accept="image/*, .pdf"]').on('change', function() {
@@ -21,5 +27,9 @@
                     errorMessage.hide();
                 }
             });
+        });
+
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
         });
     </script>

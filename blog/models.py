@@ -16,6 +16,8 @@ class Blog(models.Model):
     blog_main_image = models.ImageField(upload_to='Article/',blank=True, null=True)
     publish = models.BooleanField(default=False)
     blog_date = models.DateField(null=True,blank=True)
+    created_by = models.CharField(max_length=500,null=True,blank=True)
+    user_id = models.CharField(max_length=200,null=True,blank=True)
     def admin_photo(self):
         return mark_safe('<img src="{}" width="100" />'.format(self.blog_main_image.url))
     admin_photo.short_description = 'Image'

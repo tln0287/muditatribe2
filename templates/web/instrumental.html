@@ -1,0 +1,48 @@
+       {%include 'head.html' %}
+       {%load customtag %}
+
+<body>
+    <div id="wrapper">
+        <!--Header Start-->
+        <!--Web header starts-->
+           {%include 'header.html' %}
+        <!--Header End-->
+
+        <!--ACTIVITIES  Start-->
+        <section class="py-12 md:py-32">
+            <div class="max-w-screen-xl mx-auto px-5">
+                <div class="mb-8 md:mb-24">
+                    <h2 class="text-4xl md:text-7xl text-center font-semibold text-[#C6584F] tracking-wide mb-6 md:mb-12">Instrumental Healing</h2>
+                    <h3 class="text-4xl text-center font-semibold text-[#C6584F] italic ">
+                        Immerse yourself with these visual and auditory experiences that are curated to induce calmness, reduce stress and help you unwind. Allow the interplay of music and moving art to transport you to a state of relaxation and peace. Press play and let the stress melt away as you drift into tranquillity.
+                    </h3>                </div>
+                <div class="grid md:grid-cols-3 gap-8 items-center">
+                    {%for i in data %}
+                   <a href="/music-details/{{i.id|encrypting}}"><div>
+                        <div class="w-full bg-[#C4C4C4] h-56 rounded-lg relative">
+                            <img src="/static/img/tune.png" class="player" />
+                        </div>
+                        <div class="bg-[#C4D1D4] text-white mt-3 w-6/12 mx-auto text-xl text-center py-1.5 rounded-lg">
+                            <h5>{{i.name}}</h5>
+                        </div>
+
+                    </div></a>
+                    {%endfor%}
+
+
+
+                </div>
+            </div>
+        </section>
+        <!--ACTIVITIES  End-->
+
+        <!--Footer Start-->
+       {%include 'footer.html' %}
+        <!--Footer End-->
+
+
+
+    </div>
+</body>
+
+</html>

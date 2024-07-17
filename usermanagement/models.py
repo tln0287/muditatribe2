@@ -61,3 +61,20 @@ class UserGroups(models.Model):
         verbose_name_plural = "User Groups"
 
 
+
+class UserSupport(models.Model):
+    id = models.AutoField(primary_key=True, auto_created=True)
+    user = models.ForeignKey(User,on_delete=models.CASCADE,related_name="USERSUPPORT")
+    title = models.CharField(max_length=1000, blank=True, null=True)
+    query_created_on = models.DateTimeField(auto_now_add=True,null=True,blank=True)
+    query_status = models.IntegerField(default=0,null=True,blank=True)
+    reply_status = models.IntegerField(default=0,null=True,blank=True)
+
+
+class UserSupportComment(models.Model):
+    id = models.AutoField(primary_key=True, auto_created=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="USERSUPPORTComments")
+    support = models.ForeignKey(UserSupport, on_delete=models.CASCADE, related_name="USERComments")
+    comments = models.TextField(null=True,blank=True)
+    file = models.FileField(upload_to="support",null=True,blank=True)
+    comment_on = models.DateTimeField(auto_now_add=True,null=True,blank=True)

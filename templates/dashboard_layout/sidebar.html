@@ -12,12 +12,12 @@
             <ul class="nav-links ">
 
                 <li>
-                    <a href="/index">
-                        <i class='bx bx-grid-alt'></i>
-                        <span class="link_name">Dashboard</span>
+                    <a href="/profile">
+                     <i class='bx bx-user-circle'></i>
+                        <span class="link_name">Profile</span>
                     </a>
                     <ul class="sub-menu blank">
-                        <li><a class="link_name" href="/index">Dashboard</a></li>
+                        <li><a class="link_name" href="/profile">Profile</a></li>
                     </ul>
                 </li>
                 {% if request.user|has_group:"Admin" %}
@@ -53,26 +53,32 @@
             {% endif %}
 
                 <li>
-                    <a href="/transactions">
-                        <i class='bx bx-rupee'></i>
-                        <span class="link_name">Transactions</span>
+                    <a href="/user_blog">
+                    <i class='bx bxl-blogger' ></i>
+                        <span class="link_name">Blog</span>
                     </a>
                     <ul class="sub-menu blank">
-                        <li><a class="link_name" href="/transactions">Transactions</a></li>
+                        <li><a class="link_name" href="/user_blog">Blog</a></li>
                     </ul>
                 </li>
 
+                 <li>
+            <a href="/user_support">
+                <i class='bx bx-support'></i>
+                     {% load customtag %}
+                <span class="link_name position-relative">Support &nbsp;  {% get_support_count request.user as scount %}
+                    {% if scount != 0 %}
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                {% load customtag %}
+   {% get_support_count request.user %}
+    <span class="visually-hidden">unread messages</span>
+  </span>{% endif %}</span>
+            </a>
+        </li>
 
 
-                    <li>
-                    <a href="/share_post">
-                        <i class='bx bx-share-alt' ></i>
-                        <span class="link_name">Share Poster</span>
-                    </a>
-                    <ul class="sub-menu blank">
-                        <li><a class="link_name" href="/share_post">Share Poster</a></li>
-                    </ul>
-                </li>
+
+
 
             </ul>
         </div>

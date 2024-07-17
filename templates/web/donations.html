@@ -1,4 +1,119 @@
 {%include 'head.html' %}
+ <style>
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .label-form {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input::-webkit-outer-spin-button,
+        .form-input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .form-input {
+            -moz-appearance: textfield;
+        }
+        .hidden {
+            display: none;
+        }
+        .text-red-500 {
+            color: #ef4444;
+        }
+    </style>
+<script>
+        function handleAmountChange() {
+            var amountDropdown = document.getElementById('amountDropdown');
+            var amountInput = document.getElementById('amountInput');
+            var selectedValue = amountDropdown.value;
+
+            if (selectedValue === 'custom') {
+                amountInput.classList.remove('hidden');
+                amountInput.querySelector('input').setAttribute('required', true);
+            } else {
+                amountInput.classList.add('hidden');
+                amountInput.querySelector('input').removeAttribute('required');
+            }
+        }
+
+        function validateForm(event) {
+            var isValid = true;
+
+            // Validate Name
+            var name = document.getElementById('name').value.trim();
+            if (name === '') {
+                document.getElementById('nameError').classList.remove('hidden');
+                isValid = false;
+            } else {
+                document.getElementById('nameError').classList.add('hidden');
+            }
+
+            // Validate Address
+            var address = document.getElementById('address').value.trim();
+            if (address === '') {
+                document.getElementById('addressError').classList.remove('hidden');
+                isValid = false;
+            } else {
+                document.getElementById('addressError').classList.add('hidden');
+            }
+
+            // Validate Email
+            var email = document.getElementById('email').value.trim();
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (email === '' || !emailPattern.test(email)) {
+                document.getElementById('emailError').classList.remove('hidden');
+                isValid = false;
+            } else {
+                document.getElementById('emailError').classList.add('hidden');
+            }
+
+            // Validate Amount
+            var amountDropdown = document.getElementById('amountDropdown').value;
+            var amountInput = document.getElementById('amount').value;
+            if (amountDropdown === 'custom') {
+                if (amountInput === '' || parseFloat(amountInput) < 50) {
+                    document.getElementById('amountError').classList.remove('hidden');
+                    isValid = false;
+                } else {
+                    document.getElementById('amountError').classList.add('hidden');
+                }
+            } else if (amountDropdown === '') {
+                document.getElementById('amountError').classList.remove('hidden');
+                isValid = false;
+            } else {
+                document.getElementById('amountError').classList.add('hidden');
+            }
+
+            // Validate Mobile
+            var mobile = document.getElementById('mobile').value.trim();
+            if (mobile === '') {
+                document.getElementById('mobileError').classList.remove('hidden');
+                isValid = false;
+            } else {
+                document.getElementById('mobileError').classList.add('hidden');
+            }
+
+            // Validate PAN Image
+            var panImage = document.getElementById('panImage').files.length;
+            if (panImage === 0) {
+                document.getElementById('panImageError').classList.remove('hidden');
+                isValid = false;
+            } else {
+                document.getElementById('panImageError').classList.add('hidden');
+            }
+
+            // Prevent form submission if any field is invalid
+            if (!isValid) {
+                event.preventDefault();
+            }
+        }
+
+        window.onload = function() {
+            document.getElementById('donationForm').addEventListener('submit', validateForm);
+        }
+    </script>
 <body>
     <div id="wrapper">
         <!--Header Start-->
@@ -26,8 +141,7 @@
         <section class="py-2 about-content">
             <div class="max-w-screen-xl mx-auto px-5">
                   <form class="w-full" id="donationForm" action="/add_donation" method="post" enctype="multipart/form-data">
-                      {%csrf_token%}
-
+        {% csrf_token %}
         <div class="grid md:grid-cols-2 gap-x-8">
             <div class="form-group mb-4">
                 <label class="label-form">Name</label>
@@ -45,8 +159,18 @@
                 <p class="text-red-500 text-sm hidden" id="emailError">Valid email is required.</p>
             </div>
             <div class="form-group mb-4">
+                <label class="label-form">Amount</label>
+                <select class="form-input border-2 border-gray-300 rounded-lg p-2 w-full" name="amountDropdown" id="amountDropdown" onchange="handleAmountChange()" required>
+                    <option value="">Select an amount</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <option value="200">200</option>
+                    <option value="custom">Custom Amount</option>
+                </select>
+            </div>
+            <div class="form-group mb-4 hidden" id="amountInput">
                 <label class="label-form">Type Your Amount</label>
-                <input class="form-input border-2 border-gray-300 rounded-lg p-2 w-full" type="number" name="amount" id="amount" required />
+                <input min="50" class="form-input border-2 border-gray-300 rounded-lg p-2 w-full" type="number" name="amount" id="amount" />
                 <p class="text-red-500 text-sm hidden" id="amountError">Amount is required.</p>
             </div>
             <div class="form-group mb-4">
@@ -56,7 +180,7 @@
             </div>
             <div class="form-group mb-4">
                 <label class="label-form">Upload PAN Image</label>
-<input class="form-input" type="file" name="pan" id="panImage" accept="image/*, .pdf" required />
+                <input class="form-input" type="file" name="pan" id="panImage" accept="image/*, .pdf" required />
                 <p class="text-red-500 text-sm hidden" id="panImageError">PAN image is required.</p>
             </div>
         </div>
@@ -64,6 +188,8 @@
             <button type="submit" class="bg-[#C6584F] text-white inline-block px-8 py-2 text-xl font-bold rounded-lg">Submit Donation</button>
             <p class="text-2xl font-semibold mt-6 text-[#C6584F] hidden" id="thankYouMessage">Thank you for your donation!</p>
         </div>
+        <br>
+        <br>
     </form>
 
 
@@ -75,88 +201,6 @@
     </div>
 
 </body>
-<script>
-       document.getElementById('donationForm').addEventListener('submit', function(event) {
-    event.preventDefault();
 
-    let isValid = true;
-
-    const name = document.getElementById('name');
-    const address = document.getElementById('address');
-    const email = document.getElementById('email');
-    const amount = document.getElementById('amount');
-    const mobile = document.getElementById('mobile');
-    const panImage = document.getElementById('panImage');
-
-    const nameError = document.getElementById('nameError');
-    const addressError = document.getElementById('addressError');
-    const emailError = document.getElementById('emailError');
-    const amountError = document.getElementById('amountError');
-    const mobileError = document.getElementById('mobileError');
-    const panImageError = document.getElementById('panImageError');
-    const thankYouMessage = document.getElementById('thankYouMessage');
-
-    // Validate Name
-    if (name.value.trim() === '') {
-        nameError.classList.remove('hidden');
-        isValid = false;
-    } else {
-        nameError.classList.add('hidden');
-    }
-
-    // Validate Address
-    if (address.value.trim() === '') {
-        addressError.classList.remove('hidden');
-        isValid = false;
-    } else {
-        addressError.classList.add('hidden');
-    }
-
-    // Validate Email
-    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    if (!emailPattern.test(email.value)) {
-        emailError.classList.remove('hidden');
-        isValid = false;
-    } else {
-        emailError.classList.add('hidden');
-    }
-
-    // Validate Amount
-    if (amount.value.trim() === '' || isNaN(amount.value) || amount.value <= 0) {
-        amountError.classList.remove('hidden');
-        isValid = false;
-    } else {
-        amountError.classList.add('hidden');
-    }
-
-    // Validate Mobile
-    const mobilePattern = /^[0-9]{10}$/;
-    if (!mobilePattern.test(mobile.value)) {
-        mobileError.classList.remove('hidden');
-        isValid = false;
-    } else {
-        mobileError.classList.add('hidden');
-    }
-
-    // Validate PAN Image
-    if (panImage.files.length === 0) {
-        panImageError.classList.remove('hidden');
-        isValid = false;
-    } else {
-        panImageError.classList.add('hidden');
-    }
-
-    if (isValid) {
-        thankYouMessage.classList.remove('hidden');
-        // Use a timeout to allow the thank you message to display
-        setTimeout(() => {
-            document.getElementById('donationForm').submit();
-        }, 500);
-    } else {
-        thankYouMessage.classList.add('hidden');
-    }
-});
-
-    </script>
 
 </html>

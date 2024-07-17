@@ -12,6 +12,7 @@ urlpatterns = [
     path('donations',donations, name='donations'),
     path('counsellors',counsellors, name='counsellors'),
     path('contact',contact, name='contact'),
+    path('user_support',user_support, name='user_support'),
     path('professional',professional, name='professional'),
     path('volunteer',volunteer, name='volunteer'),
     path('breathing',breathing, name='breathing'),
@@ -34,5 +35,16 @@ urlpatterns = [
     path('blog',blog, name='blog'),
     path('profile',profile,name='profile'),
     path('logout2',logout2,name='logout2'),
+    path('user_blog',user_blog,name='user_blog'),
+    path('add_user_blog',add_user_blog,name='add_user_blog'),
+    path('instrumental',instrumental,name='instrumental'),
+    path('delete_blog/<str:id>',delete_blog,name='delete_blog'),
+
+    path('user_support', user_support, name='user_support'),
+    path('add_new_ticket', add_new_ticket, name='add_new_ticket'),
+    path('view_qcomments/<str:id>', view_qcomments, name="view_qcomments"),
+    path('delete_query/<str:id>', delete_query, name="delete_query"),
+    path('add_qcomments', add_qcomments, name="add_qcomments"),
+    path('close_ticket', close_ticket, name="close_ticket"),
 
 ]
