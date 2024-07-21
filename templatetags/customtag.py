@@ -26,6 +26,32 @@ def to_int(value):
     except:
         return value
 
+@register.filter(name='next_page')
+def next_page(page):
+    try:
+        page = int(page) + 1
+        p = encrypt(str(page))
+        return p
+    except:
+        return page
+
+
+@register.filter(name='previous_page')
+def previous_page(page):
+    try:
+        print("page-----")
+        print(page)
+        print("page----")
+        if page == "1":
+            return encrypt(page)
+        else:
+            page = int(page) - 1
+            p = encrypt(str(page))
+            return p
+    except:
+        return page
+
+
 
 @register.simple_tag
 def get_support_count(user):

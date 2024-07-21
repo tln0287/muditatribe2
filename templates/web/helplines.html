@@ -1,5 +1,6 @@
 {%include 'head.html' %}
 
+
 <body>
     <div id="wrapper">
         <!--Header Start-->
@@ -17,19 +18,24 @@
         <div class="mb-8 md:mb-24">
             <h3 class="text-xl md:text-4xl text-center font-semibold text-[#C6584F] italic">Explore the resources and reach out to begin your journey toward better well-being</h3>
         </div>
-        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-8 items-center">
-            {% for i in data %}
-            <div class="text-center" onclick="get_helpline({{i.id}})">
-                <h5 class="text-2xl font-semibold text-[#C6584F]">{{i.name}}</h5>
-                <div class="w-8/12 sm:w-6/12 md:w-4/12 mx-auto rounded-lg relative mb-1">
-                    <img src="/media/{{i.photo}}" alt="" class="w-full rounded-lg">
-                </div>
-                <a class="bg-[#C4D1D4] text-white mt-3 w-6/12 mx-auto text-xl text-center py-1.5 rounded-lg inline-block">
-                    <span>Read more</span>
-                </a>
+<div class="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
+    {% for i in data %}
+    <div class="flex flex-col items-center justify-between text-center bg-white p-4 rounded-lg h-full" onclick="get_helpline({{i.id}})">
+        <div>
+            <h5 class="text-2xl font-semibold text-[#C6584F]">{{i.name}}</h5>
+            <div class="w-8/12 sm:w-6/12 md:w-4/12 mx-auto rounded-lg my-4">
+                <img src="/media/{{i.photo}}" alt="" class="w-full rounded-lg">
             </div>
-            {% endfor %}
         </div>
+        <a class="bg-[#C4D1D4] text-white w-6/12 text-xl text-center py-1.5 rounded-lg inline-block">
+            <span>Read more</span>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+
+
     </div>
 </section>
 
@@ -74,7 +80,7 @@
 <div id="default-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed inset-0 z-50 flex justify-center items-center w-full h-full shadow-xl dark:shadow-gray-800">
     <div class="relative p-4 w-full max-w-2xl max-h-full">
         <!-- Modal content -->
-        <div class="relative bg-[#F8EDDE] rounded-lg shadow-lg p-8">
+        <div class="relative bg-[#C4D1D4] rounded-lg shadow-lg p-8">
             <!-- Modal header -->
             <div class="flex items-center justify-between rounded-t">
                 <button type="button" class="text-white bg-[#C6584F] hover:bg-black rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="default-modal">
@@ -84,7 +90,7 @@
                 </button>
             </div>
             <!-- Modal body -->
-            <div class="space-y-4 text-[#C6584F]" id="profile">
+            <div class="space-y-4 text-[#C4D1D4]" id="profile">
                 <div>
                     <h4 class="text-2xl font-semibold">Aakhansha Varghese</h4>
                     <h6 class="text-lg font-semibold">Psychologist</h6>

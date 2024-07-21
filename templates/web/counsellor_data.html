@@ -1,11 +1,18 @@
  <div class="space-y-4 text-[#C6584F]" id="profile">
-                    <div>
-                        <h4 class="text-2xl font-semibold">{{data.first_name|title}}</h4>
-                        <h6 class="text-lg font-semibold">{{data.designation}}</h6>
-                    </div>
-                    <ul class="space-y-1">
-                        <li><b>Area of Specialization:</b>{{specialization}} </li>
-                        <li><b>Experience:</b> {{data.exp}}</li>
+                    <div class="flex flex-col md:flex-row">
+    <div class="md:w-1/4">
+        <img src="/media/{{data.photo}}" id="profile_image" class="w-1/2 md:w-full">
+    </div>
+    <div class="md:w-3/4 mt-4 md:mt-0 md:pl-4">
+        <h4 class="text-2xl font-semibold">{{data.first_name}}</h4>
+        <h6 class="text-lg font-semibold">{{data.designation}}</h6>
+         <ul class="space-y-1">
+                        <li><b>Area of Specialization:</b>{{data.expertise}} </li>
+                        <li><b>Experience:</b> {{data.experience}}</li>
+         </ul>
+    </div>
+</div>
+                         <ul class="space-y-1">
                         <li><b>Qualification:</b> {{data.qualification}} </li>
                         <li><b>Mode of Delivery:</b> Both Offline and Online</li>
                         <li><b>Language:</b> {{data.language}}</li>

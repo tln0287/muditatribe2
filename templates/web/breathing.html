@@ -14,9 +14,9 @@
                     <h2 class="text-4xl md:text-7xl text-center font-semibold text-[#C6584F] tracking-wide mb-6 md:mb-12">Breathing Exercises</h2>
                     <h3 class="text-4xl text-center font-semibold text-[#C6584F] italic ">Discover the calming power of breath in our Breathing Exercises section. Each of our carefully curated video guide teaches simple, effective techniques to help you reduce stress, enhance focus, and relax. Explore these easy to follow practices at your own pace and start transforming how you feel, one breath at a time.</h3>
                 </div>
-                <div class="grid md:grid-cols-3 gap-8 items-center">
-                       {% for y in youtube %}
-    <div>
+              <div class="grid md:grid-cols-3 gap-8 items-center">
+    {% for y in youtube %}
+    <div class="flex flex-col items-center">
         <div class="w-full bg-[#C4C4C4] h-56 rounded-lg relative overflow-hidden">
             <div class="relative h-full" style="padding-bottom: 56.25%;">
                 <iframe
@@ -30,13 +30,13 @@
                 </iframe>
             </div>
         </div>
-        <div class="bg-[#C4D1D4] text-white mt-3 w-6/12 mx-auto text-xl text-center py-1.5 rounded-lg">
+        <div class="bg-[#C4D1D4] text-white mt-3 w-full text-xl text-center py-1.5 rounded-lg">
             <h5>{{ y.name }}</h5>
         </div>
     </div>
     {% endfor %}
+</div>
 
-                </div>
             </div>
         </section>
         <!--ACTIVITIES  End-->
@@ -48,6 +48,7 @@
 
 
     </div>
+
 </body>
 
 </html>

@@ -9,5 +9,5 @@ from django.contrib.auth.models import Group
 # Register your models here.
 @admin.register(AddMusic)
 class ViewAdmin(ImportExportModelAdmin):
-    list_display = ['admin_photo','name','description']
+    list_display = ['admin_photo','name','description','music_type']
     search_fields = ('name','description')

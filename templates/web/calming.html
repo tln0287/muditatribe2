@@ -1,6 +1,5 @@
-{% include 'head.html' %}
-{% load customtag %}
-<style>
+       {%include 'head.html' %}
+       <style>
     .scroll-container {
         overflow-y: auto;
     }
@@ -23,22 +22,22 @@
         border-radius: 10px; /* Rounded corners for the track */
     }
 </style>
+{%load customtag %}
 <body>
     <div id="wrapper">
         <!--Header Start-->
         <!--Web header starts-->
-           {% include 'header.html' %}
+           {%include 'header.html' %}
         <!--Header End-->
 
         <!--ACTIVITIES  Start-->
         <section class="py-12 md:py-32">
             <div class="max-w-screen-xl mx-auto px-5">
-                <div>
-                    <h2 class="text-4xl md:text-7xl text-center font-semibold text-[#C6584F] tracking-wide mb-6 md:mb-12">Sounds Of Nature</h2>
+                <div class="mb-8 md:mb-24">
+                    <h2 class="text-4xl md:text-7xl text-center font-semibold text-[#C6584F] tracking-wide mb-6 md:mb-12">Soothing Soundscapes</h2>
                     <h3 class="text-4xl text-center font-semibold text-[#C6584F] italic ">
-                        Step into serenity with our Sounds of Nature collection. Each audio track features pure, soothing sounds from different environments. Whether you need a moment of peace in a hectic day or help winding down at night, these soundscapes are perfect for calming your mind, relaxing your body, and enhancing mental clarity. </h3>
-                </div>
-                <div class="w-full mt-7">
+                        Get to learn about the harmonious world of music, where our comprehensive video tutorials are catered to all levels, from beginners to more experienced musicians. Learning to play an instrument can enhance cognitive performance, boost our mood and reduce anxiety. Experience the power of music through your journey of musical discovery and self-expression</h3>                </div>
+             <div class="w-full mt-7">
                     <div class=" bg-red-light"></div>
                     <audio id="audio" src="/media/{{ data.audio }}"></audio>
                     <div class="flex items-center justify-center  bg-red-lightest">
@@ -51,7 +50,7 @@
                                     <div class="flex justify-between">
                                         <div>
                                             <h3 class="text-2xl text-grey-darkest font-medium">{{ data.name }}</h3>
-                                            <p class="text-sm text-grey mt-1">{{ data.music_type }}</p>
+                                            <p class="text-sm text-grey mt-1">Soothing Soundscapes</p>
                                         </div>
 <!--                                        <div class="text-red-lighter">-->
 <!--                                            <svg class="w-6 h-6" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 3.22l-.61-.6a5.5 5.5 0 0 0-7.78 7.77L10 18.78l8.39-8.4a5.5 5.5 0 0 0-7.78-7.77l-.61.61z"/></svg>-->
@@ -181,14 +180,14 @@
         nextButton.addEventListener('click', () => {
             currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
             loadTrack(currentTrackIndex);
-             $('#pauseButton').show();
+            $('#pauseButton').show();
             $('#playButton').hide();
         });
 
         prevButton.addEventListener('click', () => {
             currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
             loadTrack(currentTrackIndex);
-             $('#pauseButton').show();
+            $('#pauseButton').show();
             $('#playButton').hide();
         });
 

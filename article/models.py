@@ -13,11 +13,14 @@ class Articles(models.Model):
     timestamp = models.DateTimeField(_("Timestamp"), auto_now=True)
     article_main_image = models.ImageField(upload_to='Article/',blank=True, null=True)
     publish = models.BooleanField(default=False)
+    article_type = models.CharField(max_length=500, blank=True, null=True)
     article_date = models.DateField(null=True,blank=True)
+
     def admin_photo(self):
-        return mark_safe('<img src="{}" width="100" />'.format(self.article_main_image.url))
-    admin_photo.short_description = 'Image'
-    admin_photo.allow_tags = True
+        if self.article_main_image:
+            return mark_safe('<img src="{}" width="100" />'.format(self.article_main_image.url))
+        else:
+            return '(No photo)'
 
 
 

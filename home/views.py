@@ -43,10 +43,37 @@ def activities(request):
 def donations(request):
     return render(request,'web/donations.html')
 
-def counsellors(request):
+def counsellors(request,paginate=None):
     data = User.objects.filter(userOf__group__name='counsellor')
+    s = len(data)/12
+    s = round(s)
+    if paginate:
+        paginate = decrypt(paginate)
+        paginate = int(paginate)
+        if paginate != 1:
+            print("paginate")
+            print(paginate)
+            print("paginate")
+            start = paginate - 1
+            start = 12 * start
+            p = paginate*12
+            data = data[start:p]
+            current_page = paginate
+        else:
+            data = data[:12]
+            current_page = 1
+    else:
+        data = data[:12]
+        current_page = 1
+
+    pag = []
+    for i in range(1,s+1):
+        pag.append(i)
+    print(pag)
     context=dict()
     context['data'] = data
+    context['pag'] = pag
+    context['current_page'] = current_page
     return render(request,'web/letMeet.html',context)
 
 
@@ -142,10 +169,8 @@ def music(request):
     return render(request,'web/music.html',context)
 
 def instrumental(request):
-    data = AddMusic.objects.all()
-    context = dict()
-    context['data'] = data
-    return render(request,'web/instrumental.html',context)
+
+    return render(request,'web/instrumental.html')
 
 def art(request):
     return render(request,'web/art.html')
@@ -159,7 +184,7 @@ def dance_class(request):
     return render(request,'web/dance_class.html',context)
 
 def music_class(request):
-    data = AddMusic.objects.filter(music_type='calming')
+    data = AddMusic.objects.filter(music_type='Soothing Soundscapes')
     context = dict()
     context['data'] = data
     return render(request,'web/music_class.html',context)
@@ -173,11 +198,31 @@ def postural(request):
     return render(request,'web/postural.html',context)
 
 
-def sound_nature(request):
-    data = AddMusic.objects.all()
+def sound_nature(request,id=None):
+    if id:
+        id = decrypt(id)
+        adata = AddMusic.objects.filter(music_type="Sounds Of Nature")
+        data = AddMusic.objects.filter(music_type="Sounds Of Nature",id=id).last()
+    else:
+        adata = AddMusic.objects.filter(music_type="Sounds Of Nature")
+        data = AddMusic.objects.filter(music_type="Sounds Of Nature").last()
     context = dict()
+    context['adata'] = adata
     context['data'] = data
     return render(request, 'web/sound_nature.html', context)
+
+def smoothing_sound(request,id=None):
+    if id:
+        id = decrypt(id)
+        adata = AddMusic.objects.filter(music_type="Soothing Soundscapes")
+        data = AddMusic.objects.filter(music_type="Soothing Soundscapes",id=id).last()
+    else:
+        adata = AddMusic.objects.filter(music_type="Soothing Soundscapes")
+        data = AddMusic.objects.filter(music_type="Soothing Soundscapes").last()
+    context = dict()
+    context['adata'] = adata
+    context['data'] = data
+    return render(request, 'web/calming.html', context)
 
 
 

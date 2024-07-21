@@ -1,14 +1,13 @@
 {%include 'head.html' %}
-
+{% load customtag %}
 <body>
-    <div id="wrapper">
-        <!--Header Start-->
-        <!--Web header starts-->
-       {% include 'header.html' %}
-        <!--Header End-->
+<div id="wrapper">
+    <!--Header Start-->
+    <!--Web header starts-->
+    {% include 'header.html' %}
+    <!--Header End-->
 
-          <style type="text/tailwindcss">
-
+    <style type="text/tailwindcss">
 
 
         .profile {
@@ -19,67 +18,112 @@
 
         .profile:before {
             content: '';
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0.30) 54.59%, #000 100%);
+            /*//background: linear-gradient(180deg, rgba(0, 0, 0, 0.30) 54.59%, #000 100%);*/
             position: absolute;
             top: 0px;
             left: 0px;
             width: 100%;
             height: 100%;
+            border-radius: 10px;
             z-index: 1;
         }
+
         .scrollTabs {
-    position: relative;
-    border-bottom: 2px solid #C6584F;
-    padding-bottom: 10px;
-}
+            position: relative;
+            border-bottom: 2px solid #C6584F;
+            padding-bottom: 10px;
+        }
 
-.scrollTabs .tabs-box {
-    display: flex;
-    gap: 12px;
-    list-style: none;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-    padding: 0px 40px;
-}
+        .scrollTabs .tabs-box {
+            display: flex;
+            gap: 12px;
+            list-style: none;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            padding: 0px 40px;
+        }
 
-.scrollTabs .tabs-box .tab {
-    cursor: pointer;
-    font-size: 1.18rem;
-    white-space: nowrap;
-    padding: 6px 24px;
-    border-radius: 30px;
-    color: #C6584F;
-}
+        .scrollTabs .tabs-box .tab {
+            cursor: pointer;
+            font-size: 1.18rem;
+            white-space: nowrap;
+            padding: 6px 24px;
+            border-radius: 30px;
+            color: #C6584F;
+        }
 
-.scrollTabs .tabs-box .tab.active {
-    color: #fff;
-    background: #EECC96;
-}
+        .scrollTabs .tabs-box .tab.active {
+            color: #fff;
+            background: #EECC96;
+        }
 
-.icon {
-    position: absolute;
-    top: 0;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    color: #C6584F;
-    font-size: 24px;
-}
+        .icon {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            color: #C6584F;
+            font-size: 24px;
+        }
 
-.icon i {
-    background: #f8edde;
-    width: 32px;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
+        .icon i {
+            background: #f8edde;
+            width: 32px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
 
-.icon-left {
-    left: 0px;
-}
+        .icon-left {
+            left: 0px;
+        }
 
+        .image-container {
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 5px;
+        }
+
+
+
+        new_ul {
+            list-style: none; /* Remove default list styling */
+            padding: 0;
+            display: flex; /* Align items horizontally */
+        }
+
+        li {
+            margin-right: 10px; /* Add some spacing between items */
+        }
+
+        .zoom-out {
+            transition: transform 0.1s ease;
+        }
+
+        .zoom-out:hover {
+            transform: scale(1.5);
+
+        }
+
+
+
+
+        .li-box {
+            border-width: 10px; /* Set border width */
+            border-height: 10px; /* Set border width */
+            border-color: #becccf; /* Border color */
+            background-color: #becccf; /* Background color */
+            color: #c6584f; /* Text color */
+        }
+        .tln :hover{
+            background-color: #6a1a21;
+            border-color: #6a1a21;
+        }
 
 
     </style>
@@ -87,159 +131,191 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
 
-        <!--Other Happiness Start-->
-        <section class="py-12 md:py-32 about-content">
-            <div class="max-w-screen-xl mx-auto px-5">
-                <!--                <h2 class="text-7xl text-center font-semibold text-[#C6584F] ">Support Our Journey</h2>-->
-                <div class="w-full mx-auto">
-                    <img src="/static/img/letMeet.png" alt="" class="w-full">
-                </div>
-
-                <div class="mb-8 md:mb-24">
-                    <h2 class="text-[#C6584F] mt-12 text-4xl md:text-6xl font-semibold text-center">Get to know more about the team </h2>
-                </div>
-
-
-
-                <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-5">
-                    {%for i in data%}
-                       <div class="relative overflow-hidden rounded-2xl cursor-pointer" onclick="get_counsellor({{i.id}})">
-                        <div class="w-full profile">
-                            <img src="/media/{{i.photo}}" alt="" class="w-full">
-                        </div>
-<!--                        <h6 class="absolute bottom-4 text-white px-4 py-2 text-2xl text-white z-10">{{i.first_name|title}}</h6>-->
-                    </div>
-                    {%endfor%}
-
-
-                </div>
+    <!--Other Happiness Start-->
+    <section class="py-12 md:py-32 about-content">
+        <input type="hidden" id="cpage" value="{{current_page}}">
+        <div class="max-w-screen-xl mx-auto px-5">
+            <!--                <h2 class="text-7xl text-center font-semibold text-[#C6584F] ">Support Our Journey</h2>-->
+            <div class="w-full mx-auto">
+                <img src="/static/img/letMeet.png" alt="" class="w-full">
             </div>
-        </section>
-        <!--Other Happiness End-->
-        <!--Footer Start-->
-       {% include 'footer.html' %}
 
-        <!--Footer End-->
-
+            <div class="mb-8 md:mb-24">
+                <h2 class="text-[#C6584F] mt-12 text-4xl md:text-6xl font-semibold text-center">Get to know more about
+                    the team </h2>
+            </div>
 
 
-    </div>
+            <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-10" id="show_image">
+                {%for i in data%}
+                <div class="image-container">
+                    <div class="relative overflow-hidden rounded-2xl cursor-pointer" onclick="get_counsellor({{i.id}})">
+                        <div class="w-full profile text-center transition duration-300 ease-in-out hover:shadow-lg dark:hover:shadow-black/30">
+                            <img class="tln max-w-xs transition duration-300 ease-in-out hover:shadow-lg dark:hover:shadow-black/30 zoom-out"
+                                 src="/media/{{i.photo}}" alt="">
+                        </div>
+                    </div>
+                </div>
+                {%endfor%}
+
+            </div>
+        </div>
+        <div class="mb-8 md:mb-24 mt-8 text-center">
+            <ul class="flex justify-center items-center space-x-4 mb-8 mt-16 new_ul">
+               <a href="/counsellors/{{current_page|previous_page }}">   <li class="flex justify-center items-center">
+                    <svg width="20" height="20" viewBox="0 0 25 24" fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M24.1471 20.17C24.4737 20.31 24.6371 20.9167 24.6371 21.99C24.6371 22.97 24.4737 23.39 24.1471 23.25L0.76707 12.89C0.533737 12.75 0.41707 12.3533 0.41707 11.7C0.41707 11 0.533737 10.6033 0.76707 10.51L24.1471 0.22C24.2871 0.126666 24.4037 0.219999 24.4971 0.499998C24.5904 0.733331 24.6371 1.06 24.6371 1.48C24.6371 2.46 24.4737 3.04333 24.1471 3.23L4.26707 11.7L24.1471 20.17Z"
+                              fill="#C6584F"/>
+                    </svg>
+               </li></a>
+
+                {% for i in pag %}
+                {%if current_page == i %}
+                 <li class="text-dark text-xl li-box bg-[#becccf] text-[#c6584f] flex justify-center items-center zoom-out"
+                    style="cursor:pointer;">{{ i }}
+                </li>
+                {%else%}
+                <a href="/counsellors/{{i|encrypting}}">
+                    <li class="text-dark text-2xl text-[#c6584f] flex justify-center items-center zoom-out"
+                        style="cursor:pointer;">{{ i }}
+                    </li>
+                </a>
+                {% endif %}
+                {% endfor %}
+               <a href="/counsellors/{{current_page|next_page}}"> <li class="flex justify-center items-center">
+                    <svg width="20" height="20" viewBox="0 0 25 24" fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.852929 20.17C0.526263 20.31 0.362929 20.9167 0.362929 21.99C0.362929 22.97 0.526263 23.39 0.852929 23.25L24.2329 12.89C24.4663 12.75 24.5829 12.3533 24.5829 11.7C24.5829 11 24.4663 10.6033 24.2329 10.51L0.852929 0.22C0.712928 0.126666 0.596261 0.219999 0.502928 0.499998C0.409595 0.733331 0.362929 1.06 0.362929 1.48C0.362929 2.46 0.526263 3.04333 0.852929 3.23L20.7329 11.7L0.852929 20.17Z"
+                              fill="#C6584F"/>
+                    </svg>
+               </li></a>
+            </ul>
+            <p class="text-center text-2xl  text-[#c6584f]">To join as a mental health professional, apply here </p>
+            <a href="/professional"
+               class="w-50 mt-4 bg-[#BECCCF] text-white inline-block px-8 py-2 text-xl font-bold rounded-lg text-center text-center ">View
+                Form</a>
+        </div>
+
+    </section>
+    <!--Other Happiness End-->
+    <!--Footer Start-->
+    {% include 'footer.html' %}
+
+    <!--Footer End-->
 
 
+</div>
 
-<div id="default-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed inset-0 z-50 flex justify-center items-center w-full h-full">
+
+<div id="default-modal" tabindex="-1" aria-hidden="true"
+     class="hidden overflow-y-auto overflow-x-hidden fixed inset-0 z-50 flex justify-center items-center w-full h-full">
     <div class="relative p-4 w-full max-w-2xl max-h-full">
         <!-- Modal content -->
         <div class="relative bg-[#F8EDDE] rounded-lg shadow p-8">
             <!-- Modal header -->
             <div class="flex items-center justify-between rounded-t">
-                <button type="button" class="text-white bg-[#C6584F] hover:bg-black rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="default-modal">
-                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                <button type="button"
+                        class="text-white bg-[#C6584F] hover:bg-black rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
+                        data-modal-hide="default-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                         viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                     </svg>
                 </button>
             </div>
             <!-- Modal body -->
             <div class="space-y-4 text-[#C6584F]" id="profile">
                 <div>
-                    <h4 class="text-2xl font-semibold">Aakhansha Varghese</h4>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img src="" id="profile_image" class="w-50>
+"
+                        </div>
+                        <div class="col-md-9">
+                         <h4 class="text-2xl font-semibold">Aakhansha Varghese</h4>
                     <h6 class="text-lg font-semibold">Psychologist</h6>
+                            </div>
+                    </div>
+
                 </div>
                 <ul class="space-y-1">
-                    <li><b>Area of Specialization:</b>Relationship Counselling </li>
+                    <li><b>Area of Specialization:</b>Relationship Counselling</li>
                     <li><b>Experience:</b> 5 Years</li>
-                    <li><b>Qualification:</b> MSc In Counselling Psychology </li>
+                    <li><b>Qualification:</b> MSc In Counselling Psychology</li>
                     <li><b>Mode of Delivery:</b> Both Offline and Online</li>
                     <li><b>Language:</b> English, Hindi</li>
                     <li><b>Location:</b> Valsad, Gujarat</li>
                     <li><b>Email:</b> aakansha151995@gmail.com</li>
-                    <li><b>Mobile No:</b> 9986071608 </li>
+                    <li><b>Mobile No:</b> 9986071608</li>
                 </ul>
                 <div>
-                    <b>About: </b><br />
-                    Aakanksha's work as a psychologist affords her the great privilege of being invited into the most intimate emotional spaces of people’s lives. She works with children, adolescents & young adults with cases like Anxiety, Depression, Relationship issues, Borderline Personality Disorder, ADHD (children and adults), Stress and Work-Life Balance, Adjustmental Issues. Aakanksha is a LGBTQIA ally, Trauma Informed and has worked on cases involving Childhood Trauma. In therapy her approach has been eclectic however she majorly practice humanistic approach. She believes that every individual has the capability to grow and evolve when given an environment of acceptance, empathy and unconditional positive regard.
+                    <b>About: </b><br/>
+                    Aakanksha's work as a psychologist affords her the great privilege of being invited into the most
+                    intimate emotional spaces of people’s lives. She works with children, adolescents & young adults
+                    with cases like Anxiety, Depression, Relationship issues, Borderline Personality Disorder, ADHD
+                    (children and adults), Stress and Work-Life Balance, Adjustmental Issues. Aakanksha is a LGBTQIA
+                    ally, Trauma Informed and has worked on cases involving Childhood Trauma. In therapy her approach
+                    has been eclectic however she majorly practice humanistic approach. She believes that every
+                    individual has the capability to grow and evolve when given an environment of acceptance, empathy
+                    and unconditional positive regard.
                 </div>
             </div>
         </div>
     </div>
 </div>
 </body>
-   <script src="/static/static/js/jquery-3.6.0.js"></script>
+<script src="/static/static/js/jquery-3.6.0.js"></script>
 <script>
-    const tabsBox = document.querySelector(".tabs-box"),
-        allTabs = tabsBox.querySelectorAll(".tab"),
-        arrowIcons = document.querySelectorAll(".icon i");
+    $(document).ready(function (){
+       var cpage =  $('#cpage').val()
+        console.log('Current Page:', cpage); // Debugging line
+        if (cpage != "1"){
 
-    let isDragging = false;
-
-    const handleIcons = (scrollVal) => {
-        let maxScrollableWidth = tabsBox.scrollWidth - tabsBox.clientWidth;
-        arrowIcons[0].parentElement.style.display = scrollVal <= 0 ? "none" : "flex";
-        arrowIcons[1].parentElement.style.display = maxScrollableWidth - scrollVal <= 1 ? "none" : "flex";
-    }
-
-    arrowIcons.forEach(icon => {
-        icon.addEventListener("click", () => {
-            // if clicked icon is left, reduce 350 from tabsBox scrollLeft else add
-            let scrollWidth = tabsBox.scrollLeft += icon.id === "left" ? -340 : 340;
-            handleIcons(scrollWidth);
-        });
-    });
-
-    allTabs.forEach(tab => {
-        tab.addEventListener("click", () => {
-            tabsBox.querySelector(".active").classList.remove("active");
-            tab.classList.add("active");
-        });
-    });
-
-    const dragging = (e) => {
-        if (!isDragging) return;
-        tabsBox.classList.add("dragging");
-        tabsBox.scrollLeft -= e.movementX;
-        handleIcons(tabsBox.scrollLeft)
-    }
-
-    const dragStop = () => {
-        isDragging = false;
-        tabsBox.classList.remove("dragging");
-    }
-
-    tabsBox.addEventListener("mousedown", () => isDragging = true);
-    tabsBox.addEventListener("mousemove", dragging);
-    document.addEventListener("mouseup", dragStop);
-
-</script>
-
-<script>
-
-
-$(document).ready(function() {
-    // Open modal
-    $("#open-modal").click(function() {
-        get_counsellor(1); // Example id, you can replace it with dynamic id
-    });
-
-    // Close modal
-    $(document).on('click', "[data-modal-hide='default-modal']", function() {
-        $("#default-modal").addClass("hidden");
-    });
-});
-
-function get_counsellor(id) {
-    $.ajax({
-        type: "GET",
-        url: '/get_counsellor_data',
-        data: {"id": id},
-        success: function (data) {
-            $('#profile').html(data.html_form);
-            $("#default-modal").removeClass("hidden");
-        },
-        error: function () {
-            alert("Something went wrong");
+            $('html, body').animate({
+                scrollTop: $('#show_image').offset().top
+            }, 800); // Adjust the duration (800 ms) as needed
         }
+         if (cpage !== 1){
+
+            $('html, body').animate({
+                scrollTop: $('#show_image').offset().top
+            }, 800); // Adjust the duration (800 ms) as needed
+        }
+
+
+
     });
-}
+
+
+    $(document).ready(function () {
+        // Open modal
+        $("#open-modal").click(function () {
+            get_counsellor(1); // Example id, you can replace it with dynamic id
+        });
+
+        // Close modal
+        $(document).on('click', "[data-modal-hide='default-modal']", function () {
+            $("#default-modal").addClass("hidden");
+        });
+    });
+
+    function get_counsellor(id) {
+        $.ajax({
+            type: "GET",
+            url: '/get_counsellor_data',
+            data: {"id": id},
+            success: function (data) {
+                $('#profile').html(data.html_form);
+                $("#default-modal").removeClass("hidden");
+            },
+
+            error: function () {
+                alert("Something went wrong");
+            }
+        });
+    }
 
 
 </script>

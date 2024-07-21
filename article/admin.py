@@ -10,5 +10,5 @@ from django.contrib.auth.models import Group
 # Register your models here.
 @admin.register(Articles)
 class ViewAdmin(ImportExportModelAdmin):
-    list_display = ['admin_photo','publish','article_date']
+    list_display = ['admin_photo','article_type','publish','article_date']
     search_fields = ('title',)

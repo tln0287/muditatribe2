@@ -17,6 +17,8 @@ class User(AbstractUser):
     language = models.CharField(max_length=500,null=True,blank=True)
     gender = models.CharField(max_length=30,null=True,blank=True)
     designation = models.CharField(max_length=100,null=True,blank=True)
+    experience = models.CharField(max_length=100,null=True,blank=True)
+    expertise = models.TextField(null=True,blank=True)
     u_id = models.CharField(max_length=15,null=True,blank=True)
     photo = models.ImageField(upload_to="profile_photo/",null=True,blank=True)
     flag_counter = models.BooleanField(default=False)
