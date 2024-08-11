@@ -29,10 +29,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+GOOGLE_RECAPTCHA_SECRET_KEY = '6LeQbhgqAAAAAOgvpSoUdD7yCk5ugvagYx-l-Ley'
 
+RAZORPAY_KEY_ID = 'rzp_test_qbKX3UuZ1StKj1'
+RAZORPAY_KEY_SECRET = '7ycHLJComxHxWNI3CuNLSRRW'
+RAZORPAY_WEBHOOK_SECRET = 'Mudita@2024'
 
-RAZORPAY_KEY_ID = 'rzp_test_lP8JZTcfYYzYzm'
-RAZORPAY_KEY_SECRET = 'rg8Esy7F1mSTtcityp87mPRJ'
 
 # Application definition
 
@@ -172,6 +174,13 @@ SOCIAL_AUTH_DISCONNECT_PIPELINE = (
     'social_core.pipeline.disconnect.disconnect',
 )
 
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'admin@muditatribe.com'
+EMAIL_HOST_PASSWORD = 'Mudita2022'
+EMAIL_PORT = 587
 
 WSGI_APPLICATION = 'mudita.wsgi.application'
 

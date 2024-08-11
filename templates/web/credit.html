@@ -133,8 +133,7 @@
     <!--Other Happiness Start-->
     <section class="py-6 about-content">
         <div class="max-w-screen-xl mx-auto px-5">
-            <h2 class="text-4xl md:text-7xl text-center font-semibold text-[#C6584F] ">Thank you for your
-                        donation!</h2>
+            <h2 class="text-4xl md:text-7xl text-center font-semibold text-[#C6584F] ">Support Our Journey</h2>
             <div class="w-full md:w-7/12 mx-auto">
                 <img src="/static/img/donations.png" alt="" class="w-full">
             </div>
@@ -142,14 +141,24 @@
             <div class="mb-8 md:mb-24">
                 <h2 class="text-[#C6584F] mt-12 mb-2 md:mb-12 text-3xl md:text-6xl font-semibold text-center">Let’s
                     Create A Better Tomorrow</h2>
-                <h4 class="text-2xl md:text-4xl text-center font-semibold text-[#C6584F] italic md:w-8/12 mx-auto">
-                     Thank you for your support.</h4>
-            </div>
+                <h4 class="text-lg md:text-2xl text-center font-semibold text-[#C6584F] italic md:w-8/12 mx-auto">
+Please ensure the name and mobile number provided match your PAN card details for accurate 80G certificate issuance. Thank you for your support.            </div>
         </div>
     </section>
     <!--Other Happiness End-->
 
     <!--form start-->
+ <section class="py-2 about-content mb-20" style="margin-top: -60px">
+    <div class="max-w-screen-xl mx-auto px-5">
+        <h4 class="text-2xl md:text-4xl text-center font-semibold text-[#C6584F] md:w-8/12 mx-auto mb-10">Payment Method: Credit/Debit Card</h4>
+
+        <div class="flex justify-center mt-28 mb-20">
+            <h2 class="text-7xl text-center" style="color: #C4D1D4">COMING SOON!</h2>
+
+        </div>
+
+    </div>
+</section>
 
     <!--form end-->
 
@@ -179,25 +188,6 @@
         console.log(paymentMethod);
         document.getElementById('payment').value = paymentMethod;
     }
-
-       document.getElementById('submit-button').addEventListener('click', function(event) {
-    const form = document.getElementById('experience-form');
-     const recaptchaResponse = grecaptcha.getResponse();
-
-            if (!recaptchaResponse) {
-                alert('Please enter the reCAPTCHA.');
-                return;
-            }
-    if (form.checkValidity()) {
-        // Form is valid, you can proceed with submission
-
-        form.submit(); // Submit the form
-    } else {
-        // Form is invalid, display error messages
-
-        form.reportValidity(); // Show validation errors
-    }
-});
 </script>
 </body>
 

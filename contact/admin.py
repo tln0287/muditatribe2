@@ -27,3 +27,12 @@ class ViewAdmin(ImportExportModelAdmin):
     list_filter = ('created_at',)
     search_fields = ('name', 'email', 'phone')
 
+
+
+# Register your models here.
+@admin.register(AlternateTherapist)
+class ViewAdmin(ImportExportModelAdmin):
+    list_display = ['name', 'email', 'phone','created_at']
+    list_filter = ('created_at',)
+    search_fields = ('name', 'email', 'phone')
+

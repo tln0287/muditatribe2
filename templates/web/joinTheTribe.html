@@ -25,7 +25,7 @@
                         If you have any question or need further information, don’t hesitate to contact us. We’re here to assist you in taking the first step towards a journey in mental health advocacy
                     </p>
                 </div>
-                <div class="grid grid-cols-2 gap-x-5 md:gap-x-24 items-center">
+                <div class="grid grid-cols-3 gap-x-5 md:gap-x-24 items-center">
                     <div class="rounded-t-full overflow-hidden w-full md:w-8/12 mx-auto">
                         <div class="w-full">
                             <img src="/static/img/join_1.png" alt="Breathing img" class="w-full">
@@ -44,57 +44,64 @@
                             <a href="/volunteer" class="w-full bg-[#BECCCF] text-white inline-block px-8 py-2 text-xl font-bold rounded-lg">View Form</a>
                         </div>
                     </div>
+                       <div class="rounded-t-full overflow-hidden w-full md:w-8/12 mx-auto">
+                        <div class="w-full">
+                            <img src="/static/img/connect3.png" alt="Breathing img" class="w-full">
+                        </div>
+                        <div class="py-3 text-center space-y-3">
+                            <h4 class="text-2xl text-[#C6584F] font-semibold">To join as an alternate therapist, apply here </h4>
+                            <a href="/alternate_therapist" class="w-full bg-[#BECCCF] text-white inline-block px-8 py-2 text-xl font-bold rounded-lg">View Form</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
         <!--Other Happiness End-->
 
-        <section class="py-4 md:py-8 bg-[#EECC96]">
-            <div>
-                <h2 class="text-4xl md:text-7xl text-center font-semibold text-white tracking-wide mt-3">Contact Us</h2>
-            </div>
-        </section>
-        <div class="w-full">
-            <img src="/static/img/bg_r_back.svg" class="w-full" alt="">
-        </div>
-            <section class="py-12 md:py-32">
-            <div class="max-w-screen-xl mx-auto px-5">
-                <div class="mb-8 md:mb-24">
-                    <h2 class="text-4xl md:text-7xl text-center font-semibold text-[#C6584F] tracking-wide">CONTACT US</h2>
-                </div>
-                <div class="grid md:grid-cols-2 gap-x-6 items-center">
-                    <form action="/add_contact" method="post" id="contactForm">
-             {% csrf_token %}
-    <div>
-        <div class="form">
-            <div class="form-group">
-                <label class="label-form">Name</label>
-                <input class="form-input" type="text" name="name" id="name" required />
-            </div>
-            <div class="form-group">
-                <label class="label-form">Email</label>
-                <input class="form-input" type="email" name="email" id="email" required />
-            </div>
-            <div class="form-group">
-                <label class="label-form">Phone</label>
-                <input class="form-input" type="tel" name="phone" id="phone" required />
-            </div>
-            <div class="form-group">
-                <label class="label-form">What can we help you with?</label>
-                <input class="form-input" type="text" name="message" id="message" required />
-            </div>
-            <div class="w-full text-center">
-                <button class="bg-[#EECC96] text-white inline-block px-8 py-2 text-xl font-bold rounded-lg" type="submit">Submit</button>
-            </div>
-        </div>
-    </div>
-</form>
-                    <div>
-                        <img src="/static/img/contact.png" alt="" class="w-10/12 mx-auto">
-                    </div>
-                </div>
-            </div>
-        </section>
+<!--        <section class="py-4 md:py-8 bg-[#EECC96]">-->
+<!--            <div>-->
+<!--                <h2 class="text-4xl md:text-7xl text-center font-semibold text-white tracking-wide mt-3">Contact Us</h2>-->
+<!--            </div>-->
+<!--        </section>-->
+<!--        <div class="w-full">-->
+<!--            <img src="/static/img/bg_r_back.svg" class="w-full" alt="">-->
+<!--        </div>-->
+<!--            <section class="py-12 md:py-32">-->
+<!--            <div class="max-w-screen-xl mx-auto px-5">-->
+
+<!--                <div class="grid md:grid-cols-2 gap-x-6 items-center">-->
+<!--                    <form action="/add_contact" method="post" id="contactForm">-->
+<!--             {% csrf_token %}-->
+<!--    <div>-->
+<!--        <div class="form">-->
+<!--            <div class="form-group">-->
+<!--                <label class="label-form">Name</label>-->
+<!--                <input class="form-input" type="text" name="name" id="name" required />-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label class="label-form">Email</label>-->
+<!--                <input class="form-input" type="email" name="email" id="email" required />-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label class="label-form">Phone</label>-->
+<!--                <input class="form-input" type="tel" name="phone" id="phone" required />-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label class="label-form">What can we help you with?</label>-->
+<!--                <input class="form-input" type="text" name="message" id="message" required />-->
+<!--            </div>-->
+<!--            <div class="w-full text-center">-->
+<!--                <button class="bg-[#EECC96] text-white inline-block px-8 py-2 text-xl font-bold rounded-lg" type="submit">Submit</button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</form>-->
+<!--                    <div>-->
+<!--                        <img src="/static/img/contact.png" alt="" class="w-10/12 mx-auto">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </section>-->
 
         <!--Footer Start-->
          {% include 'footer.html' %}

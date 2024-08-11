@@ -50,6 +50,39 @@
             padding: 6px 16px;
             border-radius: 8px;
         }
+
+        .new_ul {
+            list-style: none; /* Remove default list styling */
+            padding: 0;
+            display: flex; /* Align items horizontally */
+        }
+         li {
+            margin-right: 10px; /* Add some spacing between items */
+        }
+
+        .zoom-out {
+            transition: transform 0.1s ease;
+        }
+
+        .zoom-out:hover {
+            transform: scale(1.5);
+
+        }
+
+
+
+
+        .li-box {
+            border-width: 10px; /* Set border width */
+            border-height: 10px; /* Set border width */
+            border-color: #becccf; /* Border color */
+            background-color: #becccf; /* Background color */
+            color: #c6584f; /* Text color */
+        }
+        .tln :hover{
+            background-color: #6a1a21;
+            border-color: #6a1a21;
+        }
     </style>
         <!--Header End-->
 
@@ -57,17 +90,12 @@
         <!--Other Happiness Start-->
         <section class="py-12 md:py-32 about-content">
             <div class="max-w-screen-xl mx-auto px-5">
-                <div class="w-full md:w-7/12 mx-auto">
-                    <img src="/static/img/articles.png" alt="" class="w-full">
+                <div class="w-full md:w-7/12 mx-auto" style="margin-top: -80px;">
+                    <img src="/static/img/article_bg.png" alt="" class="w-full">
                 </div>
 
-                <div class="mb-8 md:mb-24"> 
-                    <div class=" mt-12 mb-2 md:mb-8 ">
-                        <p class="text-2xl md:text-4xl text-center font-semibold text-[#C6584F] italic">Explore the ancient wisdom of the Vedas. Here, we delve into how these timeless texts addressed mental health, offering insights and techniques that are still relevant today.</p>
-                         <p class="text-2xl md:text-4xl text-center font-semibold text-[#C6584F] italic"> Discover the rich heritage of mental health knowledge preserved in the Vedas and learn how these practices can enhance your mindfulness and emotional balance</p>
-                    </div>
-                    <h2 class="text-[#C6584F] text-3xl md:text-6xl font-semibold text-center">Go Through All The Latest Articles And Stay Informed</h2>
-
+                <div class="mb-8 mt-8 md:mb-24">
+                     <h2 class="text-[#C6584F] text-3xl md:text-4xl font-semibold text-center">Read all the latest articles and stay informed</h2>
                 </div>
            <div class="grid md:grid-cols-3 gap-5 blog-grid">
         {% for b in data %}
@@ -83,6 +111,39 @@
         </div>
         {% endfor %}
     </div>
+                 <div class="mb-8 md:mb-24 mt-8 text-center">
+            <ul class="flex justify-center items-center space-x-4 mb-8 mt-16 new_ul">
+               <a href="/articles/{{current_page|previous_page }}">   <li class="flex justify-center items-center">
+                    <svg width="20" height="20" viewBox="0 0 25 24" fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M24.1471 20.17C24.4737 20.31 24.6371 20.9167 24.6371 21.99C24.6371 22.97 24.4737 23.39 24.1471 23.25L0.76707 12.89C0.533737 12.75 0.41707 12.3533 0.41707 11.7C0.41707 11 0.533737 10.6033 0.76707 10.51L24.1471 0.22C24.2871 0.126666 24.4037 0.219999 24.4971 0.499998C24.5904 0.733331 24.6371 1.06 24.6371 1.48C24.6371 2.46 24.4737 3.04333 24.1471 3.23L4.26707 11.7L24.1471 20.17Z"
+                              fill="#C6584F"/>
+                    </svg>
+               </li></a>
+
+                {% for i in pag %}
+                {%if current_page == i %}
+                 <li class="text-dark text-xl li-box bg-[#becccf] text-[#c6584f] flex justify-center items-center zoom-out"
+                    style="cursor:pointer;">{{ i }}
+                </li>
+                {%else%}
+                <a href="/articles/{{i|encrypting}}">
+                    <li class="text-dark text-2xl text-[#c6584f] flex justify-center items-center zoom-out"
+                        style="cursor:pointer;">{{ i }}
+                    </li>
+                </a>
+                {% endif %}
+                {% endfor %}
+               <a href="/articles/{{current_page|next_page}}"> <li class="flex justify-center items-center">
+                    <svg width="20" height="20" viewBox="0 0 25 24" fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.852929 20.17C0.526263 20.31 0.362929 20.9167 0.362929 21.99C0.362929 22.97 0.526263 23.39 0.852929 23.25L24.2329 12.89C24.4663 12.75 24.5829 12.3533 24.5829 11.7C24.5829 11 24.4663 10.6033 24.2329 10.51L0.852929 0.22C0.712928 0.126666 0.596261 0.219999 0.502928 0.499998C0.409595 0.733331 0.362929 1.06 0.362929 1.48C0.362929 2.46 0.526263 3.04333 0.852929 3.23L20.7329 11.7L0.852929 20.17Z"
+                              fill="#C6584F"/>
+                    </svg>
+               </li></a>
+            </ul>
+
+        </div>
             </div>
         </section>
         <!--Other Happiness End-->

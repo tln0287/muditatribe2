@@ -41,16 +41,16 @@
                     <div class=" bg-red-light"></div>
                     <audio id="audio" src="/media/{{ data.audio }}"></audio>
                     <div class="flex items-center justify-center  bg-red-lightest">
-                        <div class="bg-white shadow-lg rounded-lg" style="width: 64rem !important;">
-                            <div class="flex">
+                        <div class="bg-[#c4d1d4] shadow-lg rounded-lg" style="width: 64rem !important;">
+                            <div class="flex p-4 gap-4">
                                 <div>
-                                    <img class="w-80 rounded hidden md:block" src="/media/Article/blog1.png" alt="Album Pic">
+                                    <img  class="w-80  rounded hidden md:block" src="/media/Article/blog1.png" alt="Album Pic">
                                 </div>
-                                <div class="w-full p-8">
+                                <div class="w-full">
                                     <div class="flex justify-between">
                                         <div>
-                                            <h3 class="text-2xl text-grey-darkest font-medium">{{ data.name }}</h3>
-                                            <p class="text-sm text-grey mt-1">Soothing Soundscapes</p>
+                                            <h3 class="text-2xl text-grey-darkest font-medium text-[#C6584F]" >{{ data.name }}</h3>
+                                            <p class="text-sm text-grey mt-1 text-[#C6584F]">{{ data.music_type }}</p>
                                         </div>
 <!--                                        <div class="text-red-lighter">-->
 <!--                                            <svg class="w-6 h-6" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 3.22l-.61-.6a5.5 5.5 0 0 0-7.78 7.77L10 18.78l8.39-8.4a5.5 5.5 0 0 0-7.78-7.77l-.61.61z"/></svg>-->
@@ -61,19 +61,19 @@
 <!--                                            <svg  id="shuffle" class="w-8 h-8" style="cursor: pointer" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M6.59 12.83L4.4 15c-.58.58-1.59 1-2.4 1H0v-2h2c.29 0 .8-.2 1-.41l2.17-2.18 1.42 1.42zM16 4V1l4 4-4 4V6h-2c-.29 0-.8.2-1 .41l-2.17 2.18L9.4 7.17 11.6 5c.58-.58 1.59-1 2.41-1h2zm0 10v-3l4 4-4 4v-3h-2c-.82 0-1.83-.42-2.41-1l-8.6-8.59C2.8 6.21 2.3 6 2 6H0V4h2c.82 0 1.83.42 2.41 1l8.6 8.59c.2.2.7.41.99.41h2z"/></svg>-->
                                         </div>
                                         <div class="text-grey-darker">
-                                            <svg id="prevButton" class="w-8" style="cursor: pointer" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M4 5h3v10H4V5zm12 0v10l-9-5 9-5z"/></svg>
+                                            <svg id="prevButton" class="w-8 text-white" style="cursor: pointer" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M4 5h3v10H4V5zm12 0v10l-9-5 9-5z"/></svg>
                                         </div>
                                         <div class="text-white p-6 rounded-full bg-red-dark shadow-lg">
-                                            <svg width="23" style="cursor: pointer" id="playButton" height="23" viewBox="0 0 37 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M0.555378 0.407238L36.7223 21.5352L1.11939 43.0252L0.555378 0.407238Z" fill="black"/>
+                                            <svg width="23" class="text-white" style="cursor: pointer" id="playButton" height="23" viewBox="0 0 37 44" fill="white" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M0.555378 0.407238L36.7223 21.5352L1.11939 43.0252L0.555378 0.407238Z" />
                                             </svg>
-                                            <svg id="pauseButton" style="cursor: pointer" width="23" height="23" viewBox="0 0 37 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <rect x="5" y="0" width="10" height="44" fill="black"/>
-                                                <rect x="22" y="0" width="10" height="44" fill="black"/>
+                                            <svg id="pauseButton" class="text-white" style="cursor: pointer" width="23" height="23" viewBox="0 0 37 44" fill="white" xmlns="http://www.w3.org/2000/svg">
+                                                <rect x="5" y="0" width="10" height="44" fill="white"/>
+                                                <rect x="22" y="0" width="10" height="44" fill="white"/>
                                             </svg>
                                         </div>
                                         <div class="text-grey-darker">
-                                            <svg id="nextButton"  class="w-8" style="cursor: pointer" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 5h3v10h-3V5zM4 5l9 5-9 5V5z"/></svg>
+                                            <svg  id="nextButton"  class="w-8 text-white" style="cursor: pointer" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 5h3v10h-3V5zM4 5l9 5-9 5V5z"/></svg>
                                         </div>
                                         <div class="text-grey-darker">
 <!--                                            <svg id="repeat"  class="w-8 h-8" style="cursor: pointer" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M5 4a2 2 0 0 0-2 2v6H0l4 4 4-4H5V6h7l2-2H5zm10 4h-3l4-4 4 4h-3v6a2 2 0 0 1-2 2H6l2-2h7V8z"/></svg>-->
@@ -86,20 +86,17 @@
                                     <input type="range" id="seekBar" class="w-full" value="0">
                                 </div>
                                 <div class="flex justify-between text-sm text-grey-darker">
-                                    <p><span id="currentTime">0:00</span></p>
-                                    <p><span id="totalTime">0:00</span></p>
+                                    <p><span class="text-[#C6584F]" id="currentTime">0:00</span></p>
+                                    <p><span class="text-[#C6584F]" id="totalTime">0:00</span></p>
                                 </div>
-                                <div class="mt-1">
-                                    <div class="h-1 bg-grey-dark rounded-full">
-                                        <div class="w-1/5 h-1 bg-red-light rounded-full relative">
-                                            <span class="w-4 h-4 bg-red absolute pin-r pin-b -mb-1 rounded-full shadow"></span>
-                                        </div>
-                                    </div>
+<!--                                <div class="mt-1">-->
+<!--                                    <div class="h-1 bg-grey-dark rounded-full">-->
+<!--                                        <div class="w-1/5 h-1 bg-red-light rounded-full relative">-->
+<!--                                            <span class="w-4 h-4 bg-red absolute pin-r pin-b -mb-1 rounded-full shadow"></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
                                 </div>
-                                </div>
-
-
-
                             </div>
 
                         </div>
@@ -110,17 +107,17 @@
                         <table class="min-w-full bg-white border border-gray-300" style="width: 58rem !important;">
                             <tbody class="bg-white divide-y divide-gray-200">
                                 {% for i in adata %}
-                                <tr class="{% if data.name == i.name %}bg-[#c4c4c4] {% else %}hover:bg-[#ede2d5] {% endif %}">
+                                <tr class="hover:bg-[#C4D1D4]">
                                     <td class="py-4 px-6 text-sm font-medium text-gray-900">
-                                        <a href="/sound_nature/{{ i.id|encrypting }}">
+                                        <a href="/smoothing_sound/{{ i.id|encrypting }}">
                                             <img class="w-24 rounded hidden md:block" src="/media/Article/blog1.png" alt="Album Pic">
                                         </a>
                                     </td>
                                     <td class="py-4 px-6 text-sm font-medium text-gray-900">
-                                        <a href="/sound_nature/{{ i.id|encrypting }}">{{ i.name }}</a>
+                                        <a href="/smoothing_sound/{{ i.id|encrypting }}">{{ i.name }}</a>
                                     </td>
                                     <td class="py-4 px-6 text-sm font-medium text-indigo-600 hover:text-indigo-900">
-                                        <a href="/sound_nature/{{ i.id|encrypting }}">{% if data.name == i.name %} Playing {% else %} Play {% endif %}</a>
+                                        <a href="/smoothing_sound/{{ i.id|encrypting }}"> Play </a>
                                     </td>
                                 </tr>
                                 {% endfor %}

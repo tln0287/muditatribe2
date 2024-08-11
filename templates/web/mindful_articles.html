@@ -5,7 +5,6 @@
         <!--Header Start-->
         <!--Web header starts-->
        {% include 'header.html' %}
-
          <style>
         .blog-grid {
             display: grid;
@@ -59,24 +58,27 @@
         <section class="py-12 md:py-32 about-content">
             <div class="max-w-screen-xl mx-auto px-5">
                 <div class="w-full md:w-7/12 mx-auto">
-                    <img src="/static/img/blog2.png" alt="" class="w-full">
+                    <img src="/static/img/articles.png" alt="" class="w-full">
                 </div>
 
-                <div class="mb-8 mt-8 md:mb-24">
-
-                    <h2 class="text-[#C6584F] text-3xl md:text-4xl font-semibold text-center">Share Your Story And Connect With The Community</h2>
+                <div class="mb-8 md:mb-24">
+                    <div class=" mt-12 mb-2 md:mb-8 ">
+                        <p class="text-2xl md:text-4xl text-center font-semibold text-[#C6584F] italic">Explore the ancient wisdom of the Vedas. Here, we delve into how these timeless texts addressed mental health, offering insights and techniques that are still relevant today.</p>
+                         <p class="text-2xl md:text-4xl text-center font-semibold text-[#C6584F] italic"> Discover the rich heritage of mental health knowledge preserved in the Vedas and learn how these practices can enhance your mindfulness and emotional balance</p>
+                    </div>
+                    <h2 class="text-[#C6584F] text-3xl md:text-6xl font-semibold text-center">Go Through All The Latest Articles And Stay Informed</h2>
 
                 </div>
-                <div class="grid md:grid-cols-3 gap-5 blog-grid">
+           <div class="grid md:grid-cols-3 gap-5 blog-grid">
         {% for b in data %}
         <div class="grid gap-y-2 w-full md:w-8/12 mx-auto blog-item">
             <div class="overflow-hidden rounded-2xl w-full mx-auto blog-image">
-                <img src="/media/{{ b.blog_main_image }}" style="border-radius: 10px;" alt="" class="w-full">
+                <img src="/media/{{ b.article_main_image }}" style="border-radius: 10px;" alt="" class="w-full">
             </div>
             <div class="text-[#C6584F] blog-content">
                 <h4 class="text-xl font-bold mb-1">{{ b.title }}</h4>
                 <p class="font-semibold">{{ b.content|safe|slice:"100" }}..</p>
-                <a href="/blog_details/{{ b.id|encrypting }}" class="bg-[#C4D1D4] text-white mt-3 w-6/12 mx-auto text-xl text-center py-1.5 rounded-lg px-4 blog-button">Read More</a>
+                <a href="/article_details/{{ b.id|encrypting }}" class="bg-[#C4D1D4] text-white mt-3 w-6/12 mx-auto text-xl text-center py-1.5 rounded-lg px-4 blog-button">Read More</a>
             </div>
         </div>
         {% endfor %}

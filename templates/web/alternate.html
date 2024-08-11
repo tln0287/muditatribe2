@@ -14,13 +14,14 @@
    <section class="py-12 md:py-32">
     <div class="max-w-screen-xl mx-auto px-5">
         <div class="mb-8 md:mb-24">
-            <h2 class="text-4xl md:text-7xl text-center font-semibold text-[#C6584F] tracking-wide mb-6 md:mb-12">Enlist As A Mental Health Professional</h2>
+            <h2 class="text-4xl md:text-7xl text-center font-semibold text-[#C6584F] tracking-wide mb-6 md:mb-12">
+                Enlist As An Alternate Therapist</h2>
         </div>
-        <form action="{% url 'submit_form' %}" method="post" enctype="multipart/form-data">
+        <form action="{% url 'submit_form3' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="grid md:grid-cols-2 gap-8 items-center">
                 <div>
-                    <img src="/static/img/prof.png" class="w-full" alt="Image">
+                    <img src="/static/img/alternate.png" class="w-full" alt="Image">
                 </div>
                 <div>
                     <div class="form-group">
@@ -59,7 +60,7 @@
                     <label class="label-form">Type of Mental Health Profession*</label>
                     <select class="form-input w-full" name="profession" required>
                         <option>Select</option>
-                        <option value="Mental Health Advocacy">Mental Health Advocacy</option>
+                        <option value="Mental Health Advocacy">Alternate therapist</option>
                         <option value="Autism Mentor">Autism Mentor</option>
 
                     </select>

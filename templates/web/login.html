@@ -1,54 +1,75 @@
-{%include 'head.html' %}
+{% include 'head.html' %}
 <body>
+<style>
+.loginForm .form-input:focus {
+    box-shadow: none;
+    outline: none;
+}
+.loginForm .form-input {
+    border: 1px solid #c6584f;
+    background: transparent;
+    padding: 4px;
+}
+.mbutton{
+     border: 1px solid #c6584f;
+    background: transparent;
+    padding: 8px;
+}
+.loginForm .form-input::placeholder {
+    color: #C6584F;
+    padding: 4px;
+    font-size: 18px;
+}
+.muforgot {
+    font-size: 22px;
+    color: #c6584f;
+}
+
+</style>
     <div id="wrapper">
         <!--Header Start-->
-      {%include 'header.html' %}
+        {% include 'header.html' %}
         <!--Header End-->
 
         <!--form start-->
-   <section class="py-2 about-content flex items-center justify-center h-screen bg-[#f8edde]" >
-    <div class="container mx-auto px-4 py-10">
-        <div class="max-w-screen-lg mx-auto px-2">
-            <div class="login_screen flex items-center justify-center min-h-screen">
-                <div class="content_login p-10 rounded-lg shadow-lg bg-white w-full max-w-lg">
-                    {% if messages %}
-                        {% for message in messages %}
-                            <div class="alert alert-{{ message.tags }} alert-dismissible fade show bg-[#e6ea62] text-dark p-4 mb-4 rounded" role="alert">
-                                {{ message }}
-                                <span class="closebtn float-right cursor-pointer" onclick="this.parentElement.style.display='none'">&times;</span>
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-                    <div class="logo text-center bg-[#eecc96] p-4 rounded mb-6">
-                        <a href="#">
-                            <img class="lazyload mx-auto" src="/static/img/logo.svg" alt="Mudita logo" title="Mudita">
-                        </a>
-                        <h6 class="text-2xl font-bold mt-2">Welcome to Mudita Tribe</h6>
-                    </div>
-                    <center>
-                        <a href="{% url 'social:begin' 'google-oauth2' %}" class="no-underline">
-                            <div class="google flex items-center justify-center border rounded-lg shadow p-3 bg-[#c4d1d4] hover:bg-[#eecc96] ">
-                                <img src="/static/img/google.svg" alt="google_logo" class="mr-2">
-                                <h6 class="text-lg text-white font-bold hover:text-black">Login With Your Email ID</h6>
-                            </div>
-                        </a>
-                           <a href="/register" class="no-underline"><div class="google flex items-center justify-center border rounded-lg shadow p-3 bg-[#c4d1d4] hover:bg-[#eecc96]  mt-4">
+        <section class="py-12 md:py-20">
+            <div class="max-w-screen-xl mx-auto px-5">
+                <div class="mb-8 md:mb-24">
+                    <h2 class="text-4xl md:text-7xl text-center font-semibold text-[#C6584F] tracking-wide">My Account</h2>
+                    <h2 class="text-2xl md:text-4xl text-center font-semibold text-[#C6584F] tracking-wide mt-12 mb-12">Login</h2>
+                </div>
+                <div class="flex flex-col md:flex-row gap-x-6 items-center">
 
-                                <h6 class="text-lg text-white font-bold hover:text-black">Register</h6>
-                           </div></a>
-                    </center>
+                    <div class="w-full md:w-1/2 flex justify-center">
+                        <img src="/static/img/login.png" alt="" class="w-10/12" style="margin-top: -20px;">
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <form action="/login_user" method="post" id="contactForm" class="loginForm">
+                            {% csrf_token %}
+                            <div class="form">
+                                <div class="form-group">
+
+                                    <input class="form-input" placeholder="Username/Email/Phone Number" type="text" name="email" id="email" required />
+                                </div>
+                                <div class="form-group">
+
+                                    <input class="form-input" placeholder="Password" type="password" name="password" required />
+                                </div>
+                                 <div class="g-recaptcha mb-2" data-sitekey="6LeQbhgqAAAAAN06OviyhNwLbxbbF6BlC2bdBRj4"></div>
+                                <div class="w-full">
+                                    <button class="text-[#C6584F]  text-center inline-block px-6 py-6 rounded-lg w-3/12 text-xl font-bold rounded-lg mbutton" type="submit">Login</button>
+                                    <u class="float-right text-[#C6584F] mt-4 block text-right muforgot">Forgot Password</u>
+                                </div>
+                            </div>
+                            <p class="text-center text-[#C6584F] mt-4 ml-12 muforgot" style="float: left">Don’t have an account? <u><a href="/signup"> Sign Up</a></u></p>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
-
-
+        </section>
         <!--form end-->
 
-{%include 'footer.html' %}
+        {% include 'footer.html' %}
     </div>
-
 </body>
-
 </html>

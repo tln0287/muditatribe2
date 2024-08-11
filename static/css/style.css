@@ -45,7 +45,9 @@ body {
 .swiper-button-next, .swiper-button-prev{
     color: #C6584F !important;
 }
-
+.swiper{
+    padding: 40px 0px !important;
+}
 
 
 

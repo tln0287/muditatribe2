@@ -1,175 +1,225 @@
 {%include 'head.html' %}
-   <style>
-        .form-group {
-            margin-bottom: 1rem;
-        }
-        .label-form {
-            display: block;
-            margin-bottom: 0.5rem;
-        }
+<style>
+    .form-group {
+        margin-bottom: 1rem;
+    }
 
-        .form-input::-webkit-outer-spin-button,
-        .form-input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
+    .label-form {
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    .form-input::-webkit-outer-spin-button,
+    .form-input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    .form-input {
+        -moz-appearance: textfield;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .text-red-500 {
+        color: #ef4444;
+    }
+
+    .active {
+        background-color: #c4d1d4;
+        color: white;
+    }
+</style>
+<script>
+    function handleAmountChange() {
+        var amountDropdown = document.getElementById('amountDropdown');
+        var amountInput = document.getElementById('amountInput');
+        var selectedValue = amountDropdown.value;
+
+        if (selectedValue === 'custom') {
+            amountInput.classList.remove('hidden');
+            amountInput.querySelector('input').setAttribute('required', true);
+        } else {
+            amountInput.classList.add('hidden');
+            amountInput.querySelector('input').removeAttribute('required');
         }
-        .form-input {
-            -moz-appearance: textfield;
-        }
-        .hidden {
-            display: none;
-        }
-        .text-red-500 {
-            color: #ef4444;
-        }
+    }
 
-        .custom-bg {
-            background-color: #f8edde;
-        }
-        .custom-text {
-            color: #C6584F;
-        }
-    </style>
-<body>
-    <div id="wrapper">
-        <!--Header Start-->
-      {%include 'header.html' %}
-        <!--Header End-->
+    function validateForm(event) {
+        var isValid = true;
 
-
-        <!--Other Happiness Start-->
-   <section class="py-6 about-content">
-        <div class="max-w-screen-xl mx-auto px-5">
-            <h2 class="text-4xl md:text-7xl text-center font-semibold text-[#C6584F] mb-8">Thank you for your donation</h2>
-            <div class="flex flex-col md:flex-row items-center justify-center md:space-x-8">
-                <div class="w-full md:w-6/12 mb-8 md:mb-0">
-                    <img src="/static/img/donations.png" alt="Support Our Journey" class="w-full rounded-lg">
-                </div>
-                <div class="w-full md:w-6/12 bg-white shadow-lg rounded-lg overflow-hidden">
-                    <div class="bg-[#C6584F] text-white text-center py-3">
-                        <h2 class="text-2xl font-bold">Bank Details</h2>
-                    </div>
-                    <div class="p-6 custom-bg">
-                        <table class="min-w-full divide-y divide-gray-200">
-                            <tbody class="bg-white divide-y divide-gray-200">
-                                <tr class="custom-bg">
-                                    <td class="px-6 py-4 whitespace-nowrap text-lg font-medium custom-text">Name</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-lg custom-text">Mudita Tribe Foundation</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap text-lg font-medium custom-text">Bank</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-lg custom-text">HDFC</td>
-                                </tr>
-                                <tr class="custom-bg">
-                                    <td class="px-6 py-4 whitespace-nowrap text-lg font-medium custom-text">A/c No</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-lg custom-text">50200079503249</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap text-lg font-medium custom-text">IFSC Code</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-lg custom-text">HDFC0003937</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-{%include 'footer.html' %}
-    </div>
-
-</body>
-  <script>
-        function handleAmountChange() {
-            var amountDropdown = document.getElementById('amountDropdown');
-            var amountInput = document.getElementById('amountInput');
-            var selectedValue = amountDropdown.value;
-
-            if (selectedValue === 'custom') {
-                amountInput.classList.remove('hidden');
-                amountInput.querySelector('input').setAttribute('required', true);
-            } else {
-                amountInput.classList.add('hidden');
-                amountInput.querySelector('input').removeAttribute('required');
-            }
+        // Validate Name
+        var name = document.getElementById('name').value.trim();
+        if (name === '') {
+            document.getElementById('nameError').classList.remove('hidden');
+            isValid = false;
+        } else {
+            document.getElementById('nameError').classList.add('hidden');
         }
 
-        function validateForm(event) {
-            var isValid = true;
+        // Validate Address
+        var address = document.getElementById('address').value.trim();
+        if (address === '') {
+            document.getElementById('addressError').classList.remove('hidden');
+            isValid = false;
+        } else {
+            document.getElementById('addressError').classList.add('hidden');
+        }
 
-            // Validate Name
-            var name = document.getElementById('name').value.trim();
-            if (name === '') {
-                document.getElementById('nameError').classList.remove('hidden');
-                isValid = false;
-            } else {
-                document.getElementById('nameError').classList.add('hidden');
-            }
+        // Validate Email
+        var email = document.getElementById('email').value.trim();
+        var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (email === '' || !emailPattern.test(email)) {
+            document.getElementById('emailError').classList.remove('hidden');
+            isValid = false;
+        } else {
+            document.getElementById('emailError').classList.add('hidden');
+        }
 
-            // Validate Address
-            var address = document.getElementById('address').value.trim();
-            if (address === '') {
-                document.getElementById('addressError').classList.remove('hidden');
-                isValid = false;
-            } else {
-                document.getElementById('addressError').classList.add('hidden');
-            }
-
-            // Validate Email
-            var email = document.getElementById('email').value.trim();
-            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (email === '' || !emailPattern.test(email)) {
-                document.getElementById('emailError').classList.remove('hidden');
-                isValid = false;
-            } else {
-                document.getElementById('emailError').classList.add('hidden');
-            }
-
-            // Validate Amount
-            var amountDropdown = document.getElementById('amountDropdown').value;
-            var amountInput = document.getElementById('amount').value;
-            if (amountDropdown === 'custom') {
-                if (amountInput === '' || parseFloat(amountInput) < 50) {
-                    document.getElementById('amountError').classList.remove('hidden');
-                    isValid = false;
-                } else {
-                    document.getElementById('amountError').classList.add('hidden');
-                }
-            } else if (amountDropdown === '') {
+        // Validate Amount
+        var amountDropdown = document.getElementById('amountDropdown').value;
+        var amountInput = document.getElementById('amount').value;
+        if (amountDropdown === 'custom') {
+            if (amountInput === '' || parseFloat(amountInput) < 50) {
                 document.getElementById('amountError').classList.remove('hidden');
                 isValid = false;
             } else {
                 document.getElementById('amountError').classList.add('hidden');
             }
-
-            // Validate Mobile
-            var mobile = document.getElementById('mobile').value.trim();
-            if (mobile === '') {
-                document.getElementById('mobileError').classList.remove('hidden');
-                isValid = false;
-            } else {
-                document.getElementById('mobileError').classList.add('hidden');
-            }
-
-            // Validate PAN Image
-            var panImage = document.getElementById('panImage').files.length;
-            if (panImage === 0) {
-                document.getElementById('panImageError').classList.remove('hidden');
-                isValid = false;
-            } else {
-                document.getElementById('panImageError').classList.add('hidden');
-            }
-
-            // Prevent form submission if any field is invalid
-            if (!isValid) {
-                event.preventDefault();
-            }
+        } else if (amountDropdown === '') {
+            document.getElementById('amountError').classList.remove('hidden');
+            isValid = false;
+        } else {
+            document.getElementById('amountError').classList.add('hidden');
         }
 
-        window.onload = function() {
-            document.getElementById('donationForm').addEventListener('submit', validateForm);
+        // Validate Mobile
+        var mobile = document.getElementById('mobile').value.trim();
+        if (mobile === '') {
+            document.getElementById('mobileError').classList.remove('hidden');
+            isValid = false;
+        } else {
+            document.getElementById('mobileError').classList.add('hidden');
         }
-    </script>
+
+        // Validate PAN Image
+        var panImage = document.getElementById('panImage').files.length;
+        if (panImage === 0) {
+            document.getElementById('panImageError').classList.remove('hidden');
+            isValid = false;
+        } else {
+            document.getElementById('panImageError').classList.add('hidden');
+        }
+
+        // Prevent form submission if any field is invalid
+        if (!isValid) {
+            event.preventDefault();
+        }
+    }
+
+    window.onload = function () {
+        document.getElementById('donationForm').addEventListener('submit', validateForm);
+    }
+</script>
+<body>
+<div id="wrapper">
+    <!--Header Start-->
+    {%include 'header.html' %}
+    <!--Header End-->
+
+
+    <!--Other Happiness Start-->
+    <section class="py-6 about-content">
+        <div class="max-w-screen-xl mx-auto px-5">
+            <h2 class="text-4xl md:text-7xl text-center font-semibold text-[#C6584F] ">Support Our Journey</h2>
+            <div class="w-full md:w-7/12 mx-auto">
+                <img src="/static/img/donations.png" alt="" class="w-full">
+            </div>
+
+            <div class="mb-8 md:mb-24">
+                <h2 class="text-[#C6584F] mt-12 mb-2 md:mb-12 text-3xl md:text-6xl font-semibold text-center">Let’s
+                    Create A Better Tomorrow</h2>
+                <h4 class="text-lg md:text-2xl text-center font-semibold text-[#C6584F] italic md:w-8/12 mx-auto">
+Please ensure the name and mobile number provided match your PAN card details for accurate 80G certificate issuance. Thank you for your support.                </h4>
+            </div>
+        </div>
+    </section>
+    <!--Other Happiness End-->
+
+    <!--form start-->
+ <section class="py-2 about-content mb-20" style="margin-top: -60px">
+    <div class="max-w-screen-xl mx-auto px-5">
+        <h4 class="text-2xl md:text-4xl text-center font-semibold text-[#C6584F] md:w-8/12 mx-auto mb-6">Payment Method: Bank Transfer</h4>
+        <h4 class="text-xl md:text-xl text-center font-semibold text-[#C6584F] md:w-8/12 mx-auto mb-12">If you are an Indian Citizen/NRI or an Organization registered in India, please use the information below if you wish to donate via cheque or via bank transfer </h4>
+        <h4 class="text-xl md:text-2xl text-center font-semibold text-[#C6584F] md:w-8/12 mx-auto mb-6">Via Cheque</h4>
+        <h4 class="text-xl md:text-xl text-center font-semibold text-[#C6584F] md:w-8/12 mx-auto mb-10">Please Address Your Cheque To: Mudita Tribe Foundation</h4>
+        <h4 class="text-xl md:text-xl text-center font-semibold text-[#C6584F] md:w-8/12 mx-auto mb-10">Mail It To: C/O Mudita Tribe Foundation,  H.No.8-2-293/82/JIII/6, Ramanaidu Studios, Film Nagar, Jubilee Hills, Hyderabad - 500 033.</h4>
+         <div class="w-full bg-[#C6584F] h-0.5"></div>
+        <h4 class="text-2xl md:text-4xl text-center font-semibold text-[#C6584F] md:w-8/12 mx-auto mt-10 mb-10">Via Bank Transfer</h4>
+                <h4 class="text-xl md:text-xl text-center font-semibold text-[#C6584F] md:w-8/12 mx-auto mb-10">For bank transfers please add your name, email address and mobile number in the comment section for us to be able to send you a tax exemption certificate </h4>
+
+
+
+    <div class="flex justify-center mt-4">
+<table class="min-w-80 text-center">
+    <tbody>
+        <tr>
+            <td class="px-4 py-2 text-lg font-bold text-[#c6584f]" style="text-align: left">Name</td>
+            <td class="px-4 py-2 text-lg font-bold text-[#c6584f]">Mudita Tribe Foundation</td>
+        </tr>
+        <tr>
+            <td class="px-4 py-2 text-lg font-bold text-[#c6584f]" style="text-align: left">Bank</td>
+            <td class="px-4 py-2 text-lg font-bold text-[#c6584f]">HDFC</td>
+        </tr>
+        <tr>
+            <td class="px-4 py-2 text-lg font-bold text-[#c6584f]" style="text-align: left">A/c No</td>
+            <td class="px-4 py-2 text-lg font-bold text-[#c6584f]">50200079503249</td>
+        </tr>
+        <tr>
+            <td class="px-4 py-2 text-lg font-bold text-[#c6584f]">IFSC Code</td>
+            <td class="px-4 py-2 text-lg font-bold text-[#c6584f]">HDFC0003937</td>
+        </tr>
+    </tbody>
+</table>
+
+</div>
+
+
+    </div>
+</section>
+
+    <!--form end-->
+
+    {%include 'footer.html' %}
+    {%include 'scripts.html' %}
+
+
+</div>
+<script>
+    function toggleActive(button) {
+        // Remove active class from all buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.classList.remove('active');
+            btn.classList.add('bg-[#eecc96]');
+            btn.classList.add('text-[#c6584f]');
+            btn.classList.remove('bg-[#c4d1d4]');
+            btn.classList.remove('text-white');
+        });
+        // Add active class to the clicked button
+        button.classList.add('active');
+        button.classList.remove('bg-[#eecc96]');
+        button.classList.remove('text-[#c6584f]');
+        button.classList.add('bg-[#c4d1d4]');
+        button.classList.add('text-white');
+        // Set the value of the hidden input field
+        var paymentMethod = button.value;
+        console.log(paymentMethod);
+        document.getElementById('payment').value = paymentMethod;
+    }
+</script>
+</body>
+
+
 </html>

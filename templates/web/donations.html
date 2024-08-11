@@ -1,205 +1,290 @@
 {%include 'head.html' %}
- <style>
-        .form-group {
-            margin-bottom: 1rem;
-        }
-        .label-form {
-            display: block;
-            margin-bottom: 0.5rem;
-        }
+<style>
+    .form-group {
+        margin-bottom: 1rem;
+    }
 
-        .form-input::-webkit-outer-spin-button,
-        .form-input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-        .form-input {
-            -moz-appearance: textfield;
-        }
-        .hidden {
-            display: none;
-        }
-        .text-red-500 {
-            color: #ef4444;
-        }
-    </style>
+    .label-form {
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    .form-input::-webkit-outer-spin-button,
+    .form-input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    .form-input {
+        -moz-appearance: textfield;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .text-red-500 {
+        color: #ef4444;
+    }
+
+    .active {
+        background-color: #c4d1d4;
+        color: white;
+    }
+</style>
 <script>
-        function handleAmountChange() {
-            var amountDropdown = document.getElementById('amountDropdown');
-            var amountInput = document.getElementById('amountInput');
-            var selectedValue = amountDropdown.value;
+    function handleAmountChange() {
+        var amountDropdown = document.getElementById('amountDropdown');
+        var amountInput = document.getElementById('amountInput');
+        var selectedValue = amountDropdown.value;
 
-            if (selectedValue === 'custom') {
-                amountInput.classList.remove('hidden');
-                amountInput.querySelector('input').setAttribute('required', true);
-            } else {
-                amountInput.classList.add('hidden');
-                amountInput.querySelector('input').removeAttribute('required');
-            }
+        if (selectedValue === 'custom') {
+            amountInput.classList.remove('hidden');
+            amountInput.querySelector('input').setAttribute('required', true);
+        } else {
+            amountInput.classList.add('hidden');
+            amountInput.querySelector('input').removeAttribute('required');
+        }
+    }
+
+    function validateForm(event) {
+        var isValid = true;
+
+        // Validate Name
+        var name = document.getElementById('name').value.trim();
+        if (name === '') {
+            document.getElementById('nameError').classList.remove('hidden');
+            isValid = false;
+        } else {
+            document.getElementById('nameError').classList.add('hidden');
         }
 
-        function validateForm(event) {
-            var isValid = true;
+        // Validate Address
+        var address = document.getElementById('address').value.trim();
+        if (address === '') {
+            document.getElementById('addressError').classList.remove('hidden');
+            isValid = false;
+        } else {
+            document.getElementById('addressError').classList.add('hidden');
+        }
 
-            // Validate Name
-            var name = document.getElementById('name').value.trim();
-            if (name === '') {
-                document.getElementById('nameError').classList.remove('hidden');
-                isValid = false;
-            } else {
-                document.getElementById('nameError').classList.add('hidden');
-            }
+        // Validate Email
+        var email = document.getElementById('email').value.trim();
+        var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (email === '' || !emailPattern.test(email)) {
+            document.getElementById('emailError').classList.remove('hidden');
+            isValid = false;
+        } else {
+            document.getElementById('emailError').classList.add('hidden');
+        }
 
-            // Validate Address
-            var address = document.getElementById('address').value.trim();
-            if (address === '') {
-                document.getElementById('addressError').classList.remove('hidden');
-                isValid = false;
-            } else {
-                document.getElementById('addressError').classList.add('hidden');
-            }
-
-            // Validate Email
-            var email = document.getElementById('email').value.trim();
-            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (email === '' || !emailPattern.test(email)) {
-                document.getElementById('emailError').classList.remove('hidden');
-                isValid = false;
-            } else {
-                document.getElementById('emailError').classList.add('hidden');
-            }
-
-            // Validate Amount
-            var amountDropdown = document.getElementById('amountDropdown').value;
-            var amountInput = document.getElementById('amount').value;
-            if (amountDropdown === 'custom') {
-                if (amountInput === '' || parseFloat(amountInput) < 50) {
-                    document.getElementById('amountError').classList.remove('hidden');
-                    isValid = false;
-                } else {
-                    document.getElementById('amountError').classList.add('hidden');
-                }
-            } else if (amountDropdown === '') {
+        // Validate Amount
+        var amountDropdown = document.getElementById('amountDropdown').value;
+        var amountInput = document.getElementById('amount').value;
+        if (amountDropdown === 'custom') {
+            if (amountInput === '' || parseFloat(amountInput) < 50) {
                 document.getElementById('amountError').classList.remove('hidden');
                 isValid = false;
             } else {
                 document.getElementById('amountError').classList.add('hidden');
             }
-
-            // Validate Mobile
-            var mobile = document.getElementById('mobile').value.trim();
-            if (mobile === '') {
-                document.getElementById('mobileError').classList.remove('hidden');
-                isValid = false;
-            } else {
-                document.getElementById('mobileError').classList.add('hidden');
-            }
-
-            // Validate PAN Image
-            var panImage = document.getElementById('panImage').files.length;
-            if (panImage === 0) {
-                document.getElementById('panImageError').classList.remove('hidden');
-                isValid = false;
-            } else {
-                document.getElementById('panImageError').classList.add('hidden');
-            }
-
-            // Prevent form submission if any field is invalid
-            if (!isValid) {
-                event.preventDefault();
-            }
+        } else if (amountDropdown === '') {
+            document.getElementById('amountError').classList.remove('hidden');
+            isValid = false;
+        } else {
+            document.getElementById('amountError').classList.add('hidden');
         }
 
-        window.onload = function() {
-            document.getElementById('donationForm').addEventListener('submit', validateForm);
+        // Validate Mobile
+        var mobile = document.getElementById('mobile').value.trim();
+        if (mobile === '') {
+            document.getElementById('mobileError').classList.remove('hidden');
+            isValid = false;
+        } else {
+            document.getElementById('mobileError').classList.add('hidden');
         }
-    </script>
+
+        // Validate PAN Image
+        var panImage = document.getElementById('panImage').files.length;
+        if (panImage === 0) {
+            document.getElementById('panImageError').classList.remove('hidden');
+            isValid = false;
+        } else {
+            document.getElementById('panImageError').classList.add('hidden');
+        }
+
+        // Prevent form submission if any field is invalid
+        if (!isValid) {
+            event.preventDefault();
+        }
+    }
+
+    window.onload = function () {
+        document.getElementById('donationForm').addEventListener('submit', validateForm);
+    }
+</script>
 <body>
-    <div id="wrapper">
-        <!--Header Start-->
-      {%include 'header.html' %}
-        <!--Header End-->
+<div id="wrapper">
+    <!--Header Start-->
+    {%include 'header.html' %}
+    <!--Header End-->
 
 
-        <!--Other Happiness Start-->
-        <section class="py-6 about-content">
-            <div class="max-w-screen-xl mx-auto px-5">
-                <h2 class="text-4xl md:text-7xl text-center font-semibold text-[#C6584F] ">Support Our Journey</h2>
-                <div class="w-full md:w-7/12 mx-auto">
-                    <img src="/static/img/donations.png" alt="" class="w-full">
-                </div>
+    <!--Other Happiness Start-->
+    <section class="py-6 about-content">
+        <div class="max-w-screen-xl mx-auto px-5">
+            <h2 class="text-4xl md:text-7xl text-center font-semibold text-[#C6584F] ">Support Our Journey</h2>
+            <div class="w-full md:w-7/12 mx-auto">
+                <img src="/static/img/donations.png" alt="" class="w-full">
+            </div>
 
-                <div class="mb-8 md:mb-24">
-                    <h2 class="text-[#C6584F] mt-12 mb-2 md:mb-12 text-3xl md:text-6xl font-semibold text-center">Let’s Create A Better Tomorrow</h2>
-                    <h4 class="text-2xl md:text-4xl text-center font-semibold text-[#C6584F] italic md:w-8/12 mx-auto">Please ensure the name and mobile number provided match your PAN card details for accurate 80G certificate issuance. Thank you for your support.</h4>
-                </div>
-            </div>
-        </section>
-        <!--Other Happiness End-->
-
-        <!--form start-->
-        <section class="py-2 about-content">
-            <div class="max-w-screen-xl mx-auto px-5">
-                  <form class="w-full" id="donationForm" action="/add_donation" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="grid md:grid-cols-2 gap-x-8">
-            <div class="form-group mb-4">
-                <label class="label-form">Name</label>
-                <input class="form-input border-2 border-gray-300 rounded-lg p-2 w-full" type="text" name="uname" id="name" required/>
-                <p class="text-red-500 text-sm hidden" id="nameError">Name is required.</p>
-            </div>
-            <div class="form-group mb-4">
-                <label class="label-form">Address</label>
-                <input class="form-input border-2 border-gray-300 rounded-lg p-2 w-full" type="text" name="address" id="address" required />
-                <p class="text-red-500 text-sm hidden" id="addressError">Address is required.</p>
-            </div>
-            <div class="form-group mb-4">
-                <label class="label-form">Email</label>
-                <input class="form-input border-2 border-gray-300 rounded-lg p-2 w-full" type="email" name="email" id="email" required />
-                <p class="text-red-500 text-sm hidden" id="emailError">Valid email is required.</p>
-            </div>
-            <div class="form-group mb-4">
-                <label class="label-form">Amount</label>
-                <select class="form-input border-2 border-gray-300 rounded-lg p-2 w-full" name="amountDropdown" id="amountDropdown" onchange="handleAmountChange()" required>
-                    <option value="">Select an amount</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                    <option value="200">200</option>
-                    <option value="custom">Custom Amount</option>
-                </select>
-            </div>
-            <div class="form-group mb-4 hidden" id="amountInput">
-                <label class="label-form">Type Your Amount</label>
-                <input min="50" class="form-input border-2 border-gray-300 rounded-lg p-2 w-full" type="number" name="amount" id="amount" />
-                <p class="text-red-500 text-sm hidden" id="amountError">Amount is required.</p>
-            </div>
-            <div class="form-group mb-4">
-                <label class="label-form">Mobile</label>
-                <input class="form-input border-2 border-gray-300 rounded-lg p-2 w-full" type="number" name="phone" id="mobile" required />
-                <p class="text-red-500 text-sm hidden" id="mobileError">Mobile number is required.</p>
-            </div>
-            <div class="form-group mb-4">
-                <label class="label-form">Upload PAN Image</label>
-                <input class="form-input" type="file" name="pan" id="panImage" accept="image/*, .pdf" required />
-                <p class="text-red-500 text-sm hidden" id="panImageError">PAN image is required.</p>
+            <div class="mb-8 md:mb-24">
+                <h2 class="text-[#C6584F] mt-12 mb-2 md:mb-12 text-3xl md:text-6xl font-semibold text-center">Let’s
+                    Create A Better Tomorrow</h2>
+                <h4 class="text-2xl md:text-4xl text-center font-semibold text-[#C6584F] italic md:w-8/12 mx-auto">
+                    Please ensure the name and mobile number provided match your PAN card details for accurate 80G
+                    certificate issuance. Thank you for your support.</h4>
             </div>
         </div>
-        <div class="w-full text-center mt-12">
-            <button type="submit" class="bg-[#C6584F] text-white inline-block px-8 py-2 text-xl font-bold rounded-lg">Submit Donation</button>
-            <p class="text-2xl font-semibold mt-6 text-[#C6584F] hidden" id="thankYouMessage">Thank you for your donation!</p>
+    </section>
+    <!--Other Happiness End-->
+
+    <!--form start-->
+    <section class="py-2 about-content">
+        <div class="max-w-screen-xl mx-auto px-5">
+            <form class="w-full" id="donationForm" action="/add_donation" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="grid md:grid-cols-2 gap-x-8">
+                    <div class="form-group mb-4">
+                        <label class="label-form">Name</label>
+                        <input class="form-input border-2 border-gray-300 rounded-lg p-2 w-full" type="text"
+                               name="uname" id="name" required/>
+                        <p class="text-red-500 text-sm hidden" id="nameError">Name is required.</p>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label class="label-form">Address</label>
+                        <input class="form-input border-2 border-gray-300 rounded-lg p-2 w-full" type="text"
+                               name="address" id="address" required/>
+                        <p class="text-red-500 text-sm hidden" id="addressError">Address is required.</p>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label class="label-form">Email</label>
+                        <input class="form-input border-2 border-gray-300 rounded-lg p-2 w-full" type="email"
+                               name="email" id="email" required/>
+                        <p class="text-red-500 text-sm hidden" id="emailError">Valid email is required.</p>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label class="label-form">Amount</label>
+                        <input min="10" class="form-input border-2 border-gray-300 rounded-lg p-2 w-full" type="number"
+                               name="amount" id="amount" required />
+                    </div>
+<!--                    <div class="form-group mb-4 hidden" id="amountInput">-->
+<!--                        <label class="label-form">Type Your Amount</label>-->
+<!--                        <input min="50" class="form-input border-2 border-gray-300 rounded-lg p-2 w-full" type="number"-->
+<!--                               name="amount" id="amount"/>-->
+<!--                        <p class="text-red-500 text-sm hidden" id="amountError">Amount is required.</p>-->
+<!--                    </div>-->
+                    <div class="form-group mb-4">
+                        <label class="label-form">Mobile</label>
+                        <input class="form-input border-2 border-gray-300 rounded-lg p-2 w-full" type="number"
+                               name="phone" id="mobile" required/>
+                        <p class="text-red-500 text-sm hidden" id="mobileError">Mobile number is required.</p>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label class="label-form">Upload PAN Image <small>(For 80g certificate, pan card is mandatory)</small></label>
+                        <input class="form-input" type="file" name="pan" id="panImage" accept="image/*, .pdf" />
+                        <p class="text-red-500 text-sm hidden" id="panImageError">PAN image is required.</p>
+                    </div>
+
+
+                </div>
+               <cneter><div class="form-group text-center">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="indian" name="indian" class="rounded border border-red-500 p-1.5 mb-2"/>
+                        <label class="ml-2 label-form" for="indian">I am an Indian citizen</label>
+                    </div>
+                </div></cneter>
+<!--                <label class="label-form">Payment Method</label>-->
+<!--                <input type="hidden" name="payment" id="payment" value="bank">-->
+<!--                <div class="w-full text-center mt-4 grid grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3">-->
+<!--                    <button type="button" value="upi"-->
+<!--                            class="bg-[#eecc96] text-[#c6584f] px-4 py-2 text-xl font-bold rounded-lg w-8/12 mx-auto"-->
+<!--                            onclick="toggleActive(this)">UPI-->
+<!--                    </button>-->
+<!--                    <button type="button" value="bank"-->
+<!--                            class="bg-[#eecc96] text-[#c6584f] px-4 py-2 text-xl font-bold rounded-lg w-8/12 mx-auto"-->
+<!--                            onclick="toggleActive(this)">Bank Transfer-->
+<!--                    </button>-->
+<!--                    <button type="button" value="credit"-->
+<!--                            class="bg-[#eecc96] text-[#c6584f] px-4 py-2 text-xl font-bold rounded-lg w-8/12 mx-auto"-->
+<!--                            onclick="toggleActive(this)">Credit/Debit Card-->
+<!--                    </button>-->
+<!--                </div>-->
+
+                <div class="w-full text-center mt-12">
+                    <center>  <div class="g-recaptcha mb-8" data-sitekey="6LeQbhgqAAAAAN06OviyhNwLbxbbF6BlC2bdBRj4"></div></center>
+                    <button type="submit" id="submit-button"
+                            class="bg-[#C6584F] text-white inline-block px-8 py-2 text-xl font-bold rounded-lg">Submit
+                        Donation
+                    </button>
+                    <p class="text-2xl font-semibold mt-6 text-[#C6584F] hidden" id="thankYouMessage">Thank you for your
+                        donation!</p>
+                </div>
+                <br>
+                <br>
+            </form>
+
+
         </div>
-        <br>
-        <br>
-    </form>
+    </section>
+    <!--form end-->
+
+    {%include 'footer.html' %}
+    {%include 'scripts.html' %}
 
 
-            </div>
-        </section>
-        <!--form end-->
+</div>
+<script>
+    function toggleActive(button) {
+        // Remove active class from all buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.classList.remove('active');
+            btn.classList.add('bg-[#eecc96]');
+            btn.classList.add('text-[#c6584f]');
+            btn.classList.remove('bg-[#c4d1d4]');
+            btn.classList.remove('text-white');
+        });
+        // Add active class to the clicked button
+        button.classList.add('active');
+        button.classList.remove('bg-[#eecc96]');
+        button.classList.remove('text-[#c6584f]');
+        button.classList.add('bg-[#c4d1d4]');
+        button.classList.add('text-white');
+        // Set the value of the hidden input field
+        var paymentMethod = button.value;
+        console.log(paymentMethod);
+        document.getElementById('payment').value = paymentMethod;
+    }
 
-{%include 'footer.html' %}
-    </div>
+ document.getElementById('submit-button').addEventListener('click', function(event) {
+    const form = document.getElementById('experience-form');
+    const recaptchaResponse = grecaptcha.getResponse();
 
+    if (!recaptchaResponse) {
+        alert('Please enter the reCAPTCHA.');
+        return false;
+    }
+
+    if (form.checkValidity()) {
+        // Form is valid, you can proceed with submission
+        form.submit(); // Submit the form
+    } else {
+        // Form is invalid, display error messages
+        form.reportValidity(); // Show validation errors
+    }
+});
+
+</script>
 </body>
 
 

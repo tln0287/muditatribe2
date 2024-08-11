@@ -44,13 +44,13 @@
 
        })
 
-       new Swiper(".swiper", {
+             new Swiper(".testimonialsSwiper", {
 //           effect: "coverflow",
            grabCursor: true,
-           centeredSlides: true,
-           loop: true,
+           centeredSlides: false,
+           loop: false,
            slidesPerView: 1,
-           spaceBetween: 10,
+           spaceBetween: 1,
 //           coverflowEffect: {
 //               rotate: 20,
 //               stretch: 0,
@@ -58,6 +58,9 @@
 //               modifier: 1,
 //               slideShadows: true,
 //           },
+                // autoplay: {
+   // delay: 2000,
+//  },
            breakpoints: {
                640: {
                    slidesPerView: 2,

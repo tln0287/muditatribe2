@@ -21,6 +21,7 @@ class User(AbstractUser):
     expertise = models.TextField(null=True,blank=True)
     u_id = models.CharField(max_length=15,null=True,blank=True)
     photo = models.ImageField(upload_to="profile_photo/",null=True,blank=True)
+    modal_image = models.ImageField(upload_to="profile_photo/",null=True,blank=True)
     flag_counter = models.BooleanField(default=False)
     groups = models.ManyToManyField(
         Group,

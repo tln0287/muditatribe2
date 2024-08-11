@@ -1,12 +1,22 @@
 import datetime
 
+from django.conf import settings
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from sweetify import sweetify
-
+from django.shortcuts import render, redirect
+from usermanagement.models import User
+from django.contrib import messages
+import urllib
+from django.contrib import messages
+import json
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
 from article.models import Articles
 from blog.models import Blog
 from counsellor.encryption_util import decrypt
@@ -20,6 +30,7 @@ from usermanagement.models import *
 # Create your views here.
 def home(request):
     testimonial = UserTestimonial.objects.filter(publish=True)
+
     context = dict()
     context['testi'] = testimonial
     return render(request,'web/index.html',context)
@@ -36,6 +47,8 @@ def helplines(request):
     context['data'] = data
     return render(request,'web/helplines.html',context)
 
+def alternate_therapist(request):
+    return render(request,'web/alternate.html')
 
 def activities(request):
     return render(request,'web/activities.html')
@@ -50,15 +63,26 @@ def counsellors(request,paginate=None):
     if paginate:
         paginate = decrypt(paginate)
         paginate = int(paginate)
-        if paginate != 1:
-            print("paginate")
-            print(paginate)
-            print("paginate")
-            start = paginate - 1
-            start = 12 * start
-            p = paginate*12
-            data = data[start:p]
-            current_page = paginate
+        if paginate == 0:
+            data = data[:12]
+            current_page = 1
+
+        elif paginate != 1 and paginate != 0:
+
+            if paginate > s:
+                paginate = s
+                start = paginate - 1
+                start = 12 * start
+                p = paginate * 12
+                data = data[start:p]
+                current_page = paginate
+            else:
+
+                start = paginate - 1
+                start = 12 * start
+                p = paginate*12
+                data = data[start:p]
+                current_page = paginate
         else:
             data = data[:12]
             current_page = 1
@@ -149,6 +173,10 @@ def contact(request):
 
     return render(request,'web/joinTheTribe.html')
 
+def contactus(request):
+
+    return render(request,'web/contact.html')
+
 def breathing(request):
     youtube = AddVideo.objects.filter(youtube_vedio=True, video_type='Breathing')
     context = dict()
@@ -224,13 +252,60 @@ def smoothing_sound(request,id=None):
     context['data'] = data
     return render(request, 'web/calming.html', context)
 
+def signup(request):
+    return render(request,'web/signup.html')
+
+def articles(request,paginate=None):
+    data = Articles.objects.filter(publish=True).exclude(article_type="mindful")
+    s = len(data) / 6
+    s = round(s)
+    if paginate:
+        paginate = decrypt(paginate)
+        paginate = int(paginate)
+        if paginate == 0:
+            data = data[:6]
+            current_page = 1
+
+        elif paginate != 1 and paginate != 0:
+
+            if paginate > s:
+                paginate = s
+                start = paginate - 1
+                start = 6 * start
+                p = paginate * 6
+                data = data[start:p]
+                current_page = paginate
+            else:
+
+                start = paginate - 1
+                start = 6 * start
+                p = paginate * 6
+                data = data[start:p]
+                current_page = paginate
+        else:
+            data = data[:6]
+            current_page = 1
+    else:
+        data = data[:6]
+        current_page = 1
+
+    pag = []
+    for i in range(1, s + 1):
+        pag.append(i)
+    print(pag)
+    context = dict()
+    context['data'] = data
+    context['pag'] = pag
+    context['current_page'] = current_page
+    return render(request,'web/articles.html',context)
 
 
-def articles(request):
-    data = Articles.objects.filter(publish=True)
+
+def mindful_articles(request):
+    data = Articles.objects.filter(publish=True,article_type="mindful")
     context=dict()
     context['data'] = data
-    return render(request,'web/articles.html',context)
+    return render(request,'web/mindful_articles.html',context)
 
 def chants(request):
     return render(request,'web/chants.html')
@@ -360,3 +435,106 @@ def add_user(request):
 def logout2(request):
     logout(request)
     return redirect('/')
+
+
+def add_new_user(request):
+    try:
+        recaptcha_response = request.POST.get('g-recaptcha-response')
+        url = 'https://www.google.com/recaptcha/api/siteverify'
+        values = {
+            'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+            'response': recaptcha_response
+        }
+        data = urllib.parse.urlencode(values).encode()
+        req = urllib.request.Request(url, data=data)
+        response = urllib.request.urlopen(req)
+        result = json.loads(response.read().decode())
+
+        if result['success']:
+            if request.method == 'POST':
+                uname = request.POST.get('uname')
+                email = request.POST.get('email')
+                phone = request.POST.get('phone')
+                password = request.POST.get('password')
+                rpassword = request.POST.get('rpassword')
+
+                # Form validation
+                if not uname or not email or not phone or not password or not rpassword:
+                    messages.error(request, "All fields are required.")
+                    return redirect('signup')
+
+                if password != rpassword:
+                    messages.error(request, "Passwords do not match.")
+                    return redirect('signup')
+
+                try:
+                    validate_email(email)
+                except ValidationError:
+                    messages.error(request, "Enter a valid email address.")
+                    return redirect('signup')
+
+                if User.objects.filter(username=uname).exists():
+                    messages.error(request, "Username already exists.")
+                    return redirect('signup')
+
+                if User.objects.filter(email=email).exists():
+                    messages.error(request, "Email already exists.")
+                    return redirect('signup')
+
+                # Create user
+                user = User.objects.create_user(username=uname, email=email,phone=phone, password=password)
+                user.save()
+                messages.success(request, "User created successfully.")
+                return redirect('login2')
+        else:
+            messages.error(request, "Please Enter Captcha!")
+            return redirect(request.META.get('HTTP_REFERER'))
+        return render(request, 'signup.html')
+    except:
+        messages.error(request, "Unable to add")
+        return render(request, 'signup.html')
+
+
+def login_user(request):
+    try:
+        recaptcha_response = request.POST.get('g-recaptcha-response')
+        url = 'https://www.google.com/recaptcha/api/siteverify'
+        values = {
+            'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+            'response': recaptcha_response
+        }
+        data = urllib.parse.urlencode(values).encode()
+        req = urllib.request.Request(url, data=data)
+        response = urllib.request.urlopen(req)
+        result = json.loads(response.read().decode())
+
+        if result['success']:
+            if request.method == 'POST':
+                email_or_username = request.POST.get('email')
+                password = request.POST.get('password')
+
+                # Authenticate user
+                user = authenticate(request, username=email_or_username, password=password)
+
+                if user is None:
+                    # If the username is an email, try to authenticate with email
+                    try:
+                        user = authenticate(request, username=None, password=password, email=email_or_username)
+                    except Exception as e:
+                        messages.error(request, "Invalid username/email or password.")
+                        return redirect('login2')
+
+                if user is not None:
+                    login(request, user)
+
+                    return redirect('profile')  # Redirect to dashboard or another page
+
+                messages.error(request, "Invalid username/email or password.")
+                return redirect('login2')
+        else:
+            messages.error(request, 'Please Enter Captcha!')
+            return redirect(request.META.get('HTTP_REFERER'))
+
+        return render(request, 'web/login.html')
+    except:
+        return render(request, 'web/login.html')

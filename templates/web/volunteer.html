@@ -9,7 +9,7 @@
      <section class="py-12 md:py-32">
     <div class="max-w-screen-xl mx-auto px-5">
         <div class="mb-8 md:mb-24">
-            <h2 class="text-4xl md:text-7xl text-center font-semibold text-[#C6584F] tracking-wide mb-6 md:mb-12">Become A Mental Health Volunteer</h2>
+            <h2 class="text-4xl md:text-7xl text-center font-semibold text-[#C6584F] tracking-wide mb-6 md:mb-12">Enlist As A Mental Health Volunteer</h2>
         </div>
         <form action="{% url 'submit_form2' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
@@ -88,6 +88,7 @@
                     <textarea class="form-input w-full" name="message" required></textarea>
                 </div>
             </div>
+                <center>  <div class="g-recaptcha mb-8" data-sitekey="6LeQbhgqAAAAAN06OviyhNwLbxbbF6BlC2bdBRj4"></div></center>
             <div class="w-full text-center mt-8">
                 <button type="submit" class="bg-[#EECC96] text-white inline-block px-8 py-2 text-xl font-bold rounded-lg">Submit</button>
             </div>

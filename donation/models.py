@@ -16,6 +16,7 @@ class DonatedUser(models.Model):
     paid_date = models.DateTimeField(null=True, blank=True)
     phone = models.CharField(max_length=50, null=True, blank=True)
     paid = models.BooleanField(default=False)
+    indian_citizen = models.BooleanField(default=False,null=True)
     pan_card = models.FileField(upload_to='pancards',null=True,blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=20, default='Created')

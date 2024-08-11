@@ -10,8 +10,8 @@
                 "key": "{{ razorpay_key_id }}",
                 "amount": "{{ amount }}",
                 "currency": "INR",
-                "name": "Your Company Name",
-                "description": "Test Transaction",
+                "name": "Mudita Tribe",
+                "description": "Donation Amount",
                 "order_id": "{{ order_id }}",
                 "handler": function (response){
                     var form = document.createElement("form");
@@ -36,8 +36,33 @@
                     razorpay_signature.setAttribute("value", response.razorpay_signature);
                     form.appendChild(razorpay_signature);
 
+                    var payment_method = document.createElement("input");
+                    payment_method.setAttribute("type", "hidden");
+                    payment_method.setAttribute("name", "payment_method");
+                    payment_method.setAttribute("value", response.method);
+                    form.appendChild(payment_method);
+
+                    var txn_id = document.createElement("input");
+                    txn_id.setAttribute("type", "hidden");
+                    txn_id.setAttribute("name", "txn_id");
+                    txn_id.setAttribute("value", response.id);
+                    form.appendChild(txn_id);
+
+                    var amount = document.createElement("input");
+                    amount.setAttribute("type", "hidden");
+                    amount.setAttribute("name", "amount");
+                    amount.setAttribute("value", "{{ amount }}");
+                    form.appendChild(amount);
+
+
                     document.body.appendChild(form);
                     form.submit();
+                },
+                "modal": {
+                    "ondismiss": function () {
+                        // Handle the scenario when the user closes the payment modal
+                        window.location.href = "{% url 'payment_cancel' %}"; // Redirect to a cancellation page
+                    }
                 },
                 "theme": {
                     "color": "#528FF0"
