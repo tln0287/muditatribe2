@@ -46,21 +46,22 @@
 
         <div class="details">
             <p><strong>Donation Amount:</strong> ₹{{ amount_paid }}</p>
-            <p><strong>Payment Method:</strong> {{ payment_method }}</p>
+            <p><strong>Payment Mode:</strong> Online</p>
             <p><strong>Order ID:</strong> {{ razorpay_order_id }}</p>
+            <p><strong>Payment ID:</strong> {{ razorpay_payment_id }}</p>
             <p><strong>Date:</strong> {{ paid_date }}</p>
         </div>
 
-        <p>Your support helps us continue our mission to [brief description of the organization's mission]. We couldn’t do it without you!</p>
+        <p>Your support helps us continue our mission. Let’s Create A Better Tomorrow. We couldn’t do it without you!</p>
 
         <p>If you have any questions, feel free to reply to this email or contact us at {{ support_email }}.</p>
 
         <p>Warm regards,</p>
         <p>{{ organization_name }} Team</p>
 
-        <div class="footer">
-            <p>&copy; {{ year }} {{ organization_name }}. All rights reserved.</p>
-        </div>
+<!--        <div class="footer">-->
+<!--            <p>&copy; {{ year }} {{ organization_name }}. All rights reserved.</p>-->
+<!--        </div>-->
     </div>
 </body>
 </html>

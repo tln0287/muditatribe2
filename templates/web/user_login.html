@@ -1,0 +1,85 @@
+{% include 'head.html' %}
+<body>
+<style>
+.loginForm .form-input:focus {
+    box-shadow: none;
+    outline: none;
+}
+.loginForm .form-input {
+    border: 1px solid #c6584f;
+    background: transparent;
+    padding: 4px;
+}
+.mbutton{
+     border: 1px solid #c6584f;
+    background: transparent;
+    padding: 8px;
+}
+.loginForm .form-input::placeholder {
+    color: #C6584F;
+    padding: 4px;
+    font-size: 18px;
+}
+.muforgot {
+    font-size: 22px;
+    color: #c6584f;
+}
+
+</style>
+    <div id="wrapper">
+        <!--Header Start-->
+        {% include 'header.html' %}
+        <!--Header End-->
+
+        <!--form start-->
+        <section class="py-12 md:py-20">
+            <div class="max-w-screen-xl mx-auto px-5">
+                <div class="mb-8 md:mb-24">
+                    <h2 class="text-4xl md:text-7xl text-center font-semibold text-[#C6584F] tracking-wide">My Account</h2>
+                    <h2 class="text-2xl md:text-4xl text-center font-semibold text-[#C6584F] tracking-wide mt-12 mb-12">Login</h2>
+                </div>
+                <div class="flex flex-col md:flex-row gap-x-6 items-center">
+
+                    <div class="w-full md:w-1/2 flex justify-center">
+                        <img src="/static/img/login.png" alt="" class="w-10/12" style="margin-top: -20px;">
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <form action="/check_user" method="post" id="contactForm" class="loginForm">
+                            {% csrf_token %}
+                            <div class="form">
+                                <div class="form-group" style="margin-top: -200px;">
+
+                                    <input class="form-input" placeholder="Username/Email/Phone Number" type="text" name="email" id="email" required />
+                                </div>
+
+                                        <div class="w-full">
+                                    <button class="text-[#C6584F]  text-center inline-block px-6 py-6 rounded-lg w-3/12 text-xl font-bold rounded-lg mbutton" type="submit">Login</button>
+                                </div>
+
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--form end-->
+
+
+
+        {% include 'footer.html' %}
+
+    </div>
+<script>
+  function validateRecaptcha(event) {
+    var response = grecaptcha.getResponse();
+    if (response.length == 0) {
+      event.preventDefault();
+      alert("Please complete the reCAPTCHA");
+    }
+  }
+
+  document.getElementById("contactForm").addEventListener("submit", validateRecaptcha);
+</script>
+</body>
+</html>

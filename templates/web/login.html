@@ -58,7 +58,7 @@
                                  <div class="g-recaptcha mb-2" data-sitekey="6LeQbhgqAAAAAN06OviyhNwLbxbbF6BlC2bdBRj4"></div>
                                 <div class="w-full">
                                     <button class="text-[#C6584F]  text-center inline-block px-6 py-6 rounded-lg w-3/12 text-xl font-bold rounded-lg mbutton" type="submit">Login</button>
-                                    <u class="float-right text-[#C6584F] mt-4 block text-right muforgot">Forgot Password</u>
+                                    <u class="float-right text-[#C6584F] mt-4 block text-right muforgot"><a href="/forgot">Forgot Password</a></u>
                                 </div>
                             </div>
                             <p class="text-center text-[#C6584F] mt-4 ml-12 muforgot" style="float: left">Don’t have an account? <u><a href="/signup"> Sign Up</a></u></p>
@@ -69,7 +69,21 @@
         </section>
         <!--form end-->
 
+
+
         {% include 'footer.html' %}
+
     </div>
+<script>
+  function validateRecaptcha(event) {
+    var response = grecaptcha.getResponse();
+    if (response.length == 0) {
+      event.preventDefault();
+      alert("Please complete the reCAPTCHA");
+    }
+  }
+
+  document.getElementById("contactForm").addEventListener("submit", validateRecaptcha);
+</script>
 </body>
 </html>

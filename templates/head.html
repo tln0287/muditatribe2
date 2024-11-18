@@ -33,6 +33,12 @@
 
 
 
+
+
+
+
+
+
     <style type="text/tailwindcss">
         .form {
         @apply w-10/12 mx-auto;
@@ -62,6 +68,33 @@
             width: 50%;
         }
 
+/* Animation for the search input focus */
+  #search-dropdown {
+    transition: all 0.3s ease;
+    background-color: transparent; /* Transparent background */
+  }
 
-    </style>
+  /* Light mode button hover and focus styles */
+  #dropdown-button:hover,
+  #dropdown-button:focus {
+    background-color: #e2e8f0;
+    color: #1a202c;
+  }
+
+  /* Dropdown list with transparent background */
+  #dropdown {
+    background-color: transparent; /* Transparent background */
+    border: 1px solid #d1d5db; /* Light border for visibility */
+  }
+
+  /* Animation on search input focus */
+  #search-dropdown:focus {
+    background-color: #ffffff; /* Light background on focus */
+    border-color: #3182ce;
+    box-shadow: 0 0 8px rgba(49, 130, 206, 0.3);
+  }
+
+
+
+</style>
 </head>

@@ -1,0 +1,57 @@
+{% include 'head.html' %}
+<body>
+<style>
+.loginForm .form-input:focus {
+    box-shadow: none;
+    outline: none;
+}
+.loginForm .form-input {
+    border: 1px solid #c6584f;
+    background: transparent;
+    padding: 4px;
+}
+.mbutton{
+     border: 1px solid #c6584f;
+    background: transparent;
+    padding: 8px;
+}
+.loginForm .form-input::placeholder {
+    color: #C6584F;
+    padding: 4px;
+    font-size: 18px;
+}
+.muforgot {
+    font-size: 22px;
+    color: #c6584f;
+}
+
+
+</style>
+    <div id="wrapper">
+        <!--Header Start-->
+        {% include 'header.html' %}
+        <!--Header End-->
+
+        <!--form start-->
+        <section class="py-12 md:py-20 mt-28
+        mb-28">
+            <div class="max-w-screen-xl mx-auto px-5">
+                <div class="mb-8 md:mb-24">
+                    <h2 class="text-4xl md:text-7xl text-center font-semibold text-[#C6584F] tracking-wide">Email Verification!!</h2>
+                    <h2 class="text-2xl md:text-4xl text-center font-semibold text-[#C6584F] tracking-wide mt-12 mb-12">Thank you for registering Mudita Tribe.<br>
+Please click on the link that has just been sent to your email account to activate your account.</h2>
+                </div>
+                <div class="flex flex-col md:flex-row gap-x-6 items-center">
+
+
+
+
+                </div>
+            </div>
+        </section>
+        <!--form end-->
+
+        {% include 'footer.html' %}
+    </div>
+</body>
+</html>

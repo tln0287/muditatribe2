@@ -1,0 +1,148 @@
+{% load static %}
+<html lang="en">
+{% include 'dashboard_layout/head.html' %}
+{% load customtag %}
+
+<style>
+    th,td{
+        text-align: center !important;
+    }
+</style>
+<body >
+<div id="wrapper">
+    <!-- Sidebar -->
+    {% include 'dashboard_layout/sidebar.html' %}
+ <section class="home-section">
+        <!-- header -->
+        {% include 'dashboard_layout/header.html' %}
+    <!-- Sidebar -->
+          <section class="content-container innn contentContainer" id="homeSection">
+
+            <!-- TopBar -->
+
+            <!-- Topbar -->
+            <!-- Container Fluid-->
+            <div class="container-fluid" id="container-wrapper">
+                <div class="row" style="margin-top:50px;">
+                    <!-- Form sample-->
+
+                    <div class="col-sm-12 col-lg-12 col-xl-12">
+                        <h1 class="h3 page-title">Support</h1>
+                    <a href="/user_support" style="float: right;margin-top: -40px"><button type="button" class="btn btn-primary">Back</button></a>
+
+                        <div class="box-inner">
+                         <div class="row">
+    <div class="col-md-8 offset-md-2">
+
+        <div class="card-body">
+          <div class="chat-box">
+          {% if not request.user|has_group:"admin" %}
+              {% for i in qdata %}
+                  {% if i.user.u_id == request.user.u_id %}
+            <div class="message customer mt-4" style="background-color: #dce2e7;padding: 5px ;padding-left:10px;border-radius: 10px;">
+                <p><b>{{ i.user.first_name|title}}:</b> <br><span><small>Commented on: {{ i.comment_on }}</small></span><br>{{ i.comments|title }}<br></p>
+               {% if i.file %}
+                <a href="/media/{{ i.file }}" target="_blank"><i class='bx bx-paperclip'></i> View Attachment</a>
+                {% endif %}
+            </div>
+                  {% else %}
+            <div class="message support text-end mt-4" style="background-color: #c6dad3;padding: 5px ;padding-right:10px;border-radius: 10px;">
+               <p><b>Support Team:</b><br><span><small>{{ i.comment_on }}</small></span><br>{{ i.comments }}</p>
+               {% if i.file %}
+                <a href="/media/{{ i.file }}"  target="_blank"><i class='bx bx-paperclip'></i> View Attachment</a>
+                {% endif %}
+            </div>
+                  {% endif %}
+        {% endfor %}
+          {% else %}
+              {% for i in qdata %}
+                  {% if i.user.u_id != request.user.u_id %}
+            <div class="message customer mt-4" style="background-color: #dce2e7;padding: 5px ;padding-left:10px;border-radius: 10px;">
+              <p><b>{{ i.user.first_name|title}}:</b><br><b>User Id: </b>{{ i.user.u_id }}<br> <span><small>Commented on: {{ i.comment_on }}</small></span><br>{{ i.comments|title }}</p>
+            {% if i.file %}
+                <a href="/media/{{ i.file }}"  target="_blank"><i class='bx bx-paperclip'></i> View Attachment</a>
+                {% endif %}
+            </div>
+                  {% else %}
+            <div class="message support text-end mt-4" style="background-color: #c6dad3;padding: 5px ;padding-right:10px;border-radius: 10px;">
+                <p><b>Support Team:</b><br><span><small>{{ i.comment_on }}</small></span><br>{{ i.comments }}</p>
+               {% if i.file %}
+                <a href="/media/{{ i.file }}"  target="_blank"><i class='bx bx-paperclip'></i> View Attachment</a>
+                {% endif %}
+            </div>
+                  {% endif %}
+        {% endfor %}
+          {% endif %}
+            <!-- Add more messages here -->
+          </div>
+          {% if qstatus == 0 %}
+        <form action="/add_qcomments" method="post">
+            {% csrf_token %}
+          <div class="input-group mt-3">
+              <input type="hidden" value="{{ qid }}" name="qid">
+              <textarea class="form-control" name="comments" required></textarea>
+            <button type="submit" class="btn btn-primary">Send</button>
+          </div>
+            </form>
+
+
+        <button class="badge bg-success text-dark mt-4" style="font-size: 13px;background-color: rgba(200,210,195,0.8) !important;" id="close_ticket">Close Ticket</button>
+    {% endif %}
+        </div>
+
+    </div>
+
+                       </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!---Container Fluid close-->
+            </div>
+          </section>
+
+ </section>
+</div>
+
+
+<!---wrapper close-->
+<!-- Scroll to top -->
+<!--<a class="scroll-to-top rounded" href="#page-top">-->
+<!--    <i class="fas fa-angle-up"></i></a>-->
+{% include 'dashboard_layout/scripts.html' %}
+<script>
+    $(document).on('click','#close_ticket',function (){
+        Swal.fire({
+  title: 'Are you sure to close the ticket?',
+  showCancelButton: true,
+  confirmButtonText: 'Close Ticket',
+
+
+}).then((result) => {
+  /* Read more about isConfirmed, isDenied below */
+  if (result.isConfirmed) {
+      var qid = {{ qid }}
+       $.ajax({
+            type: "GET",
+            url: '/close_ticket',
+            data: {"qid": qid},
+            success: function (data) {
+                Swal.fire('Your ticket has been closed successfully!', '', 'success')
+                console.log('Click handler attached to #close_ticket');
+                window.location.reload()
+            },
+            error: function (data) {
+                alert("something went wrong")
+            }
+        });
+  } else if (result.isDenied) {
+    Swal.fire('Ticket is not Closed', '', 'info')
+  }
+})
+    })
+</script>
+
+
+</body>
+</html>

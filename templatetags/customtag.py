@@ -1,8 +1,8 @@
 import ast
 from django import template
 from django.contrib.auth.models import Group
-from counsellor.encryption_util import encrypt
-from usermanagement.models import UserSupport
+from web.encryption_util import encrypt
+from user_management.models import UserSupport
 
 register = template.Library()
 from django.utils.safestring import mark_safe

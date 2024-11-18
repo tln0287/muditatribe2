@@ -1,5 +1,5 @@
 from django.http import HttpResponseRedirect
-from usermanagement.models import User
+from user_management.models import User
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate
 from django.contrib.auth import login

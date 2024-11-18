@@ -1,6 +1,81 @@
    <script src="/static/static/js/jquery-3.6.0.js"></script>
+   <!-- Include jQuery first -->
+
+
+<!-- Include Select2 CSS and JS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js"></script>
+
 
      <script src="/static/sweetAlert/sweetalert2.all.min.js"></script>
+
+       <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+
+    <script src="/static/sweetAlert/sweetalert2.all.min.js"></script>
+   <script>
+
+       	// Go to Top
+    $(window).on('scroll', function(){
+        var scrolled = $(window).scrollTop();
+        if (scrolled > 300) $('.go-top').addClass('active');
+        if (scrolled < 300) $('.go-top').removeClass('active');
+        });
+        // Click Event
+        $('.go-top').on('click', function() {
+        $("html, body").animate({ scrollTop: "0" },  500);
+    });
+        $(document).ready(function (){
+            $('.go-top').removeClass('active');
+
+
+    });
+
+   </script>
+
+   <script>
+       $(document).ready(function() {
+    // Initialize Select2 on page load
+   var myselect =  $('.search-dropdown').select2({
+        placeholder: 'Search Articles, Blogs, Counsellors...',
+        allowClear: true,
+        minimumInputLength: 1
+    });
+
+    // Event listener for category change
+    $(document).on('change','.category-select', function() {
+        var category = $(this).val();
+
+        $.ajax({
+            type: "GET",
+            url: '/get_category_data',
+            data: { "category": category },
+            success: function(response) {
+                var data = response.data;
+
+                // Map response data to Select2 format
+                var options = data.map(function(item) {
+                    return {
+                        id: item.id,
+                        text: item.name
+                    };
+                });
+
+                // Empty current options and update with new options
+                myselect.empty().select2({
+                    data: options,
+                    placeholder: 'Search Articles, Blogs, Counsellors...',
+                    allowClear: true
+                });
+            },
+            error: function() {
+                alert("Something went wrong");
+            }
+        });
+    });
+});
+
+   </script>
 
 
     {% load sweetify %}

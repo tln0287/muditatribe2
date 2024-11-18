@@ -1,0 +1,136 @@
+{% include 'dashboard_layout/head.html' %}
+
+<style>
+
+.form-check-input:checked {
+    background-color: #198754;
+    border-color: #198754;
+}
+</style>
+<body>
+{% load customtag %}
+<div id="wrapper">
+    {% include 'dashboard_layout/sidebar.html' %}
+    <section class="home-section">
+        {% include 'dashboard_layout/header.html' %}
+        <section class="content-container contentContainer" id="homeSection">
+            <div class="box-inner">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="myTable">
+                        <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Name</th>
+                            <th>Experience</th>
+                            <th>Expertise</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for d in data %}
+                        <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td><a href="/get_counsellor/{{d.id|encrypting}}"> {{ d.first_name }}</a></td>
+                        <td>{{ d.experience }}</td>
+                        <td width="50%">{{ d.expertise }}</td>
+                        <td><div class="form-check form-switch">
+<input class="form-check-input" style="color:#3db166;" type="checkbox" disabled name="avail" role="switch" id="switch_equip" data-equipment-id="152" checked="">
+   <label class="form-check-label" for="flexSwitchCheckChecked">  &nbsp; Available</label>
+</div></td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </section>
+    </section>
+    <div class="modal" id="myModal">
+            <div class="modal-dialog modal-lg">
+                <form action="/add_user_blog" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add Blog</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path
+                                    d="M12.0007 10.5865L16.9504 5.63672L18.3646 7.05093L13.4149 12.0007L18.3646 16.9504L16.9504 18.3646L12.0007 13.4149L7.05093 18.3646L5.63672 16.9504L10.5865 12.0007L5.63672 7.05093L7.05093 5.63672L12.0007 10.5865Z">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                       <div class="row">
+                            <div class="col-md-12 form-group">
+                                <label>Enter Title</label>
+                                <input type="text" name="title" class="form-control" required>
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <label>Enter Blog Content</label>
+
+                                <textarea cols="5" rows="5" name="content" class="form-control" required></textarea>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Add Image</label>
+                                <input type="file" name="image" accept=".jpg,.png" class="form-control" required>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer justify-content-center">
+                        <button type="submit" class="btn btn-success">Save</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+                </form>
+
+            </div>
+        </div>
+</div>
+{% include 'dashboard_layout/scripts.html' %}
+<script>
+    function myModal(){
+         $('.modal-title').html("Add Blog")
+        $('#myModal').modal('show')
+    }
+    $(document).ready(function() {
+  $('#myTable').DataTable();
+});
+    function edit_leader(id){
+
+          $.ajax({
+            type: "GET",
+            url: '/edit_leader',
+            enctype: 'multipart/form-data',
+            data: {"id": id},
+
+            success: function (data) {
+                $('.modal-title').html("Edit Leader")
+               $("input[name=name]").val(data.data[0]['first_name'])
+               $("input[name=email]").val(data.data[0]['email'])
+               $("input[name=phone]").val(data.data[0]['phone'])
+               $("textarea[name=address]").val(data.data[0]['address'])
+                  $('#myModal').modal('show')
+
+
+            },
+            error: function () {
+                alert("something went wrong")
+            }
+        });
+    }
+</script>
+</body>
+
+
+</html>

@@ -1,17 +1,17 @@
-     <div class="space-y-4 text-white text-center bg-[#C4D1D4]" id="profile" >
-                    <div>
-                        <center><img src="/media/{{data.photo}}" id="profile_image" class="w-28 mb-4"></center>
-                        <h4 class="text-2xl font-semibold">{{data.name}}</h4>
-                    </div>
-                    <div>
-                        {{data.description|safe}}
-                    </div>
+<div class="space-y-4 text-white text-center bg-[#C4D1D4]" id="profile">
+    <div>
+        <center><img src="/media/{{data.photo}}" id="profile_image" class="w-28 mb-4"></center>
+        <h4 class="text-2xl font-semibold">{{data.name}}</h4>
+    </div>
+    <div>
+        {{data.description|safe}}
+    </div>
 
-                    <ul class="space-y-1">
-                        <li><b>Number:</b> {{data.phone|default:"-"}}</li>
-                        <li><b>Time:</b> {{data.timings|default:"-"}}</li>
-                        <li><b>Languages:</b>  {{data.language|default:"-"}}</li>
-                        <li><b>Email:</b> {{data.email|default:"-"}}</li>
-                        <li><b>Website:</b> {{data.website|default:"-"}}</li>
-                    </ul>
-                </div>
+    <ul class="space-y-1">
+        <li><b>Number:</b> {{data.phone|default:"-"}}</li>
+        <li><b>Time:</b> {{data.timings|default:"-"}}</li>
+        <li><b>Languages:</b>  {{data.language|default:"-"}}</li>
+        <li><b>Email:</b> {{data.email|default:"-"}}</li>
+        <li><b>Website:</b> {{data.website|default:"-"}}</li>
+    </ul>
+</div>

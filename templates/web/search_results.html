@@ -1,0 +1,156 @@
+       {%include 'head.html' %}
+
+<body>
+    <div id="wrapper">
+        <!--Header Start-->
+        <!--Web header starts-->
+           {%include 'header.html' %}
+        <!--Header End-->
+
+        <!--ACTIVITIES  Start-->
+        {%if category == 'activities' %}
+
+        <section class="py-12 md:py-32">
+            <div class="max-w-screen-xl mx-auto px-5">
+<!--                <div class="mb-8 md:mb-24">-->
+<!--&lt;!&ndash;                    <h2 class="text-4xl md:text-7xl text-center font-semibold text-[#C6584F] tracking-wide mb-6 md:mb-12">Your Search Result</h2>&ndash;&gt;-->
+<!--                    <h3 class="text-4xl text-center font-semibold text-[#C6584F] italic ">Your Search Result. For more </h3>-->
+<!--                </div>-->
+              <div class="grid mb-8  gap-8 items-center">
+
+    <div class="flex flex-col items-center">
+        <div class="w-full bg-[#C4C4C4] h-76 rounded-lg relative overflow-hidden">
+            <div class="relative h-full" style="padding-bottom: 56.25%;">
+                <iframe
+                    class="absolute top-0 left-0 w-full h-full"
+                    src="https://www.youtube.com/embed/{{ data.iframe }}?si=cm85hsKPHk_6Mumz"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+        <div class="bg-[#C4D1D4] text-white mt-3 w-full text-xl text-center py-1.5 rounded-lg">
+            <h5>{{ data.name }}</h5>
+        </div>
+    </div>
+
+</div>
+
+            </div>
+        </section>
+        {%endif%}
+        {%if category == 'counsellors' %}
+        <style>
+
+            .cchange {
+                color: #C6584F !important;
+                font-size: 18px;
+            }
+        </style>
+
+        <section class="py-12 md:py-32">
+            <div class="max-w-screen-xl mx-auto px-5">
+<!--                <div class="mb-8 md:mb-24">-->
+<!--&lt;!&ndash;                    <h2 class="text-4xl md:text-7xl text-center font-semibold text-[#C6584F] tracking-wide mb-6 md:mb-12">Your Search Result</h2>&ndash;&gt;-->
+<!--                    <h3 class="text-4xl text-center font-semibold text-[#C6584F] italic ">Your Search Result. For more </h3>-->
+<!--                </div>-->
+              <div class="grid mb-8  gap-8 items-center">
+
+    <div class="flex flex-col items-center">
+        <div class="w-full h-76 rounded-lg relative overflow-hidden">
+
+                    <div class="flex flex-col md:flex-row">
+    <div class="md:w-1/4">
+        <img src="/media/{{data.modal_image}}" id="profile_image" class="w-1/2 md:w-full">
+    </div>
+    <div class="md:w-3/4 mt-4 md:mt-0 md:pl-4">
+        <h4 class="text-2xl text-[#C6584F]  font-semibold">{{data.first_name}}</h4>
+        <h6 class="text-xl text-[#C6584F] font-semibold">{{data.designation}}</h6>
+         <ul class="space-y-1">
+                        <li class="cchange"><b>Area of Specialization:</b>{{data.expertise}} </li>
+                        <li class="cchange"><b>Experience:</b> {{data.experience}}</li>
+               <li class="cchange"><b>Qualification:</b> {{data.qualification}} </li>
+                        <li class="cchange"><b>Mode of Delivery:</b> Both Offline and Online</li>
+                        <li class="cchange"><b>Language:</b> {{data.language}}</li>
+                        <li class="cchange"><b>Location:</b> {{data.location}}</li>
+                        <li class="cchange"><b>Email:</b> {{data.email}}</li>
+                        <li class="cchange"><b>Mobile No:</b> {{data.phone}} </li>
+         </ul>
+    </div>
+</div>
+                         <ul class="space-y-1">
+
+                    </ul>
+                    <div class="cchange">
+                        <b> About: </b><br />
+                       {{data.about|safe}} 
+                    </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+            </div>
+        </section>
+        {%endif%}
+        {%if category == 'helplines' %}
+        <style>
+
+            .hchange {
+                color: #ffffff !important;
+                font-size: 18px;
+            }
+        </style>
+
+        <section class="py-12 md:py-32">
+            <div class="max-w-screen-xl mx-auto px-5">
+<!--                <div class="mb-8 md:mb-24">-->
+<!--&lt;!&ndash;                    <h2 class="text-4xl md:text-7xl text-center font-semibold text-[#C6584F] tracking-wide mb-6 md:mb-12">Your Search Result</h2>&ndash;&gt;-->
+<!--                    <h3 class="text-4xl text-center font-semibold text-[#C6584F] italic ">Your Search Result. For more </h3>-->
+<!--                </div>-->
+              <div class="grid mb-8  gap-8 items-center">
+
+    <div class="flex flex-col items-center">
+       <div class="space-y-4 text-white text-center bg-[#C4D1D4]" id="profile">
+    <div>
+        <center><img src="/media/{{data.photo}}" id="profile_image" class="w-28 mb-4"></center>
+        <h4 class="text-2xl font-semibold">{{data.name}}</h4>
+    </div>
+    <div>
+        {{data.description|safe}}
+    </div>
+
+    <ul class="space-y-1">
+        <li class="hchange"><b>Number:</b> {{data.phone|default:"-"}}</li>
+        <li class="hchange"><b>Time:</b> {{data.timings|default:"-"}}</li>
+        <li class="hchange"><b>Languages:</b>  {{data.language|default:"-"}}</li>
+        <li class="hchange"><b>Email:</b> {{data.email|default:"-"}}</li>
+        <li class="hchange"><b>Website:</b> {{data.website|default:"-"}}</li>
+    </ul>
+</div>
+
+    </div>
+
+</div>
+
+            </div>
+        </section>
+        {%endif%}
+        <!--ACTIVITIES  End-->
+
+        <!--Footer Start-->
+       {%include 'footer.html' %}
+        <!--Footer End-->
+
+
+
+    </div>
+
+</body>
+
+</html>

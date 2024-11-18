@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -29,11 +30,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-GOOGLE_RECAPTCHA_SECRET_KEY = '6LeQbhgqAAAAAOgvpSoUdD7yCk5ugvagYx-l-Ley'
+GOOGLE_RECAPTCHA_SECRET_KEY = config('GOOGLE_RECAPTCHA_SECRET_KEY')
 
-RAZORPAY_KEY_ID = 'rzp_test_qbKX3UuZ1StKj1'
-RAZORPAY_KEY_SECRET = '7ycHLJComxHxWNI3CuNLSRRW'
-RAZORPAY_WEBHOOK_SECRET = 'Mudita@2024'
+RAZORPAY_KEY_ID = config('RAZORPAY_KEY_ID')
+RAZORPAY_KEY_SECRET = config('RAZORPAY_KEY_SECRET')
+RAZORPAY_WEBHOOK_SECRET = config('RAZORPAY_WEBHOOK_SECRET')
 
 
 # Application definition
@@ -46,22 +47,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'import_export',
-    'home',
-    'contact',
-    'donation',
-    'testimonial',
-    'usermanagement',
-    'social_django',
-    'django_social_share',
-    'counsellor',
-    'blog',
-    'helplines',
-    'mindfulTradition',
+    'web',
+    'user_management',
     'sweetify',
     'tinymce',
-    'article',
-    'music',
-    'vedios',
+    'phonenumber_field',
+    "verify_email.apps.VerifyEmailConfig",
 
 
 
@@ -76,7 +67,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-'social_django.middleware.SocialAuthExceptionMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 TINYMCE_DEFAULT_CONFIG = {
@@ -152,6 +143,7 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_LOGOUT_ON_GET = True
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
 
 SOCIAL_AUTH_PIPELINE = (
@@ -178,9 +170,11 @@ SOCIAL_AUTH_DISCONNECT_PIPELINE = (
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'admin@muditatribe.com'
-EMAIL_HOST_PASSWORD = 'Mudita2022'
+EMAIL_HOST_USER = 'noreply@muditatribe.com'
+EMAIL_HOST_PASSWORD = 'qrewfypglfyxzngy'
 EMAIL_PORT = 587
+
+
 
 WSGI_APPLICATION = 'mudita.wsgi.application'
 
@@ -236,7 +230,7 @@ USE_I18N = True
 USE_TZ = True
 
 
-AUTH_USER_MODEL = 'usermanagement.User'
+AUTH_USER_MODEL = 'user_management.User'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
@@ -245,7 +239,8 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
 LOGIN_REDIRECT_URL = '/profile'
-LOGIN_URL = '/profile'
+LOGIN_URL = 'login2'
+
 LOGOUT_REDIRECT_URL='/logout2'
 
 if DEBUG:

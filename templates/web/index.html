@@ -30,6 +30,13 @@
 
 
       <link rel="stylesheet" href="/static/sweetAlert/sweetalert2.min.css" />
+      <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KHFDC4SL');</script>
+<!-- End Google Tag Manager -->
 
 
     <style type="text/tailwindcss">
@@ -55,10 +62,166 @@
         @apply bg-[#EECC96] border-[#fff] text-white;
         }
 
+.go-top.active {
+    transform: translateY(-95%);
+    opacity: 1;
+    visibility: visible;
+    right: 3%;
+    top: 93%;
+}
+
+.go-top {
+    position: fixed;
+    cursor: pointer;
+    top: 87%;
+    right: -10%;
+    background-color: #eecc96;
+    z-index: 4;
+    width: 50px;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.9s;
+}
+
+
+.go-top {
+  position: fixed;
+  cursor: pointer;
+  top: 87%;
+  right: -10%;
+  background-color: #eecc96;
+  z-index: 4;
+  width: 50px;
+  text-align: center;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.9s;
+}
+.go-top i {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  color: #ffffff;
+  transition: 0.5s;
+  font-size: 26px;
+}
+.go-top i:last-child {
+  opacity: 0;
+  visibility: hidden;
+  top: 60%;
+}
+.go-top::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  z-index: -1;
+  background-color: #eecc96;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.5s;
+}
+.go-top:hover {
+  color: #ffffff;
+  background: #111d5e;
+}
+.go-top:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+.go-top:hover i {
+  color: #ffffff;
+}
+.go-top:hover i:first-child {
+  opacity: 0;
+  top: 0;
+  visibility: hidden;
+}
+.go-top:hover i:last-child {
+  opacity: 1;
+  visibility: visible;
+  top: 50%;
+}
+.go-top:focus {
+  color: #ffffff;
+}
+.go-top:focus::before {
+  opacity: 1;
+  visibility: visible;
+}
+.go-top:focus i:first-child {
+  opacity: 0;
+  top: 0;
+  visibility: hidden;
+}
+.go-top:focus i:last-child {
+  opacity: 1;
+  visibility: visible;
+  top: 50%;
+}
+.go-top.active {
+  transform: translateY(-95%);
+  opacity: 1;
+  visibility: visible;
+  right: 3%;
+  top: 93%;
+}
+
+/* Default width for screens smaller than 1361px */
+.swiper-slide {
+    width: 300px; /* Default width */
+}
+
+/* Override width for screens larger than 1361px */
+@media screen and (min-width: 1361px) {
+    .swiper-slide {
+        width: 580px !important; /* Width for larger screens */
+    }
+}
+
+        .swiper-slide {
+    width: 100%; /* Full width for each slide */
+}
+
+/* Ensure only one slide is visible at a time on screens less than 600px */
+@media screen and (max-width: 599px) {
+    .swiper-slide {
+        opacity: 0; /* Hide all slides by default */
+        transition: opacity 0.3s; /* Smooth transition */
+    }
+
+    .swiper-slide.swiper-slide-active {
+        opacity: 1; /* Show the active slide */
+    }
+}
+
+.select2-container--default .select2-results>.select2-results__options {
+    max-height: 600px; /* Adjust this value to your desired height */
+    overflow-y: auto;  /* Enables vertical scrolling if content exceeds the height */
+}
+
+
     </style>
 </head>
 
 <body>
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHFDC4SL"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
     <div id="wrapper">
         <!--Header Start-->
         <!--Web header starts-->
@@ -68,7 +231,7 @@
         <!--Other Happiness Start-->
         <section class="py-12 md:py-32">
             <div class="max-w-screen-xl mx-auto px-5">
-                <h2 class="text-5xl md:text-8xl text-center font-semibold text-[#C6584F] italic mb-6 md:mb-24">The Joy of Giving Others Happiness</h2>
+                <h2 class="text-5xl md:text-8xl text-center font-semibold text-[#C6584F] italic mb-6 md:mb-24">The Joy adsf of Giving Others Happiness</h2>
                 <div class="grid md:grid-cols-2 gap-y-5 md:gap-y-0 md:gap-x-5 items-center">
                     <div>
                         <img src="/static/img/about_img.jpg" alt="about" class="w-10/12 mx-auto">
@@ -496,10 +659,7 @@
 
 
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 
-    <script src="/static/js/app.js"></script>
-    <script src="/static/sweetAlert/sweetalert2.all.min.js"></script>
 
 </body>
 <script>
@@ -533,7 +693,7 @@
      const recaptchaResponse = grecaptcha.getResponse();
 
             if (!recaptchaResponse) {
-                alert('Please enter the reCAPTCHA.');
+                alert('Please complete the reCAPTCHA.');
                 return;
             }
     if (form.checkValidity()) {
@@ -554,41 +714,38 @@
 
     {% load sweetify %}
  {% sweetify %}
+ <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7HL299CD08"></script>
+    <script src="/static/js/app.js"></script>
 <script>
-     new Swiper(".collaboratorsSwiper", {
-//           effect: "coverflow",
-           grabCursor: true,
-           centeredSlides: true,
-           loop: true,
-           slidesPerView: 2,
-           spaceBetween: 0,
-           breakpoints: {
-               640: {
-                   slidesPerView: 2,
-                   spaceBetween: 20,
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-               },
-               768: {
-                   slidesPerView: 2,
-                   spaceBetween: 30,
-               },
-               1024: {
-                   slidesPerView: 2,
-                   spaceBetween: 0,
-               },
-           },
-
-                     // autoplay: {
-                     //     delay: 2500,
-                     //     disableOnInteraction: false,
-                     // },
-           navigation: {
-               nextEl: ".swiper-button-next",
-               prevEl: ".swiper-button-prev",
-           },
-
-
-       });
+  gtag('config', 'G-7HL299CD08');
+</script>
+<script>
+   const swiper = new Swiper(".collaboratorsSwiper", {
+    grabCursor: true,
+    centeredSlides: true,
+    loop: true,
+    slidesPerView: 2, // Default for screens larger than 600px
+    spaceBetween: 20, // Space between slides
+    breakpoints: {
+        600: {
+            slidesPerView: 1, // Show one slide at a time for screens smaller than 600px
+            spaceBetween: 0, // No space between slides
+        },
+        1361: {
+            slidesPerView: 2, // Show two slides at a time for screens larger than 1361px
+            spaceBetween: 20, // Space between slides
+        }
+    },
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+    }
+});
 
 </script>
 </html>

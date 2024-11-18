@@ -1,0 +1,193 @@
+{% load customtag %}
+{% load static %}
+<html lang="en">
+{% include 'dashboard_layout/head.html' %}
+
+
+<style>
+    .swal2-container {
+        z-index: 99999999999 !important;
+    }
+    th,td{
+        text-align: center !important;
+    }
+
+</style>
+<body >
+<div id="wrapper">
+    <!-- Sidebar -->
+    {% include 'dashboard_layout/sidebar.html' %}
+ <section class="home-section">
+        <!-- header -->
+        {% include 'dashboard_layout/header.html' %}
+    <!-- Sidebar -->
+          <section class="content-container innn contentContainer" id="homeSection">
+
+            <!-- TopBar -->
+
+            <!-- Topbar -->
+            <!-- Container Fluid-->
+            <div class="container-fluid mt-5" id="container-wrapper">
+                <div class="row">
+                    <!-- Form sample-->
+
+                    <div class="col-sm-12 col-lg-12 col-xl-12">
+                        <h1 class="h3 page-title">Support</h1>
+                    <a href="#" style="float: right;margin-top: -40px"><button type="button" onClick="myModal()" class="btn btn-primary">+ Add Query</button></a>
+
+                        <div class="box-inner">
+{#                            {% if qdata|length >= 1 %}#}
+                                <div class="table-responsive ">
+                                <table id="myTable" class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>S.No</th>
+                                        <th>Title</th>
+                                        <th>Requestor</th>
+                                        <th>Ticket Raised On</th>
+                                        <th>Query Status</th>
+                                        <th>Result</th>
+                                        <th>Action</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% load customtag %}
+                                    {% for i in qdata %}
+                                        <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>{{ i.title }}</td>
+                                        <td>{{ i.user.first_name|title }}<br>
+                                        <small>{{ i.user.emp_id }}</small></td>
+                                        <td>{{ i.query_created_on }}</td>
+                                        <td>{% if i.query_status == 0 %}Open{% else %}Closed{% endif %}</td>
+                                        <td>{% if i.query_status == 0 %}{% if i.reply_status == 0 %}Waiting for response{% else %}<span class="badge bg-warning text-dark" style="font-size: 12px;">Support Replied</span> {% endif %}{% else %}<span class="badge bg-success" style="font-size: 12px;">Ticket Closed</span> {% endif %}</td>
+                                            <td><a href="/view_qcomments/{{ i.id|encrypting}}"><i class='bx bx-show' style="color:darkgreen;font-size: 18px;"></i></a>   &nbsp;  <i class='bx bx-trash delete' rel="{{ i.id|encrypting }}"  style="color:darkred;font-size: 18px;"></i> </td>
+{#                                        <a href="/delete_query/{{ i.id|encrypting }}"><i style="color: darkred" class='bx bx-trash delete' rel="{{ i.id|encrypting }}"  style="color:darkred;font-size: 18px;"></i></a>#}
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+{#                            {% endif %}#}
+                        <center> For any other support please contact <span style="color: darkred">info@muditatribe.com</span></center>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!---Container Fluid close-->
+          </section>
+ </section>
+</div>
+<div class="modal" id="myModal">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Raise a New Ticket</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path
+                                    d="M12.0007 10.5865L16.9504 5.63672L18.3646 7.05093L13.4149 12.0007L18.3646 16.9504L16.9504 18.3646L12.0007 13.4149L7.05093 18.3646L5.63672 16.9504L10.5865 12.0007L5.63672 7.05093L7.05093 5.63672L12.0007 10.5865Z">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+                    <form action="/add_new_ticket" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Enter Query Title</label>
+                            <input type="text" name="title" class="form-control" required>
+                        </div>
+                         <div class="form-group">
+                            <label>Message</label>
+                             <textarea class="form-control" name="comments" required></textarea>
+                        </div>
+                           <div class="form-group">
+                            <label>Upload attachment <small>(Only accepts PDF, PNG,JPEG .size < 5MB)</small></label>
+                        <input type="file" accept="image/*,.pdf"
+                               name="qdoc" style="width: 50%"  id="qdoc"
+                               class="form-control qdoc" >
+                        </div>
+
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer justify-content-center">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                        </form>
+
+                </div>
+            </div>
+        </div>
+
+<!---wrapper close-->
+<!-- Scroll to top -->
+<!--<a class="scroll-to-top rounded" href="#page-top">-->
+<!--    <i class="fas fa-angle-up"></i></a>-->
+{% include 'dashboard_layout/scripts.html' %}
+
+<script>
+    function myModal() {
+    $("#myModal").modal('show');
+}
+$(document).ready(function () {
+                $(document).on('click', '.delete', function (e) {
+            var sid = $(this).attr('rel');
+            //window.location = '/withdraw/'+sid;
+            Swal.fire({
+                title: "Deleting Ticket",
+                text: "Are you sure to delete the ticket?",
+                icon: "warning",
+                confirmButtonText: "Yes",
+                showCancelButton: true,
+                closeOnClickOutside: false,
+                allowOutsideClick: false,
+            })
+                .then((result) => {
+                    if (result.value) {
+                        window.location = '/delete_query/'+ sid;
+                    } else if (result.dismiss === 'cancel') {
+                        swal(
+                            'Cancelled',
+                            'error'
+                        )
+                    }
+                })
+        });
+
+    $('.qdoc').on('change', function() {
+        const fileInput = this;
+        const allowedTypes = ['application/pdf', 'image/jpeg', 'image/png', 'image/gif'];
+
+        if (fileInput.files.length > 0) {
+
+            const fileSize = fileInput.files[0].size; // in bytes
+            const maxSize = 5 * 1024 * 1024; // 5 MB
+            if (fileSize > maxSize) {
+                Swal.fire('File size should be less than 5 MB.');
+                $(fileInput).val(''); // Clear the file input
+            }
+            const fileType = fileInput.files[0].type;
+            if (allowedTypes.includes(fileType)) {
+                $('#error').text('');
+            } else {
+
+                Swal.fire("Accepts Only PDF and Image format");
+                $(fileInput).val('');
+            }
+        }
+    });
+
+  });
+
+</script>
+</body>
+</html>

@@ -266,23 +266,17 @@
         document.getElementById('payment').value = paymentMethod;
     }
 
- document.getElementById('submit-button').addEventListener('click', function(event) {
-    const form = document.getElementById('experience-form');
-    const recaptchaResponse = grecaptcha.getResponse();
 
-    if (!recaptchaResponse) {
-        alert('Please enter the reCAPTCHA.');
-        return false;
+  function validateRecaptcha(event) {
+    var response = grecaptcha.getResponse();
+    if (response.length == 0) {
+      event.preventDefault();
+      alert("Please complete the reCAPTCHA");
     }
+  }
 
-    if (form.checkValidity()) {
-        // Form is valid, you can proceed with submission
-        form.submit(); // Submit the form
-    } else {
-        // Form is invalid, display error messages
-        form.reportValidity(); // Show validation errors
-    }
-});
+  document.getElementById("donationForm").addEventListener("submit", validateRecaptcha);
+
 
 </script>
 </body>
